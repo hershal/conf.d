@@ -16,6 +16,8 @@ alias matab='/usr/local/MathWorks/Matlab/bin/matlab &'
 
 # git stuff
 alias k='git status'
+alias kl='git log'
+alias klg='git log --graph'
 alias gu='git pull'
 alias gf='git fetch'
 alias gca='git commit -a'
