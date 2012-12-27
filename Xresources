@@ -47,5 +47,6 @@ Xft.dpi: 96
 
 xautolock.corners: ++++
 xautolock.cornerdelay: 1
+xautolock.cornerredelay: 10
 xautolock.time: 15
-xautolock.locker: slock
+xautolock.locker: slock & xset dpms force off

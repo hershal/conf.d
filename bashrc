@@ -6,7 +6,8 @@ export TERM="xterm-256color"
 # general command setup
 alias ls='ls --color=auto'
 alias ll='ls --color=auto -lsha'
-alias yu='yaourt -Syua'
+alias yu='yaourt -Syu'
+alias yua='yaourt -Syua'
 alias ys='yaourt -Ss'
 
 # computational engine setup
@@ -20,8 +21,9 @@ alias gf='git fetch'
 alias gca='git commit -am'
 
 # emacs stuff
-export EDITOR="emacsclient -nc -a vim"
-alias ec='emacsclient -nc -a vim'
-alias et='emacsclient -a vim'
-ecs() { emacsclient -c -n -a emacs "/sudo::$*" }
-ets() { emacsclient -t -a emacs "/sudo::$*" }
+export EDITOR='emacsclient -c -a vim'
+alias em='emacsclient -nc -a vim'
+alias emc='emacsclient -a vim'
+ecs() {
+    emacsclient -a vim "/sudo::$*"
+}

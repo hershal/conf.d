@@ -17,7 +17,7 @@ fi
 
 # Start misc things
 xrdb ~/.Xresources &
-xautolock -detectsleep -secure -corners ++++ &
+xautolock &
 synclient TouchpadOff=1 &
 xbindkeys &
 xset s off &
