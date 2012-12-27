@@ -49,4 +49,4 @@ xautolock.corners: ++++
 xautolock.cornerdelay: 1
 xautolock.cornerredelay: 10
 xautolock.time: 15
-xautolock.locker: slock & xset dpms force off
+xautolock.locker: slock & sleep 1; xset dpms force off
