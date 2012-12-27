@@ -22,7 +22,7 @@ synclient TouchpadOff=1 &
 xbindkeys &
 xset s off &
 xset 600 60 60 &
+setxkbmap -option compose:menu
 
 # Hang point
 wait $wmpid
-
