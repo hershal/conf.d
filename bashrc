@@ -17,6 +17,7 @@ alias matab='/usr/local/MathWorks/Matlab/bin/matlab &'
 alias k='git status'
 alias gu='git pull'
 alias gf='git fetch'
+alias gca='git commit -am'
 
 # emacs stuff
 export EDITOR="emacsclient -nc -a vim"
