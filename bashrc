@@ -14,19 +14,22 @@ alias ys='yaourt -Ss'
 alias mathematica='/usr/local/Wolfram/Mathematica/8.0/Executables/mathematica'
 alias matab='/usr/local/MathWorks/Matlab/bin/matlab &'
 
-# git stuff
+# emacs stuff
+export EDITOR='emacsclient -c -a ""'
+alias emc='emacsclient -nc -a ""'
+alias emm='emacsclient -n -a ""'
+alias em='emacsclient -a ""'
+ecs() {
+    emacsclient -a "emacs --daemon" "/sudo::$*"
+}
+
+# git stuff, one requires emacs stuff first
 alias k='git status'
 alias kl='git log'
+alias kd='git diff --minimal -b'
 alias klg='git log --graph'
 alias gu='git pull'
 alias gf='git fetch'
 alias gca='git commit -a'
 alias gcam='git commit -am'
 
-# emacs stuff
-export EDITOR='emacsclient -c -a vim'
-alias em='emacsclient -nc -a vim'
-alias emc='emacsclient -a vim'
-ecs() {
-    emacsclient -a vim "/sudo::$*"
-}
