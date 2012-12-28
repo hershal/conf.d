@@ -16,6 +16,7 @@ alias matab='/usr/local/MathWorks/Matlab/bin/matlab &'
 
 # emacs stuff
 export EDITOR='emacsclient -c -a ""'
+alias emk='emacsclient -e "(kill-emacs)"'
 alias emc='emacsclient -nc -a ""'
 alias emn='emacsclient -n -a ""'
 alias em='emacsclient -a ""'
