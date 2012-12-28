@@ -17,10 +17,14 @@ alias matab='/usr/local/MathWorks/Matlab/bin/matlab &'
 # emacs stuff
 export EDITOR='emacsclient -c -a ""'
 alias emc='emacsclient -nc -a ""'
-alias emm='emacsclient -n -a ""'
+alias emn='emacsclient -n -a ""'
 alias em='emacsclient -a ""'
-ecs() {
-    emacsclient -a "emacs --daemon" "/sudo::$*"
+ems() {
+    emacsclient -a "" "/sudo::$*"
+}
+
+emcs() {
+    emacsclient -nc -a "" "/sudo::$*"
 }
 
 # git stuff, one requires emacs stuff first
