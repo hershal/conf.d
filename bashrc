@@ -19,7 +19,7 @@ alias mathematica='/usr/local/Wolfram/Mathematica/8.0/Executables/mathematica'
 alias matab='/usr/local/MathWorks/Matlab/bin/matlab &'
 
 # emacs stuff
-export EDITOR='emacsclient -c -a ""'
+export EDITOR=editor
 alias emk='emacsclient -e "(kill-emacs)"'
 alias emc='emacsclient -nc -a ""'
 alias emn='emacsclient -n -a ""'
@@ -33,6 +33,10 @@ ems() {
 }
 emcs() {
     emacsclient -nc -a "" "/sudo::$*"
+}
+
+editor() {
+    emacsclient -a "" -c "$@"
 }
 
 # git stuff, one requires emacs stuff first
