@@ -17,12 +17,12 @@ fi
 
 # Start misc things
 xrdb ~/.Xresources &
-xautolock &
 synclient TouchpadOff=1 &
 xbindkeys &
 xset s off &
 xset 600 60 60 &
 setxkbmap -option compose:menu
+xautolock &
 
 # Hang point
 wait $wmpid

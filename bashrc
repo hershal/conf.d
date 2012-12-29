@@ -3,6 +3,10 @@
 # xterm settings
 export TERM="xterm-256color"
 
+lock_system() {
+    xlock& xset dpms force off;
+}
+
 # general command setup
 alias ls='ls --color=auto'
 alias ll='ls --color=auto -lsha'
@@ -20,10 +24,13 @@ alias emk='emacsclient -e "(kill-emacs)"'
 alias emc='emacsclient -nc -a ""'
 alias emn='emacsclient -n -a ""'
 alias em='emacsclient -a ""'
+
+emns() {
+    emacsclient -na "" "/sudo::$*"
+}
 ems() {
     emacsclient -a "" "/sudo::$*"
 }
-
 emcs() {
     emacsclient -nc -a "" "/sudo::$*"
 }
