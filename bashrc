@@ -19,7 +19,7 @@ alias mathematica='/usr/local/Wolfram/Mathematica/8.0/Executables/mathematica'
 alias matab='/usr/local/MathWorks/Matlab/bin/matlab &'
 
 # emacs stuff
-export EDITOR=editor
+export EDITOR='emacsclient -a ""'
 alias emk='emacsclient -e "(kill-emacs)"'
 alias emc='emacsclient -nc -a ""'
 alias emn='emacsclient -n -a ""'
