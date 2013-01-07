@@ -33,6 +33,7 @@ alias gca 'git commit -a'
 alias gcam 'git commit -am'
 
 # emacs stuff
+setenv EDITOR "emacsclient -c"
 alias emk 'emacsclient -e "(kill-emacs)"'
 alias emc 'emacsclient -nc -a ""'
 alias emn 'emacsclient -n -a ""'
