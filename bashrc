@@ -24,6 +24,7 @@ alias emk='emacsclient -e "(kill-emacs)"'
 alias emc='emacsclient -nc -a ""'
 alias emn='emacsclient -n -a ""'
 alias em='emacsclient -a ""'
+alias emr='emacsclient -e "(remember-other-frame)"'
 
 emns() {
     emacsclient -na "" "/sudo::$*"
