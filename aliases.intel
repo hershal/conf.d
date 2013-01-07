@@ -1,0 +1,102 @@
+# EC Standard Login Environment -*- sh -*-
+# user .aliases file
+# $Source: /usr/cvs/cvsrep/ec_environ-1.0/release/user/aliases,v $
+# $Revision: 1.1 $
+
+# You may place your personal aliases here or in .cshrc.$USER
+#
+# examples:
+# alias . exit
+# alias e emacs
+# alias telnet ssh2
+# EC Standard Login Environment -*- sh -*-
+# user .aliases file
+# $Source: /usr/cvs/cvsrep/ec_environ-1.0/release/user/aliases,v $
+# $Revision: 1.1 $
+
+# You may place your personal aliases here or in .cshrc.$USER
+#
+# examples:
+# alias . exit
+# alias e emacs
+# alias telnet ssh2
+
+
+# git stuff, one requires emacs stuff first
+alias k 'git status'
+alias kl 'git log'
+alias kd 'git diff -b'
+alias klg 'git log --graph'
+alias gu 'git pull'
+alias gf 'git fetch'
+alias gca 'git commit -a'
+alias gcam 'git commit -am'
+
+# emacs stuff
+alias emk 'emacsclient -e "(kill-emacs)"'
+alias emc 'emacsclient -nc -a ""'
+alias emn 'emacsclient -n -a ""'
+alias em 'emacsclient -a ""'
+
+alias m                                          'more'
+alias h                                            'history'
+alias c                                            'clear'
+alias lm                         'ls | less'
+alias ll                            'ls -lsha'
+alias la                           'ls -la'
+#alias start_vnc_55         'vncserver :55 -geometry 3150x1050'
+#alias start_vnc_55         'vncserver :55 -geometry 1500x1100'
+alias start_vnc_55     'vncserver :55 -geometry 1600x1100'
+#alias start_vnc_55         'vncserver :55 -geometry 3100x800'  
+alias kill_vnc_55   'vncserver -kill :55'
+alias start_vnc_56      'vncserver :56 -geometry 1500x1100'
+alias kill_vnc_56   'vncserver -kill :56'
+alias g            '/nfs/site/itools/em64t_linux26/pkgs/vim/7.1/bin/gvim'
+alias set_tng                           '/p/socenv/cents/proc/bin/setproj -p tng -cfg FE'
+alias set_slm                          '/p/socenv/cents/proc/bin/setproj -p slm -cfg FE'
+#alias repos         'cd /nfs/site/disks/an_umg_disk6005/dticaric/gfx'
+alias set_repo      'setenv REPO_ROOT `pwd`'
+alias cd_tng                            'cd $REPO_ROOT'
+#alias d6005                          'cd ~/disk_6005'
+#alias d6007                          'cd ~/disk_6007'
+alias d5409                            'cd ~/disk_5409'
+alias d6008                            'cd ~/disk_6008'
+alias d6014                            'cd ~/disk_6014'
+alias d6015                            'cd ~/disk_6015'
+#alias d6009                          'cd ~/disk_6009'
+#alias d5225                          'cd ~/disk_5225'
+#alias d3077                          'cd ~/disk_3077'
+alias ec_repo                         'echo $REPO_ROOT'
+alias so_tng                            'source $REPO_ROOT/soc/ace/tng/tng.env'
+alias so_tngfc         'source $REPO_ROOT/soc/ace/tngfc/tngfc.env'
+alias so_tngsimix                'source $REPO_ROOT/soc/ace/tngsimix/tngsimix.env'
+alias so_cats                           'source /nfs/an/disks/an_tng_cov01/tngcov/tng_inca/inca_root/tng/etc/cats_tng.setup'
+alias unset_qtdir   'unsetenv QTDIR'
+alias do_cats                          '$CATS/cats'
+alias csd_y      'csd -host anlx1008 -bg black -fg yellow -geometry 85x30'
+alias csd_w      'csd -host anlx1008 -bg black -fg white -geometry 85x30'
+alias csd_g      'csd -host anlx1008 -bg black -fg green -geometry 85x30'
+alias csd_salmon    'csd -host anlx1008 -bg salmon -fg black -geometry 85x30'
+alias csd_gold      'csd -host anlx1008 -bg gold -fg black -geometry 85x30'
+alias csd_blue      'csd -host anlx1008 -bg lightblue -fg black -geometry 85x30'
+alias csd_gray      'csd -host anlx1008 -bg gray -fg black -geometry 85x30'
+alias do_git        'git clone $CENTRAL_REPOS/tng/soc-ertl-tng-a0 $1'
+alias no_partcomp   'setenv DONOT_USE_PARTCOMP 1'
+alias nbpool        'setenv NBPOOL an_vp'
+alias nbslot        'setenv NBQSLOT              /ulmd/tng/val/socfcv'
+alias nblimit       'setenv NB_EXEC_LIMITS 240h:288h'
+alias nb_64         'setenv NBCLASS SLES10_EM64T_64G'
+alias nb_32         'setenv NBCLASS SLES10_EM64T_32G'
+alias nb_16         'setenv NBCLASS SLES10_EM64T_16G'
+alias nb_8          'setenv NBCLASS SLES10_EM64T_8G'
+alias nb_4          'setenv NBCLASS SLES10_EM64T_4G'
+alias nbsetup       'nbpool && nbslot && nblimit && nb_16'
+alias nbme    'nbqstat --verbose -P an_vp user=hhbhave'
+alias nbrun         'nbjob run --target an_vp --priority 5'
+alias set_pri       'setenv NBQSLOT /ulmd/pri/all && echo $NBQSLOT'
+alias vimdocs       'cd /nfs/an/itools/common/pkgs/vim/7.1/share/vim/vim71/doc'
+alias tngq          'nbstatus qslots --tar an_vp --field "Name::30,Alias,Priority,Allocation,ShouldGet,GettingNow" "glob(Name,".*tng.*")"' 
+alias mydisk	    'cd /nfs/site/stod/stod001/w.hhbhave.100/my_soc'
+alias mailrun 'nbrun --post-exec /nfs/site/disks/an_umg_disk6006/hhbhave/postexec-nb-email.sh'   
+alias acemail 'mailrun'
+alias nbwatch 'watch "nbqstat --verbose -P an_vp user=hhbhave"'
