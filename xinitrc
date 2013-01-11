@@ -13,8 +13,8 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
 fi
 
 # Run the Xmodmap bindings
-if [ -f $HOME/.Xmodmap ]; then
-    /usr/bin/xmodmap $HOME/.Xmodmap
+if [ -f $HOME/.Xmodmap* ]; then
+    /usr/bin/xmodmap $HOME/.Xmodmap*
 fi
 
 # Run the Xresources configs
@@ -24,13 +24,16 @@ fi
 
 if [ -f $HOME/.xbindkeysrc ]; then
     /usr/bin/xbindkeys
-if
+fi
 
 # Start the window manager
 /usr/bin/i3 & wmpid=$!
 
 # Start misc things
-synclient TouchpadOff=1 &
+if [ -f /usr/bin/synclient ]; then
+  synclient TouchpadOff=1 &
+fi
+
 xset s off &
 xset dpms 600 60 60 &
 
