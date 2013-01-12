@@ -10,9 +10,9 @@ lock_system() {
 # general command setup
 alias ls='ls --color=auto'
 alias ll='ls --color=auto -lsha'
-alias yu='yaourt -Syu'
-alias yua='yaourt -Syua'
-alias ys='yaourt -Ss'
+alias ysu='yaourt -Syu'
+alias ysua='yaourt -Syua'
+alias yss='yaourt -Ss'
 
 # computational engine setup
 alias mathematica='/usr/local/Wolfram/Mathematica/8.0/Executables/mathematica'
