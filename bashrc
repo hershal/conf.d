@@ -8,8 +8,10 @@ lock_system() {
 }
 
 # general command setup
-alias ls='ls --color=auto'
-alias ll='ls --color=auto -lsha'
+alias ls='ls --color=always'
+alias ll='ls -lsha'
+alias g='grep'
+alias gv='grep -v'
 alias ys='yaourt -S'
 alias ysu='yaourt -Syu'
 alias ysua='yaourt -Syua'
