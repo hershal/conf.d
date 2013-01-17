@@ -8,6 +8,7 @@ lock_system() {
 }
 
 # general command setup
+alias s='screen'
 alias ls='ls --color=always'
 alias ll='ls -lsha'
 alias g='grep'
@@ -45,6 +46,7 @@ editor() {
 
 # git stuff, one requires emacs stuff first
 alias k='git status'
+alias ka='git add'
 alias kl='git log'
 alias kd='git diff --minimal -b'
 alias klg='git log --graph'
