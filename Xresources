@@ -2,6 +2,7 @@ emacs*font: -adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1
 emacs*cursorColor: red
 emacs*pointerColor: red
 
+xterm*font: -adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1
 xterm*color0:         rgb:19/19/19
 xterm*color8:         rgb:25/25/25
 !red
