@@ -11,6 +11,7 @@ lock_system() {
 alias s='screen'
 alias ls='ls --color=always'
 alias ll='ls -lsha'
+alias l='ll'
 alias g='grep'
 alias gv='grep -v'
 alias ys='yaourt -S'
