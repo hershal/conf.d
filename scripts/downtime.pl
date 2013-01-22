@@ -47,7 +47,7 @@ chomp($currentIP);
 print("DEBUG NEW: $currentIP\nDEBUG NEW: $currentIPLastChangedDate\n");
 # DEBUG SHIT
 
-print("$hostname: $oldIP->$currentIP");
+print("$hostname: $oldIP -> $currentIP\n");
 
 if ($currentIP =~ m/\d+\.\d+\.\d+\.\d+/ && !($currentIP eq $oldIP)) {
   
@@ -62,7 +62,7 @@ if ($currentIP =~ m/\d+\.\d+\.\d+\.\d+/ && !($currentIP eq $oldIP)) {
   my $mailCommand = <<EOF;
 echo "The IP Address for $hostname has CHANGED from $oldIP to $currentIP
 $changeOccurredString
-Please update your DNS records, etc accordingly." | mail -s "IP ADDRESS CHANGED FOR $hostname" $whoami
+Please update your DNS records, etc accordingly." | mail -s "IP ADDRESS CHANGED FOR $hostname" admin
 
 EOF
 
