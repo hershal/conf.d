@@ -1,0 +1,19 @@
+Host ironside
+     User hershal
+     Hostname 129.116.21.186
+Host r2m
+     User hershal
+     Hostname 129.116.21.251
+Host sun
+     User hershal
+     Hostname sun08.mine.nu
+Host r2
+     User hershal
+     Hostname r2.ath.cx
+Host light
+     User hershal
+     Hostname r2.ath.cx
+Host bravo
+     User hershal
+     Hostname r2.ath.cx
+     Port 24
