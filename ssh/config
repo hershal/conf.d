@@ -10,6 +10,9 @@ Host sun
 Host r2
      User hershal
      Hostname r2.ath.cx
+Host r3
+     User hershal
+     Hostname r35pwn.ath.cx
 Host light
      User hershal
      Hostname r2.ath.cx
