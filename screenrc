@@ -1,3 +1,5 @@
+startup_message off
+
 backtick 1 60 60 sh -c "acpi | awk '{ print \$4 * 1 \"%\"}'"
 backtick 2 60 60 sh -c "acpi | awk '{ print substr(\$5, 0, 5) }'"
 
@@ -11,3 +13,4 @@ defbce "on"
 term xterm-256color
 bell_msg ""
 vbell off
+multiuser on
