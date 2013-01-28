@@ -26,9 +26,13 @@
 # m:xxx + c:xxx 
 # Shift+... 
 
+
+
+
 #keystate_numlock = enable
 #keystate_scrolllock = enable
 #keystate_capslock = enable
+
 
 
 # Toggle the trackpad on/off
@@ -63,6 +67,16 @@
 "cmus-remote --stop"
     m:0x0 + c:174
     XF86AudioStop 
+
+#cmus seek +15
+"cmus-remote --seek +15s"
+    m:0x1 + c:171
+    Shift + XF86AudioNext 
+
+#cmus seek -15s
+"cmus-remote --seek -15s"
+    m:0x1 + c:173
+    Shift + XF86AudioPrev 
 
 #
 # End of xbindkeys configuration
