@@ -26,10 +26,10 @@
 # m:xxx + c:xxx 
 # Shift+... 
 
-
 #keystate_numlock = enable
 #keystate_scrolllock = enable
 #keystate_capslock = enable
+
 
 # Toggle the trackpad on/off
 "/usr/bin/trackpadtoggle.sh"
@@ -40,9 +40,29 @@
    control+shift + q
 
 #Lock Screen
-"slock & sleep 1; xset dpms force off"
+"slock & sleep .1; xset dpms force off"
     m:0x1c + c:46
     Control+Alt+Mod2 + l 
+
+#cmus next
+"cmus-remote --next"
+    m:0x0 + c:171
+    XF86AudioNext 
+
+#cmus prev
+"cmus-remote --prev"
+    m:0x0 + c:173
+    XF86AudioPrev 
+
+#cmus pause
+"cmus-remote --pause"
+    m:0x0 + c:172
+    XF86AudioPlay 
+
+#cmus stop
+"cmus-remote --stop"
+    m:0x0 + c:174
+    XF86AudioStop 
 
 #
 # End of xbindkeys configuration
