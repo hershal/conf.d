@@ -9,7 +9,7 @@ lock_system() {
 
 # general command setup
 alias s='screen'
-alias ls='ls --color=always'
+alias ls='ls --color=auto'
 alias ll='ls -lsha'
 alias l='ll'
 alias g='grep'
