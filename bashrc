@@ -4,8 +4,11 @@
 export TERM="xterm-256color"
 
 lock_system() {
-    xlock& xset dpms force off;
+    slock& xset dpms force off;
 }
+
+# To enable tab-completion while sudo-ing (added by Hershal)
+complete -cf sudo
 
 # general command setup
 alias s='screen'
