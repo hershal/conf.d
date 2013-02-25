@@ -3,6 +3,8 @@
 # xterm settings
 export TERM="xterm-256color"
 
+PATH=$PATH:~/bin
+
 lock_system() {
     slock& xset dpms force off;
 }
@@ -49,6 +51,12 @@ editor() {
     emacsclient -a "" -c "$@"
 }
 
+ev() {
+    evince $@ 2>1 > /dev/null
+}
+
+
+
 # git stuff, one requires emacs stuff first
 alias k='git status'
 alias ka='git add'
@@ -62,4 +70,4 @@ alias gpom='git push origin master'
 alias gf='git fetch'
 alias gca='git commit -a'
 alias gcam='git commit -am'
-
+alias gpbl='gp bravo master & gp light master &'
