@@ -20,3 +20,6 @@ Host bravo
      User hershal
      Hostname r2.ath.cx
      Port 24
+Host riven
+     User hershal
+     Hostname 129.116.21.152
