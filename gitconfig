@@ -1,9 +1,0 @@
-[color]
-	ui = auto
-[user]
-	name = Hershal Bhave
-	email = hershal.bhave@gmail.com
-[core]
-	editor = emacsclient -a "" -c
-[push]
-	default = simple
