@@ -1,5 +1,9 @@
 #;;; -*- mode: shell-script; -*-
 
+# General Shell Settings
+export PS1="[\u@\h \W]\$ "
+export PS2=">"
+
 # xterm settings
 export TERM="xterm-256color"
 
@@ -11,6 +15,12 @@ lock_system() {
 
 # To enable tab-completion while sudo-ing (added by Hershal)
 complete -cf sudo
+
+# Enable some shell extensions
+shopt -s extglob
+shopt -s dotglob
+shopt -s checkwinsize
+shopt -s histappend
 
 # general command setup
 alias s='screen'
