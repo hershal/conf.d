@@ -1,4 +1,6 @@
 emacs.d/ac-comphist.dat
 emacs-backups/*
 emacs.d/auto-save-list/*
-emacs.d/.emacs.desktop
+emacs.d/.emacs.desktopssh/known_hosts
+ssh/known_hosts
+*.stackdump

@@ -6,4 +6,4 @@
 [core]
 	editor = emacsclient -a "" -c
 [push]
-	default = simple
+#	default = simple

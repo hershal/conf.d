@@ -1,18 +1,6 @@
 Host ironside
      User hershal
      Hostname 129.116.21.186
-Host r2m
-     User hershal
-     Hostname 129.116.21.251
-Host sun
-     User hershal
-     Hostname sun08.mine.nu
-Host r2
-     User hershal
-     Hostname r2.ath.cx
-Host r3
-     User hershal
-     Hostname r35pwn.ath.cx
 Host light
      User hershal
      Hostname r2.ath.cx
@@ -20,6 +8,55 @@ Host bravo
      User hershal
      Hostname r2.ath.cx
      Port 24
+Host r2m
+     User hershal
+     Hostname 129.116.21.251
+Host r2
+     User hershal
+     Hostname r2.ath.cx
+Host r3
+     User hershal
+     Hostname r35pwn.ath.cx
+Host sun
+     User hershal
+     Hostname sun08.mine.nu
+Host cortex
+     HostName 129.116.21.166
+     user hershal
 Host riven
      User hershal
      Hostname 129.116.21.152
+
+Host eironside
+     User hershal
+     Hostname 129.116.21.186
+     ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
+Host elight
+     HostName r2.ath.cx
+     User hershal
+     ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
+Host ebravo
+     HostName r2.ath.cx
+     User hershal
+     Port 24
+     ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
+Host er2m
+     User hershal
+     Hostname 129.116.21.251
+     ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
+Host er2
+     HostName r2.ath.cx
+     User hershal
+     ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
+Host esun
+     HostName sun08.mine.nu
+     User hershal
+     ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
+Host ecortex
+     HostName 129.116.21.166
+     User hershal
+     ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
+Host eriven
+     User hershal
+     Hostname 129.116.21.152
+     ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
