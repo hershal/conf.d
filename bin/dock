@@ -11,3 +11,7 @@ setxkbmap -option compose:menu
 setxkbmap -option ctrl:nocaps
  
 razercfg -r 0:1800
+
+xset r rate 200 60
+xset dpms 0 0 0
+synergys
