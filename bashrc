@@ -32,6 +32,7 @@ alias gv='grep -v'
 alias y='yaourt'
 alias ys='yaourt -S'
 alias ysu='yaourt -Syu'
+alias yua='yaourt -Sua'
 alias ysua='yaourt -Syua'
 alias yss='yaourt -Ss'
 
