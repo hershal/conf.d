@@ -62,9 +62,12 @@ editor() {
 }
 
 ev() {
-    evince $@ 2>1 > /dev/null
+    evince $@ > /dev/null 2>&1 &
 }
 
+eve() {
+    evince $@ > /dev/null 2>&1 & exit
+}
 
 
 # git stuff, one requires emacs stuff first
