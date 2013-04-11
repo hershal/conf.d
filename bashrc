@@ -7,13 +7,12 @@ export PS2=">"
 # xterm settings
 export TERM="xterm-256color"
 
-PATH=$PATH:~/bin
+export email='hershal.bhave@gmail.com'
 
-lock_system() {
-    slock& xset dpms force off;
-}
+# Append 
+export PATH=$PATH:~/conf.d/bin
 
-# To enable tab-completion while sudo-ing (added by Hershal)
+# To enable tab-completion while sudo-ing
 complete -cf sudo
 
 # Enable some shell extensions
@@ -21,6 +20,7 @@ shopt -s extglob
 shopt -s dotglob
 shopt -s checkwinsize
 shopt -s histappend
+shopt -s cdspell
 
 # general command setup
 alias s='screen'
@@ -36,9 +36,10 @@ alias yua='yaourt -Sua'
 alias ysua='yaourt -Syua'
 alias yss='yaourt -Ss'
 
-# computational engine setup
+# Computational Engines setup
 alias mathematica='/usr/local/Wolfram/Mathematica/8.0/Executables/mathematica'
 alias matab='/usr/local/MathWorks/Matlab/bin/matlab &'
+# Octave doesn't need anything special; it just works
 
 # emacs stuff
 export EDITOR='emacsclient -a ""'
@@ -48,6 +49,9 @@ alias emn='emacsclient -n -a ""'
 alias em='emacsclient -a ""'
 alias emr='emacsclient -e "(remember-other-frame)"'
 
+lock_system() {
+    slock& xset dpms force off;
+}
 emns() {
     emacsclient -na "" "/sudo::$*"
 }
@@ -62,16 +66,12 @@ editor() {
     emacsclient -a "" -c "$@"
 }
 
-ev() {
-    evince $@ > /dev/null 2>&1 &
-}
-
 eve() {
     evince $@ > /dev/null 2>&1 & exit
 }
 
 
-# git stuff, one requires emacs stuff first
+# git stuff
 alias k='git status'
 alias ka='git add'
 alias kl='git log'
@@ -87,3 +87,20 @@ alias gcam='git commit -am'
 alias gpbl='gp bravo master && gp light master'
 alias gsd='git svn dcommit'
 alias tagsgen='find . -regex ".*\.[cChH]\(pp\)?" -print | etags -'
+alias ev='evince 2>/dev/null'
+alias chmox='chmod +x'
+
+
+# Until EOF are configs stolen from @ericcrosson:
+
+export BROWSER='chromium &2>/dev/null'
+export HISTIGNORE=' *'
+
+# ignore duplicates in history
+export HISTCONTROL=ignoredups 
+
+# Find a file with pattern $1 in name and execute $2 on it:
+function ffand() { find . -type f -iname '*'${1:-}'*' -exec ${2:-file} {} \; ; }
+
+# Find files matching a given pattern
+function ff() { find . -type f -iname '*'$*'*' -ls ; }
