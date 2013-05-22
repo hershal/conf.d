@@ -7,7 +7,6 @@ Host light
 Host bravo
      User hershal
      Hostname r2.ath.cx
-     Port 24
 Host r2m
      User hershal
      Hostname 129.116.21.251
@@ -38,7 +37,6 @@ Host elight
 Host ebravo
      HostName r2.ath.cx
      User hershal
-     Port 24
      ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
 Host er2m
      User hershal
