@@ -36,7 +36,7 @@
 
 
 # Toggle the trackpad on/off
-"/usr/bin/trackpadtoggle.sh"
+"conf.d/bin/trackpadtoggle.sh"
     m:0x0 + c:199
     XF86TouchpadToggle 
 
