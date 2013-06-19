@@ -1,0 +1,15 @@
+#;;; -*- mode: shell-script; -*-
+
+# For some reason, osx's `ls` options are different than linux's
+unalias ls
+alias ls='ls -G'
+
+# So that emacsclient works properly
+if [[ /Applications/MacPorts/Emacs.app/Contents/MacOS/bin/ ]]; then
+    PATH=/Applications/MacPorts/Emacs.app/Contents/MacOS/bin/:$PATH
+    export EDITOR='/Applications/MacPorts/Emacs.app/Contents/MacOS/bin/emacsclient -a "" '
+else
+    export EDITOR='emacsclient -a "" '
+fi
+
+
