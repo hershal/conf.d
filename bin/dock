@@ -1,8 +1,8 @@
 #!/bin/bash
 
-xrandr --output VGA1 --right-of HDMI1 --mode 1920x1200
+xrandr --output VGA1 --right-of DP1 --mode 1920x1200
 xrandr --output LVDS1 --off
-xrandr --output HDMI1 --left-of VGA1 --mode 1920x1200
+xrandr --output DP1 --left-of VGA1 --mode 1920x1200
 
 # Set the preferred keyboard map: 
 # Compose is the Menu button
@@ -14,4 +14,4 @@ razercfg -r 0:1800
 
 xset r rate 200 60
 xset dpms 0 0 0
-synergys
+#synergys
