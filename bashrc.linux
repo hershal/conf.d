@@ -1,0 +1,25 @@
+#;;; -*- mode: shell-script; -*-
+
+alias ev='evince 2>/dev/null'
+alias tagsgen='find . -regex ".*\.[cChH]\(pp\)?" -print | etags -'
+
+# Computational Engines setup
+alias mathematica='/usr/local/Wolfram/Mathematica/8.0/Executables/mathematica'
+alias matab='/usr/local/MathWorks/Matlab/bin/matlab &'
+# Octave doesn't need anything special; it just works
+
+export BROWSER='chromium &2>/dev/null'
+
+eve() {
+    evince $@ > /dev/null 2>&1 & exit
+}
+
+emns() {
+    emacsclient -na "" "/sudo::$*"
+}
+ems() {
+    emacsclient -a "" "/sudo::$*"
+}
+emcs() {
+    emacsclient -nc -a "" "/sudo::$*"
+}
