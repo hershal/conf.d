@@ -49,9 +49,8 @@ print("DEBUG NEW: $currentIP\nDEBUG NEW: $currentIPLastChangedDate\n");
 
 print("$hostname: $oldIP -> $currentIP\n");
 
-if ($currentIP =~ m/\d+\.\d+\.\d+\.\d+/ && !($currentIP eq $oldIP)) {
-  
-  
+if (!nodef($currentIP) && $currentIP =~ m/\d+\.\d+\.\d+\.\d+/ && !($currentIP eq $oldIP)) {
+    
   print(logFile `date`.": IP Aresses CHANGED!! Emailing...\n");
 #  print("DEBUG: IP ADDRESS CHANGED\n");
 
@@ -78,3 +77,13 @@ close(currentIPFileUpdate);
 
 
 close(logFile);
+
+sub nodef {
+  if ((!defined($_[0]) || $_[0] eq "" || $_[0] =~ m/^\s+$/) {
+    return 1;
+  } else {
+    {
+      return 0;
+    }
+  }
+}
