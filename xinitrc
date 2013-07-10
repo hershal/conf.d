@@ -13,7 +13,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
 fi
 
 # Run the Xmodmap bindings
-if [ -f $HOME/.Xmodmap* ]; then
+if [ -f $HOME/.Xmodmap ]; then
     /usr/bin/xmodmap $HOME/.Xmodmap*
 fi
 
@@ -36,7 +36,7 @@ fi
 
 xset r rate 200 60
 xset s off &
-xset dpms 600 60 60 &
+xset dpms 600 0 0 &
 
 # Set the preferred keyboard map: 
 # Compose is the Menu button
