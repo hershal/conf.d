@@ -269,7 +269,7 @@ endif
 #alias lr      ls -R
 #alias h       history
 
-set prompt='(%n@%m %~)\$ '
+set prompt='(%n@%m %c1)\$ '
 
 #
 # aliases may be kept in separate file if you wish
