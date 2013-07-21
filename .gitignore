@@ -4,4 +4,5 @@ emacs.d/auto-save-list/*
 emacs.d/.emacs.desktopssh/known_hosts
 emacs.d/.mc-lists.el
 ssh/known_hosts
+ssh/id_*
 *.stackdump
