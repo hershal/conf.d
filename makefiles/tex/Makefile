@@ -11,7 +11,7 @@ OUTPUT=writeup.pdf
 all: $(SOURCE) $(OUTPUT)
 
 $(OUTPUT): $(SOURCE)
-	latexmk -pdf -pdflatex="pdflatex" -interaction=nonstopmode -use-make $(SOURCE)
+	latexmk -pdf -pdflatex='pdflatex -interaction=nonstopmode' -use-make $(SOURCE)
 
 clean:
 	latexmk -CA
