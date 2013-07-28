@@ -3,5 +3,7 @@ emacs-backups/*
 emacs.d/auto-save-list/*
 emacs.d/.emacs.desktopssh/known_hosts
 emacs.d/.mc-lists.el
+emacs.d/eshell
+emacs.d/.emacs.desktop*
 ssh/known_hosts
 *.stackdump
