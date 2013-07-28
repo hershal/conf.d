@@ -9,6 +9,9 @@ echo "I: (.cshrc.$USER) [entering] `/bin/date`" >> $ec_env_error_log
 # Original LD_LIBRARY_PATH:
 # /usr/intel/pkgs/fontconfig/2.7.3-64/lib64/:/p/socenv/cents/common/archive_root/slm/valid/bin/chekhov/9.4.9/x86-64_linux26:/p/socenv/cents/common/archive_root/slm/valid/bin/archsim/7.0.18/x86-64_linux26/lib:/nfs/site/disks/an_umg_disk2188/ip/cpu-ertl-slm-tnga0-12ww30a/cpu/target/cpu/cpu_beh/x86-64_linux26/:/nfs/site/disks/an_umg_disk2188/ip/cpu-ertl-slm-tnga0-12ww30a/cpu/target/ucode/gen/MOOSE_DEBUG:/usr/intel/pkgs/boost/1.39.0/lib64:/nfs/site/disks/an_umg_disk6006/hhbhave/soc-ertl-tng-a0-12ww32b/soc/results_tng/sim/systemsim.so.daidir:/usr/intel/pkgs/gcc/4.2.2/lib:/usr/intel/pkgs/gcc/4.2.2/lib64:/p/com/eda/denali/memorymodeler/3.3.016d:/p/com/eda/synopsys/vcsmx/E-2011.03-SP1-10/suse64/lib:/p/com/eda/mentor/QuestaVIP/10.0c_vcsE-2011.03-SP1-2-B-1/questa_mvc_core/linux_x86_64_gcc-4.2.2_vcs:/p/com/eda/intel/saola/v20120405/lib/Linux_x86_64:/p/com/eda/atrenta/spyglass/4.6/SPYGLASS_HOME/lib:/p/com/eda/atrenta/spyglass/4.6/IntelSource/SPYGLASS_HOME/lib/:/p/com/eda/atrenta/spyglass/4.6/IntelSource/SPYGLASS_HOME/policies/intel:/nfs/site/eda/group/SYSNAME/socenv/verdi/2011.04p1/share/PLI/VCS/LINUX64:/nfs/site/eda/group/SYSNAME/socenv/verdi/2011.04p1/share/PLI/lib/LINUX64:/p/com/eda/novas/verdi/2012.07/share/PLI/nc61/LINUX64/nc_loadpli1:/p/com/eda/novas/verdi/2012.07/share/PLI/modelsim_pli_latest/LINUX64:/p/com/eda/novas/verdi/2012.07/share/PLI/VCS/LINUX64:/nfs/site/eda/group/SYSNAME/socenv/vggnu/2008.12/gcc-4.2.2_64/lib:/nfs/site/eda/group/SYSNAME/socenv/vggnu/2008.12/gcc-4.2.2_64/slib64:/nfs/site/eda/data/disk0022/intel/VisaIT/2.8/common/Verific/lib:/p/com/eda/sonics/studio/5.2/studio-5.2/lib
 
+# Include my local perl libraries as well
+# setenv PERL5LIB /nfs/site/disks/an_umg_disk6006/hhbhave/cpan/lib/lib/perl5/5.8.8/:/nfs/site/home/hhbhave/mydisk/cpan/lib/lib/perl5/site_perl/5.8.8/x86_64-linux-thread-multi:/nfs/site/home/hhbhave/mydisk/cpan/lib/lib/perl5/site_perl/5.8.8/
+setenv PERL5LIB /nfs/site/disks/an_umg_disk6006/hhbhave/cpan/lib/lib:/nfs/site/disks/an_umg_disk6006/hhbhave/cpan/lib/lib/perl5:/nfs/site/disks/an_umg_disk6006/hhbhave/cpan/lib/lib/perl5/site_perl:/nfs/site/disks/an_umg_disk6006/hhbhave/cpan/lib/lib/site_perl
 
 # Fix for emacs crashing and burning
 modpath -q -n 1 -v LD_LIBRARY_PATH /usr/intel/pkgs/fontconfig/2.7.3-64/lib64/
@@ -266,6 +269,8 @@ endif
 #alias lf      ls -F
 #alias lr      ls -R
 #alias h       history
+
+set prompt='(%n@%m %c1)\$ '
 
 #
 # aliases may be kept in separate file if you wish
