@@ -14,3 +14,6 @@ term xterm-256color
 bell_msg ""
 vbell off
 multiuser on
+
+# Re-source the screenrc file on C-a R
+bind R source ~/.screenrc
