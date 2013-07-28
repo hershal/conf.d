@@ -21,14 +21,25 @@
 # alias e emacs
 # alias telnet ssh2
 
+# General command setup
+alias s 'screen'
+alias ls 'ls --color auto'
+alias l 'ls -lsha'
+alias g 'grep'
+alias gv 'grep -v'
+alias chmox 'chmod +x'
 
-# git stuff, one requires emacs stuff first
+# git stuff
 alias k 'git status'
+alias kc 'git commit'
+alias ka 'git add'
 alias kl 'git log'
-alias kd 'git diff -b'
+alias kd 'git diff'
 alias klg 'git log --graph'
-alias gp 'git push'
+alias ga 'git add'
 alias gu 'git pull'
+alias gp 'git push'
+alias gpom 'git push origin master'
 alias gf 'git fetch'
 alias gca 'git commit -a'
 alias gcam 'git commit -am'
