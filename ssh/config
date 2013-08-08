@@ -25,6 +25,9 @@ Host cortex
 Host riven
      User hershal
      Hostname 129.116.21.152
+Host fsl
+     User hershal
+     Hostname 75.126.21.182
 
 Host eironside
      User hershal
@@ -57,4 +60,8 @@ Host ecortex
 Host eriven
      User hershal
      Hostname 129.116.21.152
+     ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
+Host efsl
+     User hershal
+     Hostname 75.126.21.182
      ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
