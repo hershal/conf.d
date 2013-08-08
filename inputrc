@@ -1,0 +1,6 @@
+# Append a slash to all symlinked directories
+set mark-symlinked-directories on 
+# set page-completions off
+set completion-ignore-case on
+set editing-mode emacs
+set bell-style none
