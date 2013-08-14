@@ -45,6 +45,7 @@ editor() {
 # git stuff
 alias k='git status'
 alias kc='git commit'
+alias kb='git branch'
 alias ka='git add'
 alias kl='git log'
 alias kll='git log --stat --graph'
