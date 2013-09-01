@@ -9,7 +9,7 @@ Host bravo
      Hostname r2.ath.cx
 Host r2m
      User hershal
-     Hostname 129.116.21.251
+     Hostname r2m.mine.nu
 Host r2
      User hershal
      Hostname r2.ath.cx
@@ -43,7 +43,7 @@ Host ebravo
      ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
 Host er2m
      User hershal
-     Hostname 129.116.21.251
+     Hostname r2m.mine.nu
      ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
 Host er2
      HostName r2.ath.cx
