@@ -6,6 +6,15 @@ SOURCES=$(wildcard *.cpp) $(wildcard *.c)
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=binary
 
+UNAME=$(shell uname -o)
+ETAGS_ARGS=
+ifeq ($(UNAME),GNU/Linux)
+ETAGS_ARGS=-
+endif
+ifeq ($(UNAME),Cygwin)
+ETAGS_ARGS=-e -L -
+endif
+
 all: $(SOURCES) $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS) 
