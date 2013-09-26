@@ -26,6 +26,7 @@ shopt -s cdspell
 alias s='screen'
 alias ls='ls --color=auto'
 alias l='ls -lsha'
+alias less='less -R -i'
 alias g='grep'
 alias gv='grep -v'
 alias chmox='chmod +x'
