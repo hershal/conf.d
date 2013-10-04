@@ -62,6 +62,13 @@ alias gcam='git commit -am'
 alias gpbl='gp bravo master && gp light master'
 alias gsd='git svn dcommit'
 
+# If the GPG agent is running and its PID file is created then source it
+if [ -f "${HOME}/.gpg-agent-info" ]; then
+  . "${HOME}/.gpg-agent-info"
+  export GPG_AGENT_INFO
+  export SSH_AUTH_SOCK
+fi
+
 # *** Start configs stolen from @ericcrosson:
 
 export HISTIGNORE=' *'
