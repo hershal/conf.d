@@ -62,11 +62,14 @@ alias gcam='git commit -am'
 alias gpbl='gp bravo master && gp light master'
 alias gsd='git svn dcommit'
 
-# If the GPG agent is running and its PID file is created then source it
-if [ -f "${HOME}/.gpg-agent-info" ]; then
-  . "${HOME}/.gpg-agent-info"
-  export GPG_AGENT_INFO
-  export SSH_AUTH_SOCK
+# Start the GnuPG agent and enable OpenSSH agent emulation
+gnupginf="${HOME}/.gpg-agent-info"
+
+if pgrep -x -u "${USER}" gpg-agent >/dev/null 2>&1; then
+    eval `cat $gnupginf`
+    eval `cut -d= -f1 $gnupginf | xargs echo export`
+else
+    eval `gpg-agent -s --enable-ssh-support --daemon --write-env-file "$gnupginf"`
 fi
 
 # *** Start configs stolen from @ericcrosson:
