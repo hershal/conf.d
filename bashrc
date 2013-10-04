@@ -62,9 +62,35 @@ alias gcam='git commit -am'
 alias gpbl='gp bravo master && gp light master'
 alias gsd='git svn dcommit'
 
+# map and rota taken from
+# http://onthebalcony.wordpress.com/2008/03/08/just-for-fun-map-as-higher-order-function-in-bash/
+map () { 
+  if [ $# -le 1 ]; then 
+    return 
+  else 
+    local f=$1 
+    local x=$2 
+    shift 2 
+    local xs=$@ 
+
+    $f $x 
+
+    map "$f" $xs 
+  fi 
+}
+rota () { 
+  local f=$1 
+  shift 
+  local args=($@) 
+  local idx=$(($#-1)) 
+  local last=${args[$idx]} 
+  args[$idx]= 
+
+  $f $last ${args[@]} 
+}
+
 # Start the GnuPG agent and enable OpenSSH agent emulation
 gnupginf="${HOME}/.gpg-agent-info"
-
 if pgrep -x -u "${USER}" gpg-agent >/dev/null 2>&1; then
     eval `cat $gnupginf`
     eval `cut -d= -f1 $gnupginf | xargs echo export`
