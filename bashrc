@@ -90,14 +90,18 @@ rota () {
 }
 
 # Start the GnuPG agent and enable OpenSSH agent emulation
-gnupginf="${HOME}/.gpg-agent-info"
-if pgrep -x -u "${USER}" gpg-agent >/dev/null 2>&1; then
-    eval `cat $gnupginf`
-    eval `cut -d= -f1 $gnupginf | xargs echo export`
-else
-    eval `gpg-agent -s --enable-ssh-support --daemon --write-env-file "$gnupginf"`
+# if the gpg-agent is available
+which gpg-agent 2>&1 | /dev/null
+gpgagentexit=$?
+if [[ $rc == 0 ]] ; then
+    gnupginf="${HOME}/.gpg-agent-info"
+    if pgrep -x -u "${USER}" gpg-agent >/dev/null 2>&1; then
+	eval `cat $gnupginf`
+	eval `cut -d= -f1 $gnupginf | xargs echo export`
+    else
+	eval `gpg-agent -s --enable-ssh-support --daemon --write-env-file "$gnupginf"`
+    fi
 fi
-
 # *** Start configs stolen from @ericcrosson:
 
 export HISTIGNORE=' *'
