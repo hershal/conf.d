@@ -91,7 +91,7 @@ rota () {
 
 # Start the GnuPG agent and enable OpenSSH agent emulation
 # if the gpg-agent is available
-which gpg-agent 2>&1 | /dev/null
+which gpg-agent 2>&1 > /dev/null
 gpgagentexit=$?
 if [[ $rc == 0 ]] ; then
     gnupginf="${HOME}/.gpg-agent-info"
