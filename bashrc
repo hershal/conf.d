@@ -91,8 +91,8 @@ rota () {
 
 # Start the GnuPG agent and enable OpenSSH agent emulation
 # if the gpg-agent is available
-which gpg-agent 2>&1 > /dev/null
-gpgagentexit=$?
+which gpg-agent > /dev/null  2>&1
+rc=$?
 if [[ $rc == 0 ]] ; then
     gnupginf="${HOME}/.gpg-agent-info"
     if pgrep -x -u "${USER}" gpg-agent >/dev/null 2>&1; then
