@@ -5,9 +5,12 @@ unalias ls
 alias ls='ls -G'
 
 # So that emacsclient works properly
-if [[ /Applications/MacPorts/Emacs.app/Contents/MacOS/bin/ ]]; then
+if [[ -d /Applications/MacPorts/Emacs.app/Contents/MacOS/bin/ ]]; then
     PATH=/Applications/MacPorts/Emacs.app/Contents/MacOS/bin/:$PATH
     export EDITOR='/Applications/MacPorts/Emacs.app/Contents/MacOS/bin/emacsclient -a "" '
+elif [[ -d /usr/local/Cellar/emacs/24.3/bin/ ]]; then
+    PATH=/usr/local/Cellar/emacs/24.3/bin/:$PATH
+    export EDITOR='/usr/local/Cellar/emacs/24.3/bin/emacsclient -a "" '
 else
     export EDITOR='emacsclient -a "" '
 fi
