@@ -1,6 +1,5 @@
 #;;; -*- mode: shell-script; -*-
 
-alias ev='evince 2>/dev/null'
 alias tagsgen='find . -regex ".*\.[cChH]\(pp\)?" -print | etags -'
 
 # Computational Engines setup
@@ -10,8 +9,22 @@ alias matab='/usr/local/MathWorks/Matlab/bin/matlab &'
 
 export BROWSER='chromium &2>/dev/null'
 
-eve() {
-    evince $@ > /dev/null 2>&1 & exit
+# Start the GnuPG agent and enable OpenSSH agent emulation
+# if the gpg-agent is available
+which gpg-agent > /dev/null  2>&1
+rc=$?
+if [[ $rc == 0 ]] ; then
+    gnupginf="${HOME}/.gpg-agent-info"
+    if pgrep -x -u "${USER}" gpg-agent >/dev/null 2>&1; then
+	eval `cat $gnupginf`
+	eval `cut -d= -f1 $gnupginf | xargs echo export`
+    else
+	eval `gpg-agent -s --enable-ssh-support --daemon --write-env-file "$gnupginf"`
+    fi
+fi
+
+ev() {
+    evince $@ > /dev/null 2>&1 &
 }
 
 emns() {
