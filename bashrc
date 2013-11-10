@@ -43,6 +43,12 @@ editor() {
     emacsclient -a "" -c "$@"
 }
 
+update_links() {
+    for config in $@; do 
+	ln -s -F $config .`basename $config`;
+    done;
+}
+
 # git stuff
 alias k='git status'
 alias kc='git commit'
