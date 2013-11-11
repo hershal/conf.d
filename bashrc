@@ -111,7 +111,6 @@ rota () {
 }
 
 # *** Start configs stolen from @ericcrosson:
-
 export HISTIGNORE=' *'
 
 # ignore duplicates in history
