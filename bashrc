@@ -43,9 +43,24 @@ editor() {
     emacsclient -a "" -c "$@"
 }
 
-update_links() {
+update-links() {
+
+    prefixstr=.
+    TEMP=`getopt --options tp: --longoptions prefix:,test -- "$@"`
+    if [ $? != 0 ]; then echo "wrong operands" >&2; return 1; fi
+    eval set -- "$TEMP"
+
+    while true; do
+	case "$1" in
+	    --prefix) prefixstr=$2; shift 2 ;;
+	    --help|-h) echo "usage not implemented"; shift ;;
+	    --) shift; break ;;
+	    *) echo "INTERNAL ERROR!"; break ;;
+	esac
+    done
+
     for config in $@; do 
-	ln -s -F $config .`basename $config`;
+	ln -s -F $config $prefixstr`basename $config`;
     done;
 }
 
