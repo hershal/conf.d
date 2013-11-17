@@ -1,13 +1,13 @@
-CXX=gccrec g++-code-assist
-CXXFLAGS=-g -O0
-# -Wno-write-strings
+CXX=g++
+CXXDEBUGFLAGS=-g
+CXXFLAGS=
+CXXOPTIMIZEFLAGS=-O3
 LDFLAGS=
-SOURCES=$(wildcard *.cpp) $(wildcard *.c)
+SOURCES=$(wildcard *.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=binary
 
 UNAME=$(shell uname -o)
-ETAGS_ARGS=
 ifeq ($(UNAME),GNU/Linux)
 ETAGS_ARGS=-
 endif
@@ -18,9 +18,11 @@ endif
 all: $(SOURCES) $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS) 
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(OBJECTS) -o $@
+	$(CXX) $(CXXDEBUGFLAGS) $(LDFLAGS) $(OBJECTS) -o $(EXECUTABLE)
 	find . -regex ".*\.[cChH]\(pp\)?" -print | etags -
+optimize: $(OBJECTS)
+	$(CXX) $(CXXOPTIMIZEFLAGS) $(LDFLAGS) $(OBJECTS) -o $(EXECUTABLE)
 clean: 
-	rm $(EXECUTABLE)
-	rm $(OBJECTS)
-	rm TAGS
+	rm -f $(EXECUTABLE)
+	rm -f $(OBJECTS)
+	rm -f TAGS
