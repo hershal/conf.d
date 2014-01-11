@@ -23,7 +23,7 @@
 
 # General command setup
 alias s 'screen'
-alias ls 'ls --color auto'
+alias ls 'ls --color=auto'
 alias l 'ls -lsha'
 alias g 'grep'
 alias gv 'grep -v'
