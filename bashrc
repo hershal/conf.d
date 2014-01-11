@@ -127,11 +127,11 @@ function ff() { find . -type f -iname '*'$*'*' -ls ; }
 # Load OS-specific configs
 export configs=~/conf.d
 case `uname -a` in
-    *Linux* )
-	source ${configs}/bashrc.linux ;;
     *ARCH* )
 	source ${configs}/bashrc.linux
 	source ${configs}/bashrc.arch ;;
+    *Linux* )
+	source ${configs}/bashrc.linux ;;
     *Darwin* )
 	source ${configs}/bashrc.osx ;;
     *Cygwin* )
