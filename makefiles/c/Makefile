@@ -1,10 +1,10 @@
-CXX=g++
-CXXDEBUGFLAGS=-g
-CXXFLAGS=
-CXXOPTIMIZEFLAGS=-O3
+CC=gcc
+CCDEBUGFLAGS=-g
+CCFLAGS=
+COPTIMIZEFLAGS=-O3
 LDFLAGS=
-SOURCES=$(wildcard *.cpp)
-OBJECTS=$(SOURCES:.cpp=.o)
+SOURCES=$(wildcard *.c)
+OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=binary
 
 UNAME=$(shell uname -o)
@@ -18,10 +18,10 @@ endif
 all: $(SOURCES) $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJECTS) 
-	$(CXX) $(CXXDEBUGFLAGS) $(LDFLAGS) $(OBJECTS) -o $(EXECUTABLE)
+	$(CC) $(CCDEBUGFLAGS) $(LDFLAGS) $(OBJECTS) -o $(EXECUTABLE)
 	find . -regex ".*\.[cChH]\(pp\)?" -print | etags -
 optimize: $(OBJECTS)
-	$(CXX) $(CXXOPTIMIZEFLAGS) $(LDFLAGS) $(OBJECTS) -o $(EXECUTABLE)
+	$(CC) $(COPTIMIZEFLAGS) $(LDFLAGS) $(OBJECTS) -o $(EXECUTABLE)
 clean: 
 	rm -f $(EXECUTABLE)
 	rm -f $(OBJECTS)
