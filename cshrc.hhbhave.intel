@@ -11,7 +11,7 @@ echo "I: (.cshrc.$USER) [entering] `/bin/date`" >> $ec_env_error_log
 
 # Include my local perl libraries as well
 # setenv PERL5LIB /nfs/site/disks/an_umg_disk6006/hhbhave/cpan/lib/lib/perl5/5.8.8/:/nfs/site/home/hhbhave/mydisk/cpan/lib/lib/perl5/site_perl/5.8.8/x86_64-linux-thread-multi:/nfs/site/home/hhbhave/mydisk/cpan/lib/lib/perl5/site_perl/5.8.8/
-setenv PERL5LIB /nfs/site/disks/an_umg_disk6006/hhbhave/cpan/lib/lib:/nfs/site/disks/an_umg_disk6006/hhbhave/cpan/lib/lib/perl5:/nfs/site/disks/an_umg_disk6006/hhbhave/cpan/lib/lib/perl5/site_perl:/nfs/site/disks/an_umg_disk6006/hhbhave/cpan/lib/lib/site_perl
+# setenv PERL5LIB /nfs/site/disks/an_umg_disk6006/hhbhave/cpan/lib/lib:/nfs/site/disks/an_umg_disk6006/hhbhave/cpan/lib/lib/perl5:/nfs/site/disks/an_umg_disk6006/hhbhave/cpan/lib/lib/perl5/site_perl:/nfs/site/disks/an_umg_disk6006/hhbhave/cpan/lib/lib/site_perl
 
 # Fix for emacs crashing and burning
 modpath -q -n 1 -v LD_LIBRARY_PATH /usr/intel/pkgs/fontconfig/2.7.3-64/lib64/
