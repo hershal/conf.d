@@ -64,6 +64,10 @@ update-links() {
     done;
 }
 
+cdl() {
+    cd $@; l;
+}
+
 # git stuff
 alias k='git status'
 alias kc='git commit'
