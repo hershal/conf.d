@@ -115,6 +115,9 @@ rota () {
 }
 
 # *** Start configs stolen from @ericcrosson:
+# This is some awesome shit, it auto-expands any "!" with a space
+bind Space:magic-space
+
 export HISTIGNORE=' *'
 
 # ignore duplicates in history
