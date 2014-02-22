@@ -31,6 +31,7 @@ alias less='less -R -i'
 alias g='grep'
 alias gv='grep -v'
 alias chmox='chmod +x'
+alias please='sudo $(history -p !!)'
 
 # emacs stuff
 export EDITOR='emacsclient -a "" '
