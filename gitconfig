@@ -7,3 +7,5 @@
 	editor = emacsclient -a "" -c
 [push]
 #	default = simple
+[push]
+	default = simple
