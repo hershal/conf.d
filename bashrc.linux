@@ -15,6 +15,7 @@ which gpg-agent > /dev/null  2>&1
 rc=$?
 if [[ $rc == 0 ]] ; then
     gnupginf="${HOME}/.gpg-agent-info"
+    GPG_TTY=`tty`
     if pgrep -x -u "${USER}" gpg-agent >/dev/null 2>&1; then
 	eval `cat $gnupginf`
 	eval `cut -d= -f1 $gnupginf | xargs echo export`
