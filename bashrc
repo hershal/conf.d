@@ -78,7 +78,6 @@ alias ka='git add'
 alias kl='git log --oneline --graph'
 alias kll='git log --stat --graph --summary'
 alias klo='git log --pretty="%C(auto)%h%Creset %Cgreen[%cn]%Creset %s" --graph'
-
 alias kd='git diff --minimal -b'
 alias klg='git log --graph'
 alias kf='git fetch'
