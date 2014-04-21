@@ -65,3 +65,5 @@ Host efsl
      User hershal
      Hostname 75.126.21.182
      ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
+Host *
+    SendEnv AUTHY_TOKEN
