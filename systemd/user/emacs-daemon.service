@@ -1,0 +1,10 @@
+[Unit]
+Description=Emacs daemon service
+
+[Service]
+Type=forking
+ExecStart=/usr/bin/emacs --daemon
+ExecStop=/usr/bin/emacsclient --eval "(let (kill-emacs-hook) (kill-emacs))"
+
+[Install]
+WantedBy=multi-user.target
