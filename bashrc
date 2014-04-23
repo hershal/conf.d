@@ -36,7 +36,7 @@ alias please='sudo $(history -p !!)'
 export EDITOR='emacsclient -a "" '
 alias emc='$EDITOR  -nc  '
 alias emn='$EDITOR -n '
-alias em='$EDITOR  '
+alias em='$EDITOR  -nw'
 alias emr='emacsclient -e "(remember-other-frame)"'
 alias emk='emacsclient -e "(kill-emacs)"'
 
