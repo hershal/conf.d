@@ -17,7 +17,7 @@ emns() {
     emacsclient -na "" "/sudo::$*"
 }
 ems() {
-    emacsclient -a -nw "" "/sudo::$*"
+    emacsclient -a "" -nw "/sudo::$*"
 }
 emcs() {
     emacsclient -nc -a "" "/sudo::$*"
