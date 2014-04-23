@@ -3,7 +3,9 @@
 [user]
 	name = Hershal Bhave
 	email = hershal.bhave@gmail.com
-[push]
-#	default = simple
+[core]
+	editor = emacsclient -a "" -c
+[http]
+	# proxy = http://proxy-us.intel.com:911
 [push]
 	default = simple
