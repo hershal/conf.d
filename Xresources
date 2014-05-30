@@ -28,6 +28,7 @@ URxvt*color14:        rgb:a1/cd/cd
 URxvt*color7:         rgb:ff/ff/ff
 
 URxvt*reverseVideo:	on
+URxvt.depth: 32
 
 xterm*font: -adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1
 xterm*color0:         rgb:19/19/19
