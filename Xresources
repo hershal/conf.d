@@ -2,6 +2,34 @@ emacs*font: -adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1
 emacs*cursorColor: red
 emacs*pointerColor: red
 
+URxvt.scrollBar: false
+URxvt*font: -adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1
+URxvt*color0:         rgb:19/19/19
+URxvt*color8:         rgb:25/25/25
+!red
+URxvt*color1:         rgb:80/32/32
+URxvt*color9:         rgb:98/2b/2b
+!green
+URxvt*color2:         rgb:5b/76/2f
+URxvt*color10:        rgb:89/b8/3f
+!brown/yellow
+URxvt*color3:         rgb:aa/99/43
+URxvt*color11:        rgb:ef/ef/60
+!blue
+URxvt*color4:         rgb:32/4c/80
+URxvt*color12:        rgb:2b/4f/98
+!magenta
+URxvt*color5:         rgb:70/6c/9a
+URxvt*color13:        rgb:82/6a/b1
+!cyan
+URxvt*color6:         rgb:92/b1/9e
+URxvt*color14:        rgb:a1/cd/cd
+!white
+URxvt*color7:         rgb:ff/ff/ff
+
+URxvt*reverseVideo:	on
+URxvt.depth: 32
+
 xterm*font: -adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1
 xterm*color0:         rgb:19/19/19
 xterm*color8:         rgb:25/25/25
