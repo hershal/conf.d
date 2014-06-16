@@ -3,7 +3,7 @@ startup_message off
 backtick 1 60 60 sh -c "acpi | awk '{ print \$4 * 1 \"%\"}'"
 backtick 2 60 60 sh -c "acpi | awk '{ print substr(\$5, 0, 5) }'"
 
-hardstatus alwayslastline '[%{= kw}%?%-Lw%?%{= kc}%n*%f %t%?%?%{= kw}%?%+Lw%?%?%= ] [%{= kc}%H%{= kw}] [%{c}%l %1` %2`%{w}]%{w} [%{c}%m/%d/%y %C %A%{w}] '
+hardstatus alwayslastline '[%{= kw}%?%-Lw%?%{= kc}%n*%f %t%?%?%{= kw}%?%+Lw%?%?%= ] [%{= kc}%H%{= kw}] [%{c}%l %1` %2`%{w}]%{w} [%{c}%Y-%m-%d %C %A%{w}] '
 defscrollback 5000
 
 # 256 color xterm
