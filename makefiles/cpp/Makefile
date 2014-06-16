@@ -7,7 +7,7 @@ SOURCES=$(wildcard *.cpp)
 OBJECTS=$(SOURCES:.cpp=.o)
 EXECUTABLE=binary
 
-UNAME=$(shell uname -o)
+UNAME=$(shell uname)
 ifeq ($(UNAME),GNU/Linux)
 ETAGS_ARGS=-
 endif
