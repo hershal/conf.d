@@ -7,7 +7,7 @@ SOURCES=$(wildcard *.c)
 OBJECTS=$(SOURCES:.c=.o)
 EXECUTABLE=binary
 
-UNAME=$(shell uname -o)
+UNAME=$(shell uname)
 ifeq ($(UNAME),GNU/Linux)
 ETAGS_ARGS=-
 endif
