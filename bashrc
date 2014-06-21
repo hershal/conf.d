@@ -65,10 +65,6 @@ update-links() {
     done;
 }
 
-cdl() {
-    cd $@; l;
-}
-
 # git stuff
 alias k='git status'
 alias kc='git commit'
@@ -145,6 +141,10 @@ case `uname -a` in
     *Cygwin* )
 	source ${configs}/bashrc.cygwin ;;
 esac
+
+cdl() {
+    cd $@ && l
+}
 
 # Taken from Petar Marinov
 # http://geocities.com/h2428/petar/bash_acd.htm
