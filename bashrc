@@ -66,6 +66,7 @@ update-links() {
 }
 
 # git stuff
+git_diff_useful() { git diff --minimal -b --color=always $@ | less -R; }
 alias k='git status'
 alias kc='git commit'
 alias kb='git branch'
@@ -73,7 +74,7 @@ alias kh='git checkout'
 alias ka='git add'
 alias kl='git log --pretty="%C(blue)[%ci]%Creset %Cgreen[%cn]%Creset %C(auto)%h%Creset %s" --graph'
 alias kll='git log --stat --graph --summary'
-alias kd='git diff --minimal -b --color=always | less -R'
+alias kd='git_diff_useful'
 alias klg='git log --graph'
 alias kf='git fetch'
 alias kca='git commit -a'
