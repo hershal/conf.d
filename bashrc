@@ -147,6 +147,18 @@ cdl() {
     cd $@ && l
 }
 
+if [[ -f ${EXPANDED_WHICH_BINARY} ]]; then
+    which () {
+        (alias; declare -f) | ${EXPANDED_WHICH_BINARY} \
+            --tty-only \
+            --read-alias \
+            --read-functions \
+            --show-tilde \
+            --show-dot $@
+    }
+    export -f which
+fi
+
 # Taken from Petar Marinov
 # http://geocities.com/h2428/petar/bash_acd.htm
 cd_func ()
