@@ -19,3 +19,9 @@ fi
 if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
     . /opt/local/etc/profile.d/bash_completion.sh
 fi
+
+# Enable expanded which binary if possible
+export GWHICH_BINARY=/opt/local/bin/gwhich;
+if [ -f ${GWHICH_BINARY} ]; then
+    export EXPANDED_WHICH_BINARY=${GWHICH_BINARY}
+fi
