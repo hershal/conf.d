@@ -45,7 +45,6 @@ editor() {
 }
 
 update-links() {
-
     prefixstr=.
     TEMP=`getopt --options tp: --longoptions prefix:,test -- "$@"`
     if [ $? != 0 ]; then echo "wrong operands" >&2; return 1; fi
@@ -118,7 +117,7 @@ bind Space:magic-space
 
 export HISTIGNORE=' *'
 
-# ignore duplicates in history
+# Ignore duplicates in history
 export HISTCONTROL=ignoredups 
 
 # Find a file with pattern $1 in name and execute $2 on it:
@@ -143,6 +142,7 @@ case `uname -a` in
 	source ${configs}/bashrc.cygwin ;;
 esac
 
+# Miscellaneous platform-sensitive configs
 cdl() {
     cd $@ && l
 }
@@ -161,8 +161,7 @@ fi
 
 # Taken from Petar Marinov
 # http://geocities.com/h2428/petar/bash_acd.htm
-cd_func ()
-{
+cd_func () {
   local x2 the_new_dir adir index
   local -i cnt
 
