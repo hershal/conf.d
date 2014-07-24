@@ -147,6 +147,7 @@ cdl() {
     cd $@ && l
 }
 
+unset -f which
 if [[ -f ${EXPANDED_WHICH_BINARY} ]]; then
     which () {
         (alias; declare -f) | ${EXPANDED_WHICH_BINARY} \
