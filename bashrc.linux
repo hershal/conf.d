@@ -10,7 +10,9 @@ alias matab='/usr/local/MathWorks/Matlab/bin/matlab &'
 export BROWSER='chromium &2>/dev/null'
 
 # GNU which is compatible with the expanded functinality
-export EXPANDED_WHICH_BINARY=`which which`
+if [[ -z $EXPANDED_WHICH_BINARY ]]; then
+    export EXPANDED_WHICH_BINARY=`which which`
+fi
 
 ev() {
     evince $@ > /dev/null 2>&1 &
