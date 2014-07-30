@@ -26,3 +26,8 @@ export GWHICH_BINARY=/opt/local/bin/gwhich;
 if [[ -f ${GWHICH_BINARY} ]]; then
     export EXPANDED_WHICH_BINARY=${GWHICH_BINARY}
 fi
+
+# Use gfind if possible
+if [[ -f /opt/local/bin/gfind ]]; then
+    alias find=gfind
+fi
