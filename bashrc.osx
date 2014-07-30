@@ -46,8 +46,7 @@ function vol() {
         osascript -e "set volume output volume $1";
         vol_str="${prev_vol} -> ";
     fi
-    curr_vol=$(osascript -e 'output volume of (get volume settings)')
-    echo "${vol_str}${curr_vol}"
+    echo "${vol_str}$(osascript -e 'output volume of (get volume settings)')"
 }
 alias mute="vol 0"
 alias unmute="vol \${prev_vol}"
