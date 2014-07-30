@@ -24,8 +24,8 @@ fi
 # Enable expanded which binary if possible
 export GWHICH_BINARY=/opt/local/bin/gwhich;
 if [[ -f ${GWHICH_BINARY} ]]; then
-    if [[ -z $EXPANDED_WHICH_BINARY ]]; then
-        export EXPANDED_WHICH_BINARY=`which which`
+    if [[ -z $_WHICH_BINARY ]]; then
+        export _WHICH_BINARY=${GWHICH_BINARY}
     fi
 fi
 
