@@ -1,9 +1,5 @@
 #;;; -*- mode: shell-script; -*-
 
-# For some reason, osx's `ls` options are different than linux's
-unalias ls
-alias ls='ls -G'
-
 # So that emacsclient works properly
 if [[ -d /Applications/MacPorts/Emacs.app/Contents/MacOS/bin/ ]]; then
     PATH=/Applications/MacPorts/Emacs.app/Contents/MacOS/bin/:$PATH
@@ -32,4 +28,12 @@ fi
 # Use gfind if possible
 if [[ -f /opt/local/bin/gfind ]]; then
     alias find=gfind
+fi
+
+# For some reason, osx's `ls` options are different than those in
+# linux. If gls exists, use that instead.
+if [[ -f /opt/local/bin/gls ]]; then
+    alias ls='gls --color=auto'
+else
+    alias ls='ls -G'
 fi
