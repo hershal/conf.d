@@ -23,7 +23,6 @@ shopt -s checkwinsize
 shopt -s histappend
 shopt -s cdspell
 
-
 # Load OS-specific configs
 export configs=~/conf.d
 source ${configs}/bashrc.aliases
