@@ -23,23 +23,21 @@ shopt -s checkwinsize
 shopt -s histappend
 shopt -s cdspell
 
-# General command setup
-alias s='screen'
-alias ls='ls --color=auto'
-alias l='ls -lsha'
-alias less='less -R -i'
-alias gv='grep -v'
-alias gr='grep -rniI'
-alias chmox='chmod +x'
-alias please='sudo $(history -p !!)'
 
-# emacs stuff
-export EDITOR='emacsclient -a "" '
-alias emc='$EDITOR  -nc  '
-alias emn='$EDITOR -n '
-alias em='$EDITOR  -nw'
-alias emr='emacsclient -e "(remember-other-frame)"'
-alias emk='emacsclient -e "(kill-emacs)"'
+# Load OS-specific configs
+export configs=~/conf.d
+source ${configs}/bashrc.aliases
+case `uname -a` in
+    *ARCH* )
+	source ${configs}/bashrc.linux
+	source ${configs}/bashrc.arch ;;
+    *Linux* )
+	source ${configs}/bashrc.linux ;;
+    *Darwin* )
+	source ${configs}/bashrc.osx ;;
+    *Cygwin* )
+	source ${configs}/bashrc.cygwin ;;
+esac
 
 editor() {
     emacsclient -a "" -c "$@"
@@ -64,26 +62,6 @@ update-links() {
 	ln -s -F $config $prefixstr`basename $config`;
     done;
 }
-
-# git stuff
-git_diff_useful() { git diff --minimal -b --color=always $@ | less -R; }
-alias k='git status'
-alias kc='git commit'
-alias kb='git branch'
-alias kh='git checkout'
-alias ka='git add'
-alias kl='git log --pretty="%C(blue)[%ci]%Creset %Cgreen[%cn]%Creset %C(auto)%h%Creset %s%C(auto)%d%Creset" --graph'
-alias kll='git log --stat --graph --summary'
-alias kd='git_diff_useful'
-alias klg='git log --graph'
-alias kf='git fetch'
-alias kca='git commit -a'
-alias kcam='git commit -am'
-alias ksd='git svn dcommit'
-alias g='git'
-alias gu='git pull'
-alias gp='git push'
-alias gpom='git push origin master'
 
 # map and rota taken from
 # http://onthebalcony.wordpress.com/2008/03/08/just-for-fun-map-as-higher-order-function-in-bash/
@@ -128,20 +106,6 @@ function ffand() { find . -type f -iname '*'${1:-}'*' -exec ${2:-file} {} \; ; }
 function ff() { find . -type f -iname '*'$*'*' -ls ; }
 
 # *** End configs stolen from @ericcrosson:
-
-# Load OS-specific configs
-export configs=~/conf.d
-case `uname -a` in
-    *ARCH* )
-	source ${configs}/bashrc.linux
-	source ${configs}/bashrc.arch ;;
-    *Linux* )
-	source ${configs}/bashrc.linux ;;
-    *Darwin* )
-	source ${configs}/bashrc.osx ;;
-    *Cygwin* )
-	source ${configs}/bashrc.cygwin ;;
-esac
 
 # Miscellaneous platform-sensitive configs
 cdl() {
@@ -209,6 +173,3 @@ cd_func () {
 
   return 0
 }
-
-alias cd='cd_func '
-alias sd='cd -- '
