@@ -37,3 +37,17 @@ if [[ -f /opt/local/bin/gls ]]; then
 else
     alias ls='ls -G'
 fi
+
+# Set the volume level, mute, and unmute for the current output device
+function vol() {
+    vol_str=""
+    if [[ -n $1 ]]; then
+        export prev_vol=$(osascript -e 'output volume of (get volume settings)');
+        osascript -e "set volume output volume $1";
+        vol_str="${prev_vol} -> ";
+    fi
+    curr_vol=$(osascript -e 'output volume of (get volume settings)')
+    echo "${vol_str}${curr_vol}"
+}
+alias mute="vol 0"
+alias unmute="vol \${prev_vol}"
