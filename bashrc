@@ -29,6 +29,7 @@ alias ls='ls --color=auto'
 alias l='ls -lsha'
 alias less='less -R -i'
 alias gv='grep -v'
+alias gr='grep -rniI'
 alias chmox='chmod +x'
 alias please='sudo $(history -p !!)'
 
