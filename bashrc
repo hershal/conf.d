@@ -149,9 +149,9 @@ cdl() {
 }
 
 unset -f which
-if [[ -f ${EXPANDED_WHICH_BINARY} ]]; then
+if [[ -f ${_WHICH_BINARY} ]]; then
     which () {
-        (alias; declare -f) | ${EXPANDED_WHICH_BINARY} \
+        (alias; declare -f) | ${_WHICH_BINARY} \
             --tty-only \
             --read-alias \
             --read-functions \
