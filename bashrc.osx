@@ -56,8 +56,11 @@ function wifi() {
     case "$1" in
         "on") networksetup -setairportpower en0 on ;;
         "off") networksetup -setairportpower en0 off ;;
+        "re") wifi off; wifi on ;;
         "scan") airport scan ;;
+        "stat") airport -I ;;
+        "dis") sudo /System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport -z ;;
         "join") shift; networksetup -setairportnetwork en0 $1 $2;;
-        *) echo "available options: on, off, scan, join [ssid] [pass]" ;;
+        *) echo "available options: on, off, re, scan, stat, dis, join [ssid] [pass]" ;;
     esac
 }
