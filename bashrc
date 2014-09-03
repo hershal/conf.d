@@ -62,6 +62,14 @@ update-links() {
     done;
 }
 
+# don't ask
+modpath ()                            
+{                                     
+    modpathargs=${@+"$@"};            
+    . ${configs}/modpath.sh;    
+    unset modpathargs                 
+}
+
 # map and rota taken from
 # http://onthebalcony.wordpress.com/2008/03/08/just-for-fun-map-as-higher-order-function-in-bash/
 map () { 
