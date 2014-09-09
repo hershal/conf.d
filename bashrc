@@ -38,6 +38,10 @@ case `uname -a` in
 	source ${configs}/bashrc.cygwin ;;
 esac
 
+ev() {
+    evince $@ > /dev/null 2>&1 &
+}
+
 editor() {
     emacsclient -a "" -c "$@"
 }
