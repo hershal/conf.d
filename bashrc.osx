@@ -38,6 +38,8 @@ else
     alias ls='ls -G'
 fi
 
+alias sln='pmset sleepnow'
+
 # Set the volume level, mute, and unmute for the current output device
 function vol() {
     vol_str=""
