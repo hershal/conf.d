@@ -4,6 +4,9 @@ emacs*pointerColor: red
 
 URxvt.scrollBar: false
 URxvt*font: -adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1
+URxvt*boldFont:
+! URxvt*font: xft:Monaco-7
+
 URxvt*color0:         rgb:19/19/19
 URxvt*color8:         rgb:25/25/25
 !red
