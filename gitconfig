@@ -9,3 +9,5 @@
 	# proxy = http://proxy-us.intel.com:911
 [push]
 	default = simple
+[gpg]
+        program = gpg2
