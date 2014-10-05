@@ -1,4 +1,4 @@
-# General command setup
+# general command setup
 alias s='screen'
 alias ls='ls --color=auto'
 alias l='ls -lsha'
@@ -7,6 +7,7 @@ alias gv='grep -v'
 alias gr='grep -rniI'
 alias chmox='chmod +x'
 alias please='sudo $(history -p !!)'
+alias rfdate='date +"%Y-%m-%d-%H%M"'
 
 # emacs stuff
 export EDITOR='emacsclient -a "" '
@@ -36,5 +37,6 @@ alias gu='git pull'
 alias gp='git push'
 alias gpom='git push origin master'
 
+# based on custom configs
 alias cd='cd_func '
 alias sd='cd -- '
