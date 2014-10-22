@@ -25,6 +25,12 @@ if [[ -f ${GWHICH_BINARY} ]]; then
     fi
 fi
 
+# For some reason, osx's `sed` seems to just plain suck. If gsed
+# exists, use that instead.
+if [[ -f /opt/local/bin/gsed ]]; then
+    alias sed='gsed'
+fi
+
 # Use gfind if possible
 if [[ -f /opt/local/bin/gfind ]]; then
     alias find=gfind
