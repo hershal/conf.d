@@ -119,9 +119,7 @@ function ff() { find . -type f -iname '*'$*'*' -ls ; }
 # *** End configs stolen from @ericcrosson:
 
 # Miscellaneous platform-sensitive configs
-cdl() {
-    cd $@ && l
-}
+function cdl() { cd $@ && l ; }
 
 unset -f which
 if [[ -f ${_WHICH_BINARY} ]]; then
