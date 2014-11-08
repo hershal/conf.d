@@ -120,6 +120,7 @@ function ff() { find . -type f -iname '*'$*'*' -ls ; }
 
 # Miscellaneous platform-sensitive configs
 function cdl() { cd $@ && l ; }
+function mkc() { mkdir -p $@ && cd $@ ; }
 
 unset -f which
 if [[ -f ${_WHICH_BINARY} ]]; then
