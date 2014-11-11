@@ -119,7 +119,7 @@ function ff() { find . -type f -iname '*'$*'*' -ls ; }
 # *** End configs stolen from @ericcrosson:
 
 # Miscellaneous platform-sensitive configs
-function cdl() { cd $@ && l ; }
+function cl() { cd $@ && l ; }
 function mkc() { mkdir -p $@ && cd $@ ; }
 
 unset -f which
