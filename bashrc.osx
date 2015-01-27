@@ -1,5 +1,10 @@
 #;;; -*- mode: shell-script; -*-
 
+# Fix for multi-term, ansi-term, and term not working properly under emacs
+if [[ -d /opt/local/bin/ ]]; then
+    PATH=/opt/local/bin:$PATH
+fi
+
 # So that emacsclient works properly
 if [[ -d /Applications/MacPorts/Emacs.app/Contents/MacOS/bin/ ]]; then
     PATH=/Applications/MacPorts/Emacs.app/Contents/MacOS/bin/:$PATH
