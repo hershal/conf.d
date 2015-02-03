@@ -1,9 +1,25 @@
-
 #;;; -*- mode: shell-script; -*-
 
-# General Shell Settings
-export PS1="[\u@\h \W]\$ "
-export PS2=">"
+# bash-specific configuration
+if [[ -n ${BASH} ]]; then
+
+    # General Shell Settings
+    export PS1="[\u@\h \W]\$ "
+    export PS2=">"
+
+    # To enable tab-completion while sudo-ing
+    complete -cf sudo
+
+    # Enable some shell extensions
+    shopt -s extglob
+    shopt -s dotglob
+    shopt -s checkwinsize
+    shopt -s histappend
+    shopt -s cdspell
+
+    # This is some awesome shit, it auto-expands any "!" with a space
+    bind Space:magic-space
+fi
 
 # xterm settings
 export TERM="xterm-256color"
@@ -12,16 +28,6 @@ export email='hershal.bhave@gmail.com'
 
 # Append 
 export PATH=$PATH:~/conf.d/bin
-
-# To enable tab-completion while sudo-ing
-complete -cf sudo
-
-# Enable some shell extensions
-shopt -s extglob
-shopt -s dotglob
-shopt -s checkwinsize
-shopt -s histappend
-shopt -s cdspell
 
 # Load OS-specific configs
 export configs=~/conf.d
@@ -102,9 +108,6 @@ rota () {
 }
 
 # *** Start configs stolen from @ericcrosson:
-# This is some awesome shit, it auto-expands any "!" with a space
-bind Space:magic-space
-
 export HISTIGNORE=' *'
 
 # Ignore duplicates in history
@@ -122,7 +125,7 @@ function ff() { find . -type f -iname '*'$*'*' -ls ; }
 function cl() { cd $@ && l ; }
 function mkc() { mkdir -p $@ && cd $@ ; }
 
-unset -f which
+unset -f which 2> /dev/null
 if [[ -f ${_WHICH_BINARY} ]]; then
     which () {
         (alias; declare -f) | ${_WHICH_BINARY} \
@@ -132,7 +135,7 @@ if [[ -f ${_WHICH_BINARY} ]]; then
             --show-tilde \
             --show-dot $@
     }
-    export -f which
+    export -f which > /dev/null
 fi
 
 # Taken from Petar Marinov
