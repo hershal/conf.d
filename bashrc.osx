@@ -33,7 +33,7 @@ fi
 # For some reason, osx's `sed` seems to just plain suck. If gsed
 # exists, use that instead.
 if [[ -f /opt/local/bin/gsed ]]; then
-    alias sed='gsed'
+    alias sed='/opt/local/bin/gsed'
 fi
 
 # Use gfind if possible
@@ -44,7 +44,7 @@ fi
 # For some reason, osx's `ls` options are different than those in
 # linux. If gls exists, use that instead.
 if [[ -f /opt/local/bin/gls ]]; then
-    alias ls='gls --color=auto'
+    alias ls='/opt/local/bin/gls --color=auto'
 else
     alias ls='ls -G'
 fi
