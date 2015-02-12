@@ -1,11 +1,17 @@
-emacs*font: -adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1
+Xft.dpi: 184
+Xft.antialias: 1
+Xft.autohint: 0
+Xft.hinting: 1
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcddefault
+Xft.rgba: rgb
+
+emacs*font: Monaco-8
 emacs*cursorColor: red
 emacs*pointerColor: red
 
 URxvt.scrollBar: false
-URxvt*font: -adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1
-URxvt*boldFont:
-! URxvt*font: xft:Monaco-7
+URxvt*font: xft:Monaco-8
 
 URxvt*color0:         rgb:19/19/19
 URxvt*color8:         rgb:25/25/25
@@ -33,7 +39,7 @@ URxvt*color7:         rgb:ff/ff/ff
 URxvt*reverseVideo:	on
 URxvt.depth: 32
 
-xterm*font: -adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1
+xterm*font: Monaco-8
 xterm*color0:         rgb:19/19/19
 xterm*color8:         rgb:25/25/25
 !red
@@ -41,7 +47,7 @@ xterm*color1:         rgb:80/32/32
 xterm*color9:         rgb:98/2b/2b
 !green
 xterm*color2:         rgb:5b/76/2f
-xterm*color10:        rgb:89/b8/3f
+! xterm*color10:        rgb:89/b8/3f
 !brown/yellow
 xterm*color3:         rgb:aa/99/43
 xterm*color11:        rgb:ef/ef/60
@@ -74,8 +80,6 @@ xclock*minuteColor:     white
 xclock*secondColor:     white
 xclock*majorColor:      white
 xclock*minorColor:      white
-
-Xft.dpi: 96
 
 xautolock.time: 15
 xautolock.locker: slock & sleep 1; xset dpms force off

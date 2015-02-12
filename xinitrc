@@ -48,7 +48,9 @@ setxkbmap -option ctrl:nocaps
 # with the delays set in Xresources
 xautolock &
 
-xrandr --output default --mode 1920x1080; i3-msg restart
+xrandr --newmode "3840x2400"  794.25  3840 4160 4584 5328  2400 2403 2409 2486 -hsync +vsync
+xrandr --addmode Virtual1 "3840x2400"
+xrandr -s "3840x2400"; i3-msg restart
 
 # Hang point
 wait $wmpid
