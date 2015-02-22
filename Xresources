@@ -6,12 +6,15 @@ Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 
-emacs*font: Monaco-8
+emacs*font: xft:Meslo LG S:regular:size=8
 emacs*cursorColor: red
 emacs*pointerColor: red
 
 URxvt.scrollBar: false
-URxvt*font: xft:Monaco-8
+!URxvt*font: xft:Monaco-8
+
+urxvt.font: xft:Meslo LG S:regular:size=8
+urxvt.boldfont: xft:Meslo LG S:bold:size=8
 
 URxvt*color0:         rgb:19/19/19
 URxvt*color8:         rgb:25/25/25
@@ -36,7 +39,7 @@ URxvt*color14:        rgb:a1/cd/cd
 !white
 URxvt*color7:         rgb:ff/ff/ff
 
-URxvt*reverseVideo:	on
+URxvt*reverseVideo:     on
 URxvt.depth: 32
 
 xterm*font: Monaco-8
@@ -63,7 +66,7 @@ xterm*color14:        rgb:a1/cd/cd
 !white
 xterm*color7:         rgb:ff/ff/ff
 
-xterm*reverseVideo:	on
+xterm*reverseVideo:     on
 
 xterm*metaSendsEscape: true
 xterm*cursorColor: red
