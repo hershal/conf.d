@@ -50,6 +50,7 @@ else
 fi
 
 alias sln='pmset sleepnow'
+alias dsn='pmset displaysleepnow'
 
 # Set the volume level, mute, and unmute for the current output device
 function vol() {
