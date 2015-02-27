@@ -38,7 +38,7 @@ xset r rate 200 60
 xset s off &
 xset dpms 600 0 0 &
 
-# Set the preferred keyboard map: 
+# Set the preferred keyboard map:
 # Compose is the Menu button
 setxkbmap -option compose:menu
 # Caps is the Ctrl buton
