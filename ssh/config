@@ -1,3 +1,6 @@
+Host github
+     User git
+     Hostname github.com
 Host ironside
      User hershal
      Hostname 129.116.21.186
