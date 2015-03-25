@@ -42,7 +42,7 @@ URxvt*color7:         rgb:ff/ff/ff
 URxvt*reverseVideo:     on
 URxvt.depth: 32
 
-xterm*font: Monaco-8
+xterm*font: xft:Meslo Lg S 8
 xterm*color0:         rgb:19/19/19
 xterm*color8:         rgb:25/25/25
 !red
