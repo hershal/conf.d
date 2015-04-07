@@ -39,6 +39,6 @@ alias gpom="git push origin master"
 
 # based on custom configs
 if [[ $(basename ${SHELL}) == "bash" ]]; then
-   alias cd='cd_func '
-   alias sd='cd -- '
+    alias cd='cd_func '
+    alias sd='cd -- '
 fi
