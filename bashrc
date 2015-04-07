@@ -26,7 +26,7 @@ export TERM="xterm-256color"
 
 export email='hershal.bhave@gmail.com'
 
-# Append 
+# Append
 export PATH=$PATH:~/conf.d/bin
 
 # Load OS-specific configs
@@ -34,14 +34,14 @@ export configs=~/conf.d
 source ${configs}/bashrc.aliases
 case `uname -a` in
     *ARCH* )
-	source ${configs}/bashrc.linux
-	source ${configs}/bashrc.arch ;;
+        source ${configs}/bashrc.linux
+        source ${configs}/bashrc.arch ;;
     *Linux* )
-	source ${configs}/bashrc.linux ;;
+        source ${configs}/bashrc.linux ;;
     *Darwin* )
-	source ${configs}/bashrc.osx ;;
+        source ${configs}/bashrc.osx ;;
     *Cygwin* )
-	source ${configs}/bashrc.cygwin ;;
+        source ${configs}/bashrc.cygwin ;;
 esac
 
 ev() {
@@ -59,59 +59,59 @@ update-links() {
     eval set -- "$TEMP"
 
     while true; do
-	case "$1" in
-	    --prefix) prefixstr=$2; shift 2 ;;
-	    --help|-h) echo "usage not implemented"; shift ;;
-	    --) shift; break ;;
-	    *) echo "INTERNAL ERROR!"; break ;;
-	esac
+        case "$1" in
+            --prefix) prefixstr=$2; shift 2 ;;
+            --help|-h) echo "usage not implemented"; shift ;;
+            --) shift; break ;;
+            *) echo "INTERNAL ERROR!"; break ;;
+        esac
     done
 
-    for config in $@; do 
-	ln -s -F $config $prefixstr`basename $config`;
+    for config in $@; do
+        ln -s -F $config $prefixstr`basename $config`;
     done;
 }
 
 # don't ask
-modpath ()                            
-{                                     
-    modpathargs=${@+"$@"};            
-    . ${configs}/modpath.sh;    
-    unset modpathargs                 
+modpath ()
+{
+    modpathargs=${@+"$@"};
+    . ${configs}/modpath.sh;
+    unset modpathargs
 }
 
 # map and rota taken from
 # http://onthebalcony.wordpress.com/2008/03/08/just-for-fun-map-as-higher-order-function-in-bash/
-map () { 
-  if [ $# -le 1 ]; then 
-    return 
-  else 
-    local f=$1 
-    local x=$2 
-    shift 2 
-    local xs=$@ 
+map () {
+    if [ $# -le 1 ]; then
+        return
+    else
+        local f=$1
+        local x=$2
+        shift 2
+        local xs=$@
 
-    $f $x 
+        $f $x
 
-    map "$f" $xs 
-  fi 
+        map "$f" $xs
+    fi
 }
-rota () { 
-  local f=$1 
-  shift 
-  local args=($@) 
-  local idx=$(($#-1)) 
-  local last=${args[$idx]} 
-  args[$idx]= 
+rota () {
+    local f=$1
+    shift
+    local args=($@)
+    local idx=$(($#-1))
+    local last=${args[$idx]}
+    args[$idx]=
 
-  $f $last ${args[@]} 
+    $f $last ${args[@]}
 }
 
 # *** Start configs stolen from @ericcrosson:
 export HISTIGNORE=' *'
 
 # Ignore duplicates in history
-export HISTCONTROL=ignoredups 
+export HISTCONTROL=ignoredups
 
 # Find a file with pattern $1 in name and execute $2 on it:
 function ffand() { find . -type f -iname '*'${1:-}'*' -exec ${2:-file} {} \; ; }
