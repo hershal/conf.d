@@ -188,3 +188,6 @@ if [[ $(basename ${SHELL}) == "bash" ]]; then
         return 0
     }
 fi
+
+# quick and easy qr encoding for sharing
+function qr() { qrencode -t ansi256 -o - "$*"; }
