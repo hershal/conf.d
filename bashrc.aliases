@@ -1,3 +1,4 @@
+# -*- mode: sh -*-
 # general command setup
 alias s="screen"
 alias ls="ls --color=auto"
