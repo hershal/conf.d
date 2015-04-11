@@ -86,3 +86,7 @@ function mouse() {
         *) echo "available options: on, off" ;;
     esac
 }
+
+function bat() {
+    pmset -g ps
+}
