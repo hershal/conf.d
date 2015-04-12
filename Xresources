@@ -7,10 +7,9 @@ Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 
 URxvt.scrollBar: false
-!URxvt*font: xft:Monaco-8
 
-urxvt.font: xft:Meslo LG S:regular:size=7
-urxvt.boldfont: xft:Meslo LG S:bold:size=7
+urxvt.font: xft:Menlo:regular:size=7
+urxvt.boldfont: xft:Menlo:bold:size=7
 
 URxvt*color0:         rgb:19/19/19
 URxvt*color8:         rgb:25/25/25
@@ -38,7 +37,7 @@ URxvt*color7:         rgb:ff/ff/ff
 URxvt*reverseVideo:     on
 URxvt.depth: 32
 
-xterm*font: xft:Meslo LG S 7
+xterm*font: xft:Menlo 7
 xterm*color0:         rgb:19/19/19
 xterm*color8:         rgb:25/25/25
 !red
