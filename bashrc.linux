@@ -23,3 +23,25 @@ ems() {
 emcs() {
     emacsclient -nc -a "" "/sudo::$*"
 }
+
+# Change urxvt's face
+chface() {
+    if [ -z "$1" ]; then
+       face="Menlo";
+       size="7";
+    elif [ -z "$2" ]; then
+       face="Menlo";
+       size="$1";
+    else
+        face="$1";
+        size="$2";
+    fi
+
+    if [ ! -z "$3" ]; then
+        params="$3";
+    else
+        params="regular";
+    fi
+
+    printf '\33]50;%s\007' "xft:$face:$params:size=$size"
+}
