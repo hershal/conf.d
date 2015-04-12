@@ -6,10 +6,6 @@ Xft.hintstyle: hintfull
 Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 
-!emacs*font: xft:Meslo LG S:regular:size=8
-emacs*cursorColor: red
-emacs*pointerColor: red
-
 URxvt.scrollBar: false
 !URxvt*font: xft:Monaco-8
 
