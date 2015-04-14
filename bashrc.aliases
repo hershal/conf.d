@@ -7,7 +7,7 @@ alias less="less -R -i"
 alias gv="grep -v"
 alias gr="grep -rniI"
 alias chmox="chmod +x"
-alias rfdate="date +"%Y-%m-%d-%H%M""
+alias rfdate="date +"%Y-%m-%d-%H%M%S""
 
 # emacs stuff
 export EDITOR="emacsclient -a \"\" "
