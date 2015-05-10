@@ -121,10 +121,10 @@ function ff() { find . -type f -iname '*'$*'*' -ls ; }
 
 # *** End configs stolen from @ericcrosson:
 
-# Miscellaneous platform-sensitive configs
-function cl() { cd $@ && l ; }
-function mkc() { mkdir -p $@ && cd $@ ; }
+cl() { cd $@ && l ; }
+mkc() { mkdir -p $@ && cd $@ ; }
 
+# Miscellaneous platform-sensitive configs
 unset -f which 2> /dev/null
 if [[ -f ${_WHICH_BINARY} ]]; then
     which () {
