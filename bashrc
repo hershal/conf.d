@@ -121,9 +121,6 @@ ff() { find . -type f -iname '*'$*'*' -ls ; }
 
 # *** End configs stolen from @ericcrosson:
 
-cl() { cd $@ && l ; }
-mkc() { mkdir -p $@ && cd $@ ; }
-
 # Miscellaneous platform-sensitive configs
 unset -f which 2> /dev/null
 if [[ -f ${_WHICH_BINARY} ]]; then
@@ -191,3 +188,5 @@ fi
 
 # quick and easy qr encoding for sharing
 qr() { qrencode -t ansi256 -o - "$*"; }
+cl() { cd $@ && l ; }
+mkc() { mkdir -p $@ && cd $@ ; }
