@@ -186,7 +186,6 @@ if [[ $(basename ${SHELL}) == "bash" ]]; then
     }
 fi
 
-# quick and easy qr encoding for sharing
 qr() { qrencode -t ansi256 -o - "$*"; }
 cl() { cd $@ && l ; }
 mkc() { mkdir -p $@ && cd $@ ; }
