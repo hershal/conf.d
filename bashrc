@@ -114,10 +114,10 @@ export HISTIGNORE=' *'
 export HISTCONTROL=ignoredups
 
 # Find a file with pattern $1 in name and execute $2 on it:
-function ffand() { find . -type f -iname '*'${1:-}'*' -exec ${2:-file} {} \; ; }
+ffand() { find . -type f -iname '*'${1:-}'*' -exec ${2:-file} {} \; ; }
 
 # Find files matching a given pattern
-function ff() { find . -type f -iname '*'$*'*' -ls ; }
+ff() { find . -type f -iname '*'$*'*' -ls ; }
 
 # *** End configs stolen from @ericcrosson:
 
@@ -190,4 +190,4 @@ if [[ $(basename ${SHELL}) == "bash" ]]; then
 fi
 
 # quick and easy qr encoding for sharing
-function qr() { qrencode -t ansi256 -o - "$*"; }
+qr() { qrencode -t ansi256 -o - "$*"; }
