@@ -7,7 +7,7 @@ if [[ -n ${BASH} ]]; then
     export PS1="[\u@\h \W]\$ "
     export PS2=">"
 
-    # To enable tab-completion while sudo-ing
+    # Enables tab-completion while sudo-ing
     complete -cf sudo
 
     # Enable some shell extensions
@@ -17,7 +17,7 @@ if [[ -n ${BASH} ]]; then
     shopt -s histappend
     shopt -s cdspell
 
-    # This is some awesome shit, it auto-expands any "!" with a space
+    # This auto-expands any "!" with a space
     bind Space:magic-space
 fi
 
