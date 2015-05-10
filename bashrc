@@ -73,8 +73,7 @@ update-links() {
 }
 
 # don't ask
-modpath ()
-{
+modpath () {
     modpathargs=${@+"$@"};
     . ${configs}/modpath.sh;
     unset modpathargs
@@ -96,6 +95,7 @@ map () {
         map "$f" $xs
     fi
 }
+
 rota () {
     local f=$1
     shift
