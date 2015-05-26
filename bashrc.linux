@@ -11,7 +11,7 @@ export BROWSER='chromium &2>/dev/null'
 
 # GNU which is compatible with the expanded functinality
 if [[ -z $_WHICH_BINARY ]]; then
-    export _WHICH_BINARY=`which which`
+    export _WHICH_BINARY=`env which which`
 fi
 
 emns() {
