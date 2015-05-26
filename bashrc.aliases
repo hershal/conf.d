@@ -40,7 +40,7 @@ alias gp="git push"
 alias gpom="git push origin master"
 
 # based on custom configs
-if [[ $(basename ${SHELL}) == "bash" ]]; then
+if [[ -n ${BASH} ]]; then
     alias cd='cd_func '
     alias sd='cd -- '
 fi
