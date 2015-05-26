@@ -137,7 +137,7 @@ fi
 
 # Taken from Petar Marinov
 # http://geocities.com/h2428/petar/bash_acd.htm
-if [[ $(basename ${SHELL}) == "bash" ]]; then
+if [[ -n ${BASH} ]]; then
     cd_func () {
         local x2 the_new_dir adir index
         local -i cnt
