@@ -1,2 +1,3 @@
 source ~/conf.d/zsh/zprezto/init.zsh
+source ~/conf.d/zsh/zpreztorc
 source ~/conf.d/bashrc
