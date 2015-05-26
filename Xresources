@@ -11,57 +11,62 @@ URxvt.scrollBar: false
 urxvt.font: xft:Menlo:regular:size=7
 urxvt.boldfont: xft:Menlo:bold:size=7
 
-URxvt*color0:         rgb:19/19/19
-URxvt*color8:         rgb:25/25/25
-!red
-URxvt*color1:         rgb:80/32/32
-URxvt*color9:         rgb:98/2b/2b
-!green
-URxvt*color2:         rgb:5b/76/2f
-URxvt*color10:        rgb:89/b8/3f
-!brown/yellow
-URxvt*color3:         rgb:aa/99/43
-URxvt*color11:        rgb:ef/ef/60
-!blue
-URxvt*color4:         rgb:32/4c/80
-URxvt*color12:        rgb:2b/4f/98
-!magenta
-URxvt*color5:         rgb:70/6c/9a
-URxvt*color13:        rgb:82/6a/b1
-!cyan
-URxvt*color6:         rgb:92/b1/9e
-URxvt*color14:        rgb:a1/cd/cd
-!white
-URxvt*color7:         rgb:ff/ff/ff
+! Using the base16 theme collection from:
+! https://github.com/chriskempson/base16 and
+!
+#define base00 #000000
+#define base01 #303030
+#define base02 #505050
+#define base03 #b0b0b0
+#define base04 #d0d0d0
+#define base05 #e0e0e0
+#define base06 #f5f5f5
+#define base07 #ffffff
+#define base08 #fb0120
+#define base09 #fc6d24
+#define base0A #fda331
+#define base0B #a1c659
+#define base0C #76c7b7
+#define base0D #6fb3d2
+#define base0E #d381c3
+#define base0F #be643c
 
-URxvt*reverseVideo:     on
+*.foreground:   base05
+*.background:   base00
+*.cursorColor:  base05
+
+*.color0:       base00
+*.color1:       base08
+*.color2:       base0B
+*.color3:       base0A
+*.color4:       base0D
+*.color5:       base0E
+*.color6:       base0C
+*.color7:       base05
+
+*.color8:       base03
+*.color9:       base08
+*.color10:      base0B
+*.color11:      base0A
+*.color12:      base0D
+*.color13:      base0E
+*.color14:      base0C
+*.color15:      base07
+
+! Note: colors beyond 15 might not be loaded (e.g., xterm, urxvt),
+! use 'shell' template to set these if necessary
+*.color16:      base09
+*.color17:      base0F
+*.color18:      base01
+*.color19:      base02
+*.color20:      base04
+*.color21:      base06
+
+URxvt*reverseVideo:     off
 URxvt.depth: 32
 
 xterm*font: xft:Menlo 7
-xterm*color0:         rgb:19/19/19
-xterm*color8:         rgb:25/25/25
-!red
-xterm*color1:         rgb:80/32/32
-xterm*color9:         rgb:98/2b/2b
-!green
-xterm*color2:         rgb:5b/76/2f
-! xterm*color10:        rgb:89/b8/3f
-!brown/yellow
-xterm*color3:         rgb:aa/99/43
-xterm*color11:        rgb:ef/ef/60
-!blue
-xterm*color4:         rgb:32/4c/80
-xterm*color12:        rgb:2b/4f/98
-!magenta
-xterm*color5:         rgb:70/6c/9a
-xterm*color13:        rgb:82/6a/b1
-!cyan
-xterm*color6:         rgb:92/b1/9e
-xterm*color14:        rgb:a1/cd/cd
-!white
-xterm*color7:         rgb:ff/ff/ff
-
-xterm*reverseVideo:     on
+xterm*reverseVideo:     off
 
 xterm*metaSendsEscape: true
 xterm*cursorColor: red
