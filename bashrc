@@ -7,7 +7,7 @@ if [[ -n ${BASH} ]]; then
     export PS1="[\u@\h \W]\$ "
     export PS2=">"
 
-    # To enable tab-completion while sudo-ing
+    # Enables tab-completion while sudo-ing
     complete -cf sudo
 
     # Enable some shell extensions
@@ -17,7 +17,7 @@ if [[ -n ${BASH} ]]; then
     shopt -s histappend
     shopt -s cdspell
 
-    # This is some awesome shit, it auto-expands any "!" with a space
+    # This auto-expands any "!" with a space
     bind Space:magic-space
 fi
 
@@ -73,8 +73,7 @@ update-links() {
 }
 
 # don't ask
-modpath ()
-{
+modpath () {
     modpathargs=${@+"$@"};
     . ${configs}/modpath.sh;
     unset modpathargs
@@ -96,6 +95,7 @@ map () {
         map "$f" $xs
     fi
 }
+
 rota () {
     local f=$1
     shift
@@ -114,17 +114,14 @@ export HISTIGNORE=' *'
 export HISTCONTROL=ignoredups
 
 # Find a file with pattern $1 in name and execute $2 on it:
-function ffand() { find . -type f -iname '*'${1:-}'*' -exec ${2:-file} {} \; ; }
+ffand() { find . -type f -iname '*'${1:-}'*' -exec ${2:-file} {} \; ; }
 
 # Find files matching a given pattern
-function ff() { find . -type f -iname '*'$*'*' -ls ; }
+ff() { find . -type f -iname '*'$*'*' -ls ; }
 
 # *** End configs stolen from @ericcrosson:
 
 # Miscellaneous platform-sensitive configs
-function cl() { cd $@ && l ; }
-function mkc() { mkdir -p $@ && cd $@ ; }
-
 unset -f which 2> /dev/null
 if [[ -f ${_WHICH_BINARY} ]]; then
     which () {
@@ -140,7 +137,7 @@ fi
 
 # Taken from Petar Marinov
 # http://geocities.com/h2428/petar/bash_acd.htm
-if [[ $(basename ${SHELL}) == "bash" ]]; then
+if [[ -n ${BASH} ]]; then
     cd_func () {
         local x2 the_new_dir adir index
         local -i cnt
@@ -189,5 +186,6 @@ if [[ $(basename ${SHELL}) == "bash" ]]; then
     }
 fi
 
-# quick and easy qr encoding for sharing
-function qr() { qrencode -t ansi256 -o - "$*"; }
+qr() { qrencode -t ansi256 -o - "$*"; }
+cl() { cd $@ && l ; }
+mkc() { mkdir -p $@ && cd $@ ; }
