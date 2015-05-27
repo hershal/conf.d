@@ -7,7 +7,8 @@ alias less="less -R -i"
 alias gv="grep -v"
 alias gr="grep -rniI"
 alias chmox="chmod +x"
-alias rfdate="date +"%Y-%m-%d-%H%M""
+alias rfdate="date +"%Y-%m-%d-%H%M%S""
+alias pspr="ps aux | grep "
 
 # emacs stuff
 export EDITOR="emacsclient -a \"\" "
@@ -39,7 +40,7 @@ alias gp="git push"
 alias gpom="git push origin master"
 
 # based on custom configs
-if [[ $(basename ${SHELL}) == "bash" ]]; then
+if [[ -n ${BASH} ]]; then
     alias cd='cd_func '
     alias sd='cd -- '
 fi
