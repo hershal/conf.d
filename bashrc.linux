@@ -43,5 +43,5 @@ chface() {
         params="regular";
     fi
 
-    printf '\33]50;%s\007' "xft:$face:$params:size=$size"
+    printf '\33]50;%s\007' "xft:${face}:${params}:size=${size}"
 }
