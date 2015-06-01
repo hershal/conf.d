@@ -4,3 +4,4 @@ source ~/conf.d/bashrc
 
 zmodload zsh/complist
 bindkey -M menuselect '^M' .accept-line
+setopt CLOBBER
