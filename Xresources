@@ -57,18 +57,17 @@ Xft.rgba: rgb
 *.color20:      base04
 *.color21:      base06
 
-
-*.reverseVideo:     off
-
 urxvt.depth: 32
 urxvt.scrollBar: false
 urxvt.font: xft:Menlo:regular:size=7
 urxvt.boldfont: xft:Menlo:bold:size=7
+urxvt.reverseVideo: off
 
-xterm*font: xft:Menlo 7
-xterm*metaSendsEscape: true
-xterm*cursorColor: red
-xterm*pointerColor: red
+xterm.font: xft:Menlo 7
+xterm.metaSendsEscape: true
+xterm.cursorColor: red
+xterm.pointerColor: red
+xterm.reverseVideo: off
 
 xclock*Foreground:      white
 xclock*Background:      black
