@@ -6,3 +6,4 @@ zmodload zsh/complist
 bindkey -M menuselect '^M' .accept-line
 setopt CLOBBER
 unsetopt share_history
+bindkey -e
