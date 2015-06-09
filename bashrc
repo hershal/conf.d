@@ -52,7 +52,7 @@ editor() {
     emacsclient -a "" -c "$@"
 }
 
-update-links() {
+update_links() {
     prefixstr=.
     TEMP=`getopt --options tp: --longoptions prefix:,test -- "$@"`
     if [ $? != 0 ]; then echo "wrong operands" >&2; return 1; fi
