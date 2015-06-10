@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 # general command setup
 alias s="screen"
-alias u="cd .."
+alias u="cl .."
 alias ls="ls --color=auto"
 alias l="ls -lsha"
 alias less="less -R -i"
