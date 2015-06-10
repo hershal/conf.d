@@ -8,7 +8,7 @@ alias less="less -R -i"
 alias gv="grep -v"
 alias gr="grep -rniI"
 alias chmox="chmod +x"
-alias rfdate="date +"%Y-%m-%d-%H%M%S""
+alias rfdate="date +\"%Y-%m-%d-%H%M%S\""
 alias pspr="ps aux | grep "
 alias nocolor="sed -r 's:\x1B\[[0-9;]*[mK]::g'"
 
