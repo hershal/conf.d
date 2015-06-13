@@ -21,6 +21,9 @@ if [[ -n ${BASH} ]]; then
     bind Space:magic-space
 fi
 
+# carry nonzero exit codes through pipes
+set -o pipefail
+
 # xterm settings
 export TERM="xterm-256color"
 
