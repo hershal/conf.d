@@ -192,3 +192,9 @@ fi
 qr() { qrencode -t ansi256 -o - "$*"; }
 cl() { cd $@ && l ; }
 mkc() { mkdir -p $@ && cd $@ ; }
+
+if [[ -d ${configs}/bashrc.d/ ]]; then
+    for conf in ${configs}/bashrc.d/*; do
+        source ${conf}
+    done
+fi
