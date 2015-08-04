@@ -6,3 +6,5 @@ source ~/conf.d/bashrc
 
 zmodload zsh/complist
 bindkey -M menuselect '^M' .accept-line
+
+autoload copy-earlier-word && zle -N copy-earlier-word && bindkey '^[,' copy-earlier-word
