@@ -10,4 +10,6 @@ setopt CLOBBER
 unsetopt share_history
 bindkey -e
 
-autoload copy-earlier-word && zle -N copy-earlier-word && bindkey '^[,' copy-earlier-word
+autoload copy-earlier-word
+zle -N copy-earlier-word
+bindkey '^[,' copy-earlier-word
