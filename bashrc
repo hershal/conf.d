@@ -52,7 +52,7 @@ editor() {
     emacsclient -a "" -c "$@"
 }
 
-update-links() {
+update_links() {
     prefixstr=.
     TEMP=`getopt --options tp: --longoptions prefix:,test -- "$@"`
     if [ $? != 0 ]; then echo "wrong operands" >&2; return 1; fi
@@ -189,3 +189,9 @@ fi
 qr() { qrencode -t ansi256 -o - "$*"; }
 cl() { cd $@ && l ; }
 mkc() { mkdir -p $@ && cd $@ ; }
+
+if [[ -d ${configs}/bashrc.d/ ]]; then
+    for conf in ${configs}/bashrc.d/*; do
+        source ${conf}
+    done
+fi
