@@ -11,12 +11,15 @@ lock_system() {
     slock& xset dpms force off;
 }
 
+# Set the volume level, mute, and unmute for the current output device
 vol() {
     vol_str=""
     if [[ -n $1 ]]; then
-        prev_vol=$(amixer get Master | tail -n1 | grep -o '[0-9]\+%')
+        export prev_vol=$(amixer get Master | tail -n1 | sed 's/^.*\[\(.*\)%\].*$/\1/')
         amixer set Master ${1}% > /dev/null
-        export vol_str="${prev_vol} -> ";
+        export vol_str="${prev_vol} -> "
     fi
-    echo "${vol_str}$(amixer get Master | tail -n1 | grep -o '[0-9]\+%')"
+    echo "${vol_str}$(amixer get Master | tail -n1 | sed 's/^.*\[\(.*\)%\].*$/\1/')"
 }
+alias mute="vol 0"
+alias umute="vol \${prev_vol}"
