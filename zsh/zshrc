@@ -6,7 +6,7 @@ source ~/conf.d/bashrc
 
 zmodload zsh/complist
 bindkey -M menuselect '^M' .accept-line
-setopt CLOBBER
+setopt clobber
 unsetopt share_history
 bindkey -e
 
