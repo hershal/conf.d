@@ -7,7 +7,16 @@ alias yua='yaourt -Sua'
 alias ysua='yaourt -Syua'
 alias yss='yaourt -Ss'
 
-
 lock_system() {
     slock& xset dpms force off;
+}
+
+vol() {
+    vol_str=""
+    if [[ -n $1 ]]; then
+        prev_vol=$(amixer get Master | tail -n1 | grep -o '[0-9]\+%')
+        amixer set Master ${1}% > /dev/null
+        export vol_str="${prev_vol} -> ";
+    fi
+    echo "${vol_str}$(amixer get Master | tail -n1 | grep -o '[0-9]\+%')"
 }
