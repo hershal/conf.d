@@ -37,6 +37,12 @@ chface() {
         size="$2";
     fi
 
+    if [ "${face}" = "b" ]; then
+        face="Bitstream Vera Sans Mono"
+    elif [ "${face}" = "s" ]; then
+        face="Meslo LG S"
+    fi
+
     if [ ! -z "$3" ]; then
         params="$3";
     else
