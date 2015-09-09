@@ -48,8 +48,8 @@ setxkbmap -option ctrl:nocaps
 # with the delays set in Xresources
 xautolock &
 
-xrandr --output HDMI-0 --left-of DVI-0
-xrandr --output DVI-1 --right-of DVI-0
+xrandr --output DisplayPort-0 --right-of HDMI-0
+xrandr --output DisplayPort-1 --right-of DisplayPort-0
 
 # Hang point
 wait $wmpid

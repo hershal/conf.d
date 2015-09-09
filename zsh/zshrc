@@ -6,7 +6,7 @@ source ~/conf.d/bashrc
 
 zmodload zsh/complist
 bindkey -M menuselect '^M' .accept-line
-setopt clobber
+setopt CLOBBER
 unsetopt share_history
 bindkey -e
 
@@ -14,4 +14,5 @@ autoload copy-earlier-word
 zle -N copy-earlier-word
 bindkey '^[,' copy-earlier-word
 
+setopt no_rm_star_silent
 alias rsync='noglob rsync'
