@@ -14,4 +14,4 @@ autoload copy-earlier-word
 zle -N copy-earlier-word
 bindkey '^[,' copy-earlier-word
 
-setopt no_rm_star_silent
+setopt rmstarsilent
