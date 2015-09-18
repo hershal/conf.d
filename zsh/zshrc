@@ -1,3 +1,5 @@
+# -*- mode: sh -*-
+
 source ~/conf.d/zsh/zprezto/init.zsh
 source ~/conf.d/zsh/zpreztorc
 source ~/conf.d/bashrc
@@ -7,3 +9,10 @@ bindkey -M menuselect '^M' .accept-line
 setopt CLOBBER
 unsetopt share_history
 bindkey -e
+
+autoload copy-earlier-word
+zle -N copy-earlier-word
+bindkey '^[,' copy-earlier-word
+
+setopt rmstarsilent
+alias rsync='noglob rsync'

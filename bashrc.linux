@@ -7,6 +7,8 @@ alias mathematica='/usr/local/Wolfram/Mathematica/8.0/Executables/mathematica'
 alias matab='/usr/local/MathWorks/Matlab/bin/matlab &'
 # Octave doesn't need anything special; it just works
 
+alias dln='sleep 0.25; xset dpms force off'
+
 export BROWSER='chromium &2>/dev/null'
 
 # GNU which is compatible with the expanded functinality
@@ -35,6 +37,12 @@ chface() {
     else
         face="$1";
         size="$2";
+    fi
+
+    if [ "${face}" = "b" ]; then
+        face="Bitstream Vera Sans Mono"
+    elif [ "${face}" = "s" ]; then
+        face="Meslo LG S"
     fi
 
     if [ ! -z "$3" ]; then

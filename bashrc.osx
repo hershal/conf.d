@@ -22,6 +22,17 @@ if [[ -f /opt/local/etc/profile.d/bash_completion.sh ]]; then
     . /opt/local/etc/profile.d/bash_completion.sh
 fi
 
+function flash () {
+    original_brightness=$(brightness -l | grep 'display 0' | grep brightness | cut -d " " -f 4)
+    new_brightness=1.0
+    flash_time=0.1
+    if (( $(bc <<< "$original_brightness > 0.5") )); then
+        new_brightness=0.0
+        flash_time=0.5
+    fi
+    brightness ${new_brightness} && sleep ${flash_time} && brightness ${original_brightness}
+}
+
 # Enable expanded which binary if possible
 export GWHICH_BINARY=/opt/local/bin/gwhich;
 if [[ -f ${GWHICH_BINARY} ]]; then
