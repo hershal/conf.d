@@ -110,17 +110,19 @@ ff() { find . -type f -iname '*'$*'*' -ls ; }
 # *** End configs stolen from @ericcrosson:
 
 # Miscellaneous platform-sensitive configs
-unset -f which 2> /dev/null
-if [[ -f ${_WHICH_BINARY} ]]; then
-    which () {
-        (alias; declare -f) | ${_WHICH_BINARY} \
-            --tty-only \
-            --read-alias \
-            --read-functions \
-            --show-tilde \
-            --show-dot $@
-    }
-    export -f which > /dev/null
+if [[ -n ${BASH} ]]; then
+    unset -f which 2> /dev/null
+    if [[ -f ${_WHICH_BINARY} ]]; then
+        which () {
+            (alias; declare -f) | ${_WHICH_BINARY} \
+                                      --tty-only \
+                                      --read-alias \
+                                      --read-functions \
+                                      --show-tilde \
+                                      --show-dot $@
+        }
+        export -f which > /dev/null
+    fi
 fi
 
 # Taken from Petar Marinov
