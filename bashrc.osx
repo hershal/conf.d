@@ -101,3 +101,8 @@ function mouse() {
 function bat() {
     pmset -g ps
 }
+
+alias proxyon='networksetup -setsocksfirewallproxystate "Wi-Fi" on'
+alias proxy='networksetup -getsocksfirewallproxy "Wi-Fi" | grep "Enabled" | head -n1 | cut -d " " -f 2'
+alias proxyoff='networksetup -setsocksfirewallproxystate "Wi-Fi" off'
+alias eject='hdiutil detach'
