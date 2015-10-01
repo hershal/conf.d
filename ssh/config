@@ -3,70 +3,19 @@ Host github
      Hostname github.com
 Host ironside
      User hershal
-     Hostname 129.116.21.186
-Host light
+     Hostname home.r2labs.us
+     Port 1023
+Host nyancat
      User hershal
-     Hostname r2.ath.cx
-Host bravo
+     Hostname 129.116.175.11
+Host uts
      User hershal
-     Hostname r2.ath.cx
-Host r2m
-     User hershal
-     Hostname r2m.mine.nu
-Host r2
-     User hershal
-     Hostname r2.ath.cx
-Host r3
-     User hershal
-     Hostname r35pwn.ath.cx
-Host sun
-     User hershal
-     Hostname sun08.mine.nu
-Host cortex
-     HostName 129.116.21.166
-     user hershal
-Host riven
-     User hershal
-     Hostname 129.116.21.152
-Host fsl
-     User hershal
-     Hostname 75.126.21.182
+     Hostname uts.cc.utexas.edu
 
 Host eironside
      User hershal
-     Hostname 129.116.21.186
-     ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
-Host elight
-     HostName r2.ath.cx
-     User hershal
-     ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
-Host ebravo
-     HostName r2.ath.cx
-     User hershal
-     ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
-Host er2m
-     User hershal
-     Hostname r2m.mine.nu
-     ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
-Host er2
-     HostName r2.ath.cx
-     User hershal
-     ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
-Host esun
-     HostName sun08.mine.nu
-     User hershal
-     ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
-Host ecortex
-     HostName 129.116.21.166
-     User hershal
-     ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
-Host eriven
-     User hershal
-     Hostname 129.116.21.152
-     ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
-Host efsl
-     User hershal
-     Hostname 75.126.21.182
+     Hostname r2labs.us
+     Port 1023
      ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
 Host *
     SendEnv AUTHY_TOKEN
