@@ -26,14 +26,6 @@ if [ -f $HOME/.xbindkeysrc ]; then
     /usr/bin/xbindkeys
 fi
 
-# Start the window manager
-/usr/bin/i3 & wmpid=$!
-
-# Start misc things
-if [ -f /usr/bin/synclient ]; then
-  synclient TouchpadOff=1 &
-fi
-
 xset r rate 200 60
 xset s off &
 xset dpms 600 0 0 &
@@ -53,4 +45,5 @@ xrandr --addmode Virtual1 "3840x2400"
 xrandr -s "3840x2400"; i3-msg restart
 
 # Hang point
-wait $wmpid
+# exec /usr/bin/gnome-session
+exec /usr/bin/i3
