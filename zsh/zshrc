@@ -16,3 +16,4 @@ bindkey '^[,' copy-earlier-word
 
 setopt rmstarsilent
 alias rsync='noglob rsync'
+precmd () { echo -ne "\ek$(basename $(readlink -e .))\e\\" }
