@@ -185,3 +185,9 @@ if [[ -d ${configs}/bashrc.d/ ]]; then
         source ${conf}
     done
 fi
+
+pidguard() {
+    while kill -0 $1 > /dev/null 2>&1; do sleep 1; done;
+    shift;
+    $@
+}
