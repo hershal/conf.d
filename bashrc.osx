@@ -54,11 +54,7 @@ fi
 
 # For some reason, osx's `ls` options are different than those in
 # linux. If gls exists, use that instead.
-if [[ -f /opt/local/bin/gls ]]; then
-    alias ls='/opt/local/bin/gls --color=auto'
-else
-    alias ls='ls -G'
-fi
+alias ls='ls -G'
 
 alias sln='pmset sleepnow'
 alias dsn='pmset displaysleepnow'
