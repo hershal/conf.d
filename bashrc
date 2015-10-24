@@ -186,8 +186,6 @@ if [[ -d ${configs}/bashrc.d/ ]]; then
     done
 fi
 
-pidguard() {
-    while kill -0 $1 > /dev/null 2>&1; do sleep 1; done;
-    shift;
-    $@
+guard() {
+    while test $($@ > /dev/null 2>&1; echo $?) != 0; do sleep 1; done;
 }
