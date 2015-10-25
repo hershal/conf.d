@@ -186,6 +186,10 @@ if [[ -d ${configs}/bashrc.d/ ]]; then
     done
 fi
 
+nguard() {
+    while test $($@ > /dev/null 2>&1; echo $?) = 0; do sleep 1; done;
+}
+
 guard() {
     while test $($@ > /dev/null 2>&1; echo $?) != 0; do sleep 1; done;
 }
