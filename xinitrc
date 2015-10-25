@@ -34,7 +34,7 @@ if [ -f /usr/bin/synclient ]; then
   synclient TouchpadOff=1 &
 fi
 
-xset r rate 200 60
+xset r rate 200 80
 xset s off &
 xset dpms 600 0 0 &
 
