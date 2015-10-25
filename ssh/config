@@ -1,6 +1,9 @@
+Host linaro
+     user linaro
+     hostname 192.168.2.5
 Host github
-     User git
-     Hostname github.com
+     user git
+     hostname github.com
 Host ironside
      User hershal
      Hostname home.r2labs.us
