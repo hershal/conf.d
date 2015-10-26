@@ -1,6 +1,6 @@
 Host linaro
      user linaro
-     hostname 192.168.2.5
+     hostname 192.168.2.8
 Host github
      user git
      hostname github.com
