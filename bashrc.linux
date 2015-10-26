@@ -53,3 +53,7 @@ chface() {
 
     printf '\33]50;%s\007' "xft:${face}:${params}:size=${size}"
 }
+
+open () {
+    xdg-open $@ &>/dev/null &
+}
