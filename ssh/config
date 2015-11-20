@@ -14,11 +14,5 @@ Host nyancat
 Host uts
      User hershal
      Hostname uts.cc.utexas.edu
-
-Host eironside
-     User hershal
-     Hostname r2labs.us
-     Port 1023
-     ProxyCommand /usr/bin/nc -x proxy-us.intel.com:1080 %h %p
 Host *
     SendEnv AUTHY_TOKEN
