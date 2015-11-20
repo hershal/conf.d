@@ -27,7 +27,7 @@ font -adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec gnome-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
