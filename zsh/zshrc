@@ -18,3 +18,14 @@ setopt rmstarsilent
 alias rsync='noglob rsync'
 precmd () { echo -ne "\ek$(basename "$(readlink -e .)")\e\\" }
 preexec () { echo -ne "\ek${1}\e\\" }
+
+# fixes for tramp
+if [[ "$TERM" == "dumb" ]]
+then
+    unsetopt zle
+    unsetopt prompt_cr
+    unsetopt prompt_subst
+    unfunction precmd
+    unfunction preexec
+    PS1='$ '
+fi
