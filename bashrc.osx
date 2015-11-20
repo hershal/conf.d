@@ -47,6 +47,11 @@ if [[ -f /opt/local/bin/gsed ]]; then
     alias sed='/opt/local/bin/gsed'
 fi
 
+# Use greadlink if possible
+if [[ -f /opt/local/bin/greadlink ]]; then
+    alias readlink=greadlink
+fi
+
 # Use gfind if possible
 if [[ -f /opt/local/bin/gfind ]]; then
     alias find=gfind
