@@ -3,6 +3,7 @@
 alias s="screen"
 alias u="cl .."
 alias ls="ls --color=auto"
+alias d="ls -lshd */"
 alias l="ls -lsha"
 alias less="less -R -i"
 alias gv="grep -v"
