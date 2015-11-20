@@ -1,4 +1,4 @@
-emacs*font: -adobe-courier-medium-r-normal-*-*-*-100-100-*-60-iso10646-1
+emacs*font: Monospace-10
 emacs*cursorColor: red
 emacs*pointerColor: red
 
