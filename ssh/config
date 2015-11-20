@@ -14,5 +14,7 @@ Host nyancat
 Host uts
      User hershal
      Hostname uts.cc.utexas.edu
+Host ros
+     Hostname 192.168.106.134
 Host *
     SendEnv AUTHY_TOKEN
