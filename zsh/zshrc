@@ -21,3 +21,5 @@ setopt rmstarsilent
 alias rsync='noglob rsync'
 precmd () { echo -ne "\ek$(basename "$(readlink -e .)")\e\\" }
 preexec () { echo -ne "\ek${1}\e\\" }
+
+bindkey -M emacs "$key_info[Control]u" backward-kill-line
