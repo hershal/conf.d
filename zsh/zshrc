@@ -8,18 +8,18 @@ source ~/conf.d/zsh/zpreztorc
 source ~/conf.d/bashrc
 
 zmodload zsh/complist
-bindkey -M menuselect '^M' .accept-line
 setopt CLOBBER
 unsetopt share_history
-bindkey -e
 
 autoload copy-earlier-word
 zle -N copy-earlier-word
-bindkey '^[,' copy-earlier-word
 
 setopt rmstarsilent
 alias rsync='noglob rsync'
 precmd () { echo -ne "\ek$(basename "$(readlink -e .)")\e\\" }
 preexec () { echo -ne "\ek${1}\e\\" }
 
+bindkey -e
+bindkey -M emacs '^[,' copy-earlier-word
 bindkey -M emacs "$key_info[Control]u" backward-kill-line
+bindkey -M menuselect '^M' .accept-line
