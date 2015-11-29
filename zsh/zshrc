@@ -23,3 +23,5 @@ fi
 bindkey -e
 bindkey -M emacs "$key_info[Control]u" backward-kill-line
 bindkey -M menuselect '^M' .accept-line
+
+export WORDCHARS=''
