@@ -16,6 +16,7 @@ defscrollback 5000
 
 # 256 color xterm
 termcapinfo xterm-256color "Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm"
+termcapinfo xterm* ti@:te@
 term screen-256color-bce
 
 # Bell Settings
