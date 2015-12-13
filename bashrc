@@ -35,6 +35,12 @@ export PATH=$PATH:~/conf.d/bin
 # Load OS-specific configs
 export configs=~/conf.d
 source ${configs}/bashrc.aliases
+
+hasbin() {
+    command -v $@ > /dev/null
+    return $?
+}
+
 case `uname -a` in
     *ARCH* )
         source ${configs}/bashrc.linux
