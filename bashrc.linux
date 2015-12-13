@@ -16,6 +16,8 @@ if [[ -z $_WHICH_BINARY ]]; then
     export _WHICH_BINARY=`env which which`
 fi
 
+if hasbin keychain; then eval $(keychain -q --eval id_rsa); fi
+
 emns() {
     emacsclient -na "" "/sudo::$*"
 }
