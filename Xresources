@@ -6,6 +6,10 @@ Xft.hintstyle: hintnone
 Xft.lcdfilter: lcddefault
 Xft.rgba: rgb
 
+emacs*font: Monospace-10
+emacs*cursorColor: red
+emacs*pointerColor: red
+
 ! Using the base16 theme collection from:
 ! https://github.com/chriskempson/base16 and
 !

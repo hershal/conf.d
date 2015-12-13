@@ -1,20 +1,27 @@
 # -*- mode: sh -*-
 
+# fix for tramp
+if [[ "$TERM" == "dumb" ]]; then break; fi
+
 source ~/conf.d/zsh/zprezto/init.zsh
 source ~/conf.d/zsh/zpreztorc
 source ~/conf.d/bashrc
 
 zmodload zsh/complist
-bindkey -M menuselect '^M' .accept-line
 setopt CLOBBER
 unsetopt share_history
-bindkey -e
-
-autoload copy-earlier-word
-zle -N copy-earlier-word
-bindkey '^[,' copy-earlier-word
 
 setopt rmstarsilent
 alias rsync='noglob rsync'
-precmd () { echo -ne "\ek$(basename $(readlink -e .))\e\\" }
-preexec () { echo -ne "\ek $1\e\\" }
+
+# For screen
+if [ -n "$STY" ]; then
+    precmd () { echo -ne "\ek$(basename "$(readlink -e .)")\e\\" }
+    preexec () { echo -ne "\ek${1}\e\\" }
+fi
+
+bindkey -e
+bindkey -M emacs "$key_info[Control]u" backward-kill-line
+bindkey -M menuselect '^M' .accept-line
+
+export WORDCHARS=''

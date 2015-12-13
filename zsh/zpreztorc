@@ -34,6 +34,7 @@ zstyle ':prezto:load' pmodule \
        'history' \
        'directory' \
        'spectrum' \
+       'screen' \
        'completion' \
        'prompt' \
        'osx'
@@ -107,7 +108,7 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 # zstyle ':prezto:module:screen:auto-start' local 'yes'
 
 # Auto start a session when Zsh is launched in a SSH connection.
-# zstyle ':prezto:module:screen:auto-start' remote 'yes'
+zstyle ':prezto:module:screen:auto-start' remote 'yes'
 
 #
 # SSH
