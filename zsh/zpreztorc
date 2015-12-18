@@ -105,7 +105,9 @@ zstyle ':prezto:module:prompt' theme 'sorin'
 #
 
 # Auto start a session when Zsh is launched in a local terminal.
-# zstyle ':prezto:module:screen:auto-start' local 'yes'
+if [[ $TERM != "linux" ]]; then
+    zstyle ':prezto:module:screen:auto-start' local 'yes'
+fi
 
 # Auto start a session when Zsh is launched in a SSH connection.
 zstyle ':prezto:module:screen:auto-start' remote 'yes'
