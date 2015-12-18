@@ -38,12 +38,13 @@ setxkbmap -option ctrl:nocaps
 
 # Enable the auto-locking mechanism
 # with the delays set in Xresources
-xautolock &
+# xautolock &
 
 xrandr --newmode "3840x2400"  794.25  3840 4160 4584 5328  2400 2403 2409 2486 -hsync +vsync
 xrandr --addmode Virtual1 "3840x2400"
-xrandr -s "3840x2400"; i3-msg restart
+xrandr -s "3840x2400"
 
 # Hang point
 # exec /usr/bin/gnome-session
-exec /usr/bin/i3
+sxhkd &
+exec /usr/bin/bspwm
