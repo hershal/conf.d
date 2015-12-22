@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 
 # fix for tramp
-if [[ "$TERM" == "dumb" ]]; then break; fi
+if [[ "$TERM" == "dumb" ]]; then source ~/conf.d/bashrc; return; fi
 
 source ~/conf.d/zsh/zprezto/init.zsh
 source ~/conf.d/zsh/zpreztorc
