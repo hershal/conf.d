@@ -1,11 +1,9 @@
 [color]
-	ui = auto
+  ui = auto
 [user]
-	name = Hershal Bhave
-	email = hershal.bhave@gmail.com
-[http]
-	# proxy = http://proxy-us.intel.com:911
+  name = Hershal Bhave
+  email = hershal.bhave@gmail.com
 [push]
-	default = simple
+  default = simple
 [gpg]
-        program = gpg2
+  program = gpg2
