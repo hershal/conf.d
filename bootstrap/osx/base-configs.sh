@@ -1,5 +1,3 @@
-git clone https://git@github.com/syl20bnr/spacemacs .emacs.d
-git clone https://git@github.com/hershal/spacemacs.d .spacemacs.d
 git clone https://git@github.com/hershal/conf.d
 source ~/conf.d/bashrc
 cd ~/
@@ -12,5 +10,3 @@ update_links ~/conf.d/ssh
 
 cd ~/conf.d/
 git remote set-url origin ssh://git@github.com/hershal/conf.d
-cd ~/.spacemacs.d
-git remote set-url origin ssh://git@github.com/hershal/spacemacs.d
