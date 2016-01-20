@@ -1,4 +1,3 @@
-git clone https://git@github.com/hershal/conf.d
 source ~/conf.d/bashrc
 cd ~/
 update_links ~/conf.d/bashrc
