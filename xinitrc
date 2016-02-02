@@ -26,14 +26,6 @@ if [ -f $HOME/.xbindkeysrc ]; then
     /usr/bin/xbindkeys
 fi
 
-# Start the window manager
-/usr/bin/i3 & wmpid=$!
-
-# Start misc things
-if [ -f /usr/bin/synclient ]; then
-  synclient TouchpadOff=1 &
-fi
-
 xset r rate 200 80
 xset s off &
 xset dpms 600 0 0 &
@@ -43,13 +35,15 @@ xset dpms 600 0 0 &
 setxkbmap -option compose:menu
 # Caps is the Ctrl buton
 setxkbmap -option ctrl:nocaps
+xrandr --output DVI-1 --right-of HDMI-0 --mode 1920x1200
+xrandr --output DVI-0 --right-of DVI-1 --mode 1920x1200
 
-# Enable the auto-locking mechanism
-# with the delays set in Xresources
-xautolock &
-
-xrandr --output DisplayPort-0 --right-of HDMI-0
-xrandr --output DisplayPort-1 --right-of DisplayPort-0
+export BSPWM_TREE=/tmp/bspwm-tree.json
+export BSPWM_HISTORY=/tmp/bspwm-history.txt
+export BSPWM_STACK=/tmp/bspwm-stack.txt
 
 # Hang point
-wait $wmpid
+gnome-terminal &
+emacs &
+sxhkd &
+exec wm
