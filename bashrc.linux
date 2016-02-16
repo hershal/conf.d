@@ -10,6 +10,7 @@ alias matab='/usr/local/MathWorks/Matlab/bin/matlab &'
 alias dsn='sleep 0.25; xset dpms force off'
 
 export BROWSER='chromium &2>/dev/null'
+export XLIB_SKIP_ARGB_VISUALS=1
 
 # GNU which is compatible with the expanded functinality
 if [[ -z $_WHICH_BINARY ]]; then
