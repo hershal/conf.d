@@ -63,6 +63,8 @@ alias ls='ls -G'
 
 alias sln='pmset sleepnow'
 alias dsn='pmset displaysleepnow'
+alias lk='/System/Library/CoreServices/"Menu Extras"/User.menu/Contents/Resources/CGSession -suspend'
+alias slk='lk && sln'
 alias oa='open -a'
 
 # Set the volume level, mute, and unmute for the current output device
