@@ -13,6 +13,7 @@ unsetopt share_history
 
 setopt rmstarsilent
 alias rsync='noglob rsync'
+alias scp='noglob scp'
 
 # For screen
 if [ -n "$STY" ]; then
