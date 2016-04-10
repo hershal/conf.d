@@ -1,6 +1,0 @@
-* TODO Find the equivalent `tagsgen` for cygwin
-* TODO Find the `modpath` command/script to cleanly modify paths
-* TODO Add an aliasing script
-The aliasing script would automatically symlink the given configs to
-the user's home folder.
-* TODO Find out why the emacs jc/isearch configs don't become active automatically

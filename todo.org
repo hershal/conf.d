@@ -1,0 +1,2 @@
+* TODO Integrate config manager
+There was a good one but I can't remember its name any more.
