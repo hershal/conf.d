@@ -23,12 +23,20 @@ if [[ -n ${BASH} ]]; then
 fi
 
 function flash () {
+    _flash 0 .5
+}
+
+function flashs () {
+    _flash .5 .2
+}
+
+function _flash () {
+    brightness_offset=${1}
+    flash_time=${2}
     original_brightness=$(brightness -l | grep 'display 0' | grep brightness | cut -d " " -f 4)
-    new_brightness=1.0
-    flash_time=0.1
+    new_brightness=$(bc <<< "1.0-${brightness_offset}")
     if (( $(bc <<< "$original_brightness > 0.5") )); then
-        new_brightness=0.0
-        flash_time=0.5
+        new_brightness=$(bc <<< "0.0+${brightness_offset}")
     fi
     brightness ${new_brightness} && sleep ${flash_time} && brightness ${original_brightness}
 }
