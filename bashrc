@@ -188,7 +188,9 @@ mkc() { mkdir -p $@ && cd $@ ; }
 
 if [[ -d ~/bashrc.d/ ]]; then
     for conf in ~/bashrc.d/*; do
-        source ${conf}
+        if [ -f $conf ]; then
+            source ${conf}
+        fi
     done
 fi
 
