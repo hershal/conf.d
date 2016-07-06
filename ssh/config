@@ -1,6 +1,3 @@
-Host linaro
-     user linaro
-     hostname 192.168.2.8
 Host github
      user git
      hostname github.com
@@ -8,15 +5,5 @@ Host ironside
      User hershal
      Hostname home.r2labs.us
      Port 1023
-Host nyancat
-     User hershal
-     Hostname 129.116.175.11
-Host uts
-     User hershal
-     Hostname uts.cc.utexas.edu
-Host dirt
-     Hostname 72.177.51.209
-Host ros
-     Hostname 192.168.106.134
 Host *
     SendEnv AUTHY_TOKEN
