@@ -11,3 +11,4 @@ ssh/known_hosts
 ssh/id_*
 *.stackdump
 .DS_Store
+/ssh/authorized_keys
