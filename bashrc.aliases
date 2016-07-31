@@ -42,6 +42,8 @@ alias gu="git pull"
 alias gp="git push"
 alias gpom="git push origin master"
 
+alias cp="cp -r"
+
 # based on custom configs
 if [[ -n ${BASH} ]]; then
     alias cd='cd_func '
