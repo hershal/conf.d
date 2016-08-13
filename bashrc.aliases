@@ -12,6 +12,7 @@ alias chmox="chmod +x"
 alias rfdate="date +\"%Y-%m-%d-%H%M%S\""
 alias pspr="ps aux | grep "
 alias nocolor='sed -r "s:\x1b\[[0-9;]*[mk]::g"; return ${pipestatus[1]}'
+alias cp="cp -r"
 
 # emacs stuff
 export EDITOR="emacsclient -a \"\" "
@@ -41,8 +42,6 @@ alias g="git"
 alias gu="git pull"
 alias gp="git push"
 alias gpom="git push origin master"
-
-alias cp="cp -r"
 
 # based on custom configs
 if [[ -n ${BASH} ]]; then
