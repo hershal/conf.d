@@ -1,3 +1,9 @@
+Host *
+    SendEnv AUTHY_TOKEN
+    ControlMaster auto
+    ControlPath ~/.ssh/sockets/%r@%h-%p
+    ControlPersist 600
+
 Host github
      user git
      hostname github.com
@@ -5,5 +11,3 @@ Host ironside
      User hershal
      Hostname home.r2labs.us
      Port 1023
-Host *
-    SendEnv AUTHY_TOKEN
