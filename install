@@ -1,0 +1,3 @@
+source bashrc
+
+update_links ~/{bashrc,screenrc,zsh/{zshrc,zpreztorc,zprezto},gitconfig}
