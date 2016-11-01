@@ -53,6 +53,7 @@ function path_contains_path() {
 remove=0
 index=0
 outfile=''
+variable='PATH'
 declare -a paths_to_add=()
 
 if [[ $# -lt 1 ]]; then
@@ -70,6 +71,8 @@ while [ "$1" != "" ]; do
             remove=1; index=-1; shift;;
         -n)
             shift; index=$1; shift;;
+        -v|--variable)
+            shift; variable=$1; shift;;
         *)
             if [ -d $1 ]; then
                 paths_to_add+=($1);
@@ -87,5 +90,5 @@ else
     path=$(add_paths ${index} ${paths_to_add})
 fi
 
-echo "PATH=${path}" | sed 's/ /:/g' > ${outfile};
-echo 'export PATH' >> ${outfile}
+echo "${variable}=${path}" | sed 's/ /:/g' > ${outfile};
+echo "export ${variable}" >> ${outfile}
