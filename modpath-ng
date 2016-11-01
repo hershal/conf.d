@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+
+# -*- mode: shell-script -*-
+
+function paths() {
+    echo $PATH | sed 's/:/ /g';
+}
+
+function add_paths() {
+    local index=$1
+
+    declare -a path_local=()
+    local current_paths=($(paths))
+    local current_paths_len=$(((${#current_paths[@]}-1)))
+
+    shift;
+    local paths_to_add=($@)
+
+    for i in $(seq 0 ${current_paths_len}); do
+        if [[ ${i} -eq ${index} ]]; then
+            path_local+=(${paths_to_add[@]})
+        fi
+        path_local+=(${current_paths[${i}]})
+    done
+
+    echo ${path_local[@]}
+}
+
+function remove_path() {
+    echo 'to implement'
+    exit 1
+}
+
+function print_usage() {
+    echo "usage: $(basename $0) [-a|-r] [-n] paths..."
+    echo "  -h: print this help"
+    echo "  -r: remove the specified paths or indices (not yet implemented)"
+    echo "  -a: [default] add the paths at the specified index"
+    echo "  -n: [default:0] index to add to or remove"
+}
+
+function path_contains_path() {
+    for p in $(paths); do
+        if ([[ "$p" == "$1" ]]); then
+            return 0
+        fi
+    done
+    return 1
+}
+
+# main program
+
+remove=0
+index=0
+outfile=''
+declare -a paths_to_add=()
+
+if [[ $# -lt 1 ]]; then
+    print_usage
+    exit 0
+fi
+
+while [ "$1" != "" ]; do
+    case $1 in
+        -h|--help)
+            print_usage; exit;;
+        -o|--outfile)
+            shift; outfile=$1; shift;;
+        -r|--remove)
+            remove=1; index=-1; shift;;
+        -n)
+            shift; index=$1; shift;;
+        *)
+            if [ -d $1 ]; then
+                paths_to_add+=($1);
+            else
+                echo "$(basename $0): warning: directory '$1' does not exist; skipped."
+            fi
+            shift;;
+    esac
+done
+
+path=''
+if [[ ${remove} -eq 1 ]]; then
+    path=$(remove_path ${index})
+else
+    path=$(add_paths ${index} ${paths_to_add})
+fi
+
+echo "PATH=${path}" | sed 's/ /:/g' > ${outfile};
+echo 'export PATH' >> ${outfile}
