@@ -67,9 +67,11 @@ while [ "$1" != "" ]; do
             print_usage; exit;;
         -o|--outfile)
             shift; outfile=$1; shift;;
+        -a|--add)
+            shift; shift;; # do nothing; default behavior
         -r|--remove)
             remove=1; index=-1; shift;;
-        -n)
+        -n|-i|--index)
             shift; index=$1; shift;;
         -v|--variable)
             shift; variable=$1; shift;;
