@@ -76,6 +76,7 @@ modpath () {
 modpath-ng() {
     outfile=/tmp/modpath-ng.$$;
     ${configs}/modpath-ng $@ -o ${outfile}
+    source ${outfile}
     rm -f ${outfile}
 }
 
