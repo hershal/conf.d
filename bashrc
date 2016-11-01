@@ -73,6 +73,7 @@ modpath () {
     unset modpathargs
 }
 
+# new generation of modpath
 modpath-ng() {
     outfile=/tmp/modpath-ng.$$;
     ${configs}/modpath-ng $@ -o ${outfile}
