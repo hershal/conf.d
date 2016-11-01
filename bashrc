@@ -73,6 +73,11 @@ modpath () {
     unset modpathargs
 }
 
+modpath-ng() {
+    outfile=/tmp/modpath-ng.$$;
+    ${configs}/modpath-ng $@ -o ${outfile}
+}
+
 # map and rota taken from
 # http://onthebalcony.wordpress.com/2008/03/08/just-for-fun-map-as-higher-order-function-in-bash/
 map () {
