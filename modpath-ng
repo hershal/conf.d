@@ -32,11 +32,12 @@ function remove_path() {
 }
 
 function print_usage() {
-    echo "usage: $(basename $0) [-a|-r] [-n] paths..."
-    echo "  -h: print this help"
-    echo "  -r: remove the specified paths or indices (not yet implemented)"
-    echo "  -a: [default] add the paths at the specified index"
-    echo "  -n: [default:0] index to add to or remove"
+    echo "usage: $(basename $0) [options] paths..."
+    echo "  -h|--help:                    print this help"
+    echo "  -r|--remove:                  remove the specified paths or indices"
+    echo "  -a|--add: [default]           add the paths at the specified index"
+    echo "  -i|--index: [default:0]       index to add to or remove"
+    echo "  -v|--variable: [default:PATH] variable to modify"
 }
 
 function path_contains_path() {
