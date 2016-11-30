@@ -120,9 +120,8 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings -d
 echo "Disable smart quotes"
 defaults write com.apple.messageshelper.MessageController SOInputLineSettings -dict-add "automaticQuoteSubstitutionEnabled" -bool false
 
-echo "Speeding up wake from sleep from 1 hour to 8 hours"
-# http://www.cultofmac.com/221392/quick-hack-speeds-up-retina-macbooks-wake-from-sleep-os-x-tips/
-sudo pmset -a standbydelay 28800
+echo "Destroy FileVault Key on Standby"
+sudo pmset -a destroyfvkeyonstandby 1
 
 # Allow Finder to quit
 defaults write com.apple.finder QuitMenuItem -bool YES
