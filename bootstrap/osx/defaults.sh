@@ -123,5 +123,5 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings -d
 echo "Destroy FileVault Key on Standby"
 sudo pmset -a destroyfvkeyonstandby 1
 
-# Allow Finder to quit
+echo "Allow Finder to quit"
 defaults write com.apple.finder QuitMenuItem -bool YES
