@@ -49,6 +49,7 @@ case `uname -a` in
     *Cygwin* )
         source ${configs}/bashrc.cygwin ;;
 esac
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 ev() {
     evince $@ > /dev/null 2>&1 &
