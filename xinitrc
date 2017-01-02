@@ -35,8 +35,8 @@ xset dpms 600 0 0 &
 setxkbmap -option compose:menu
 # Caps is the Ctrl buton
 setxkbmap -option ctrl:nocaps
-xrandr --output DVI-1 --right-of HDMI-0 --mode 1920x1200
-xrandr --output DVI-0 --right-of DVI-1 --mode 1920x1200
+# xrandr --output DVI-1 --right-of HDMI-0 --mode 1920x1200
+# xrandr --output DVI-0 --right-of DVI-1 --mode 1920x1200
 
 export BSPWM_TREE=/tmp/bspwm-tree.json
 export BSPWM_HISTORY=/tmp/bspwm-history.txt
@@ -46,4 +46,4 @@ export BSPWM_STACK=/tmp/bspwm-stack.txt
 gnome-terminal &
 emacs &
 sxhkd &
-exec wm
+exec bspwm
