@@ -72,3 +72,5 @@ function invert() {
 
     xcalib -invert -alter -s $disp > /dev/null
 }
+
+export NVM_DIR="/home/$(whoami)/.nvm"

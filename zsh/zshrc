@@ -27,7 +27,3 @@ bindkey -M menuselect '^M' .accept-line
 
 export WORDCHARS=''
 export SHELL=`which zsh`
-
-# For nvm
-export NVM_DIR="/Users/hershal/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
