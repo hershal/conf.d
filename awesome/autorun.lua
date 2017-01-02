@@ -1,0 +1,1 @@
+-- run_once('emacs --daemon && emacsclient -c')
