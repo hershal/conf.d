@@ -29,12 +29,9 @@ fi
 xset r rate 200 80
 xset s off &
 xset dpms 600 0 0 &
-
-# Set the preferred keyboard map:
-# Compose is the Menu button
 setxkbmap -option compose:menu
-# Caps is the Ctrl buton
 setxkbmap -option ctrl:nocaps
+
 # xrandr --output DVI-1 --right-of HDMI-0 --mode 1920x1200
 # xrandr --output DVI-0 --right-of DVI-1 --mode 1920x1200
 
