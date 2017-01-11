@@ -27,7 +27,7 @@ export TERM="xterm-256color"
 export email='hershal.bhave@gmail.com'
 
 # Append
-export PATH=$PATH:~/conf.d/bin
+export PATH=${PATH}:~/conf.d/bin
 
 # Load OS-specific configs
 export configs=${HOME}/conf.d
@@ -49,7 +49,7 @@ case `uname -a` in
     *Cygwin* )
         source ${configs}/bashrc.cygwin ;;
 esac
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+[ -s "${NVM_DIR}/nvm.sh" ] && . "${NVM_DIR}/nvm.sh"
 
 ev() {
     evince $@ > /dev/null 2>&1 &
@@ -63,7 +63,7 @@ update_links() {
     prefixstr=.
 
     for config in $@; do
-        ln -s -F $config ${prefixstr}$(basename $config)
+        ln -s -F ${config} ${prefixstr}$(basename ${config})
     done;
 }
 
