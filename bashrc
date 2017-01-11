@@ -30,7 +30,7 @@ export email='hershal.bhave@gmail.com'
 export PATH=$PATH:~/conf.d/bin
 
 # Load OS-specific configs
-export configs=~/conf.d
+export configs=${HOME}/conf.d
 source ${configs}/bashrc.aliases
 
 hasbin() {
@@ -195,9 +195,9 @@ qr() { qrencode -t ansi256 -o - "$*"; }
 cl() { cd $@ && l ; }
 mkc() { mkdir -p $@ && cd $@ ; }
 
-if [[ -d ~/bashrc.d/ ]]; then
-    for conf in ~/bashrc.d/*; do
-        if [ -f $conf ]; then
+if [[ -d ${HOME}/bashrc.d/ ]]; then
+    for conf in ${HOME}/bashrc.d/*; do
+        if [ -f ${conf} ]; then
             source ${conf}
         fi
     done
