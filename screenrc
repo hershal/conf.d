@@ -2,7 +2,7 @@ escape ^\\                # Set the escape sequence to CTRL+\.
 defutf8 on                # Make UTF-8 encoding default.
 altscreen on              # Use alternate screen to clean exit out of vim.
 autodetach on             # Detach on hang-up.
-defscrollback 10000       # Makes the default scroll back large.
+defscrollback 100000      # Makes the default scroll back large.
 msgwait 2                 # Display a message for 2 seconds.
 nonblock on               # Do not block when a program freezes.
 startup_message off       # Do not display the copyright page.
@@ -12,7 +12,6 @@ backtick 2 60 60 sh -c "acpi | awk '{ print substr(\$5, 0, 5) }'"
 
 hardstatus alwayslastline '[%{= kw}%?%-Lw%?%{= kc}%n*%f %t%?%?%{= kw}%?%+Lw%?%?%= ] [%{= kc}%H%{= kw}] [%{c}%l %1` %2`%{w}]%{w} [%{c}%Y-%m-%d %C %A%{w}] '
 # hardstatus alwayslastline  "%{.kW}%-w%{.rW}%f%n %t%{-}%+w %=%{..r}%{..c} [%H %l] %{..g} %m/%d %c %{..y} %1`"
-defscrollback 5000
 
 # 256 color xterm
 termcapinfo xterm-256color "Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm"
