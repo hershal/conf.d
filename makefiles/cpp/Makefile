@@ -1,6 +1,6 @@
 CXX=g++
 CXXDEBUGFLAGS=-g
-CXXFLAGS=
+CXXFLAGS=-W -Wall -Werror -Wconversion -Wsign-conversion -Wunused -Wunreachable-code -Wno-write-strings
 CXXOPTIMIZEFLAGS=-O3
 LDFLAGS=
 SOURCES=$(wildcard *.cpp)
@@ -17,12 +17,12 @@ endif
 
 all: $(SOURCES) $(EXECUTABLE)
 
-$(EXECUTABLE): $(OBJECTS) 
-	$(CXX) $(CXXDEBUGFLAGS) $(LDFLAGS) $(OBJECTS) -o $(EXECUTABLE)
+$(EXECUTABLE): $(OBJECTS)
+	$(CXX) $(CXXFLAGS) $(CXXDEBUGFLAGS) $(LDFLAGS) $(OBJECTS) -o $(EXECUTABLE)
 	find . -regex ".*\.[cChH]\(pp\)?" -print | etags -
 optimize: $(OBJECTS)
-	$(CXX) $(CXXOPTIMIZEFLAGS) $(LDFLAGS) $(OBJECTS) -o $(EXECUTABLE)
-clean: 
+	$(CXX) $(CXXFLAGS) $(CXXOPTIMIZEFLAGS) $(LDFLAGS) $(OBJECTS) -o $(EXECUTABLE)
+clean:
 	rm -f $(EXECUTABLE)
 	rm -f $(OBJECTS)
 	rm -f TAGS
