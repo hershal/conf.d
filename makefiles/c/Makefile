@@ -1,6 +1,6 @@
 CC=gcc
 CCDEBUGFLAGS=-g
-CCFLAGS=
+CCFLAGS=-W -Wall -Werror -Wconversion -Wsign-conversion -Wunused -Wunreachable-code -Wno-write-strings
 COPTIMIZEFLAGS=-O3
 LDFLAGS=
 SOURCES=$(wildcard *.c)
@@ -17,12 +17,12 @@ endif
 
 all: $(SOURCES) $(EXECUTABLE)
 
-$(EXECUTABLE): $(OBJECTS) 
-	$(CC) $(CCDEBUGFLAGS) $(LDFLAGS) $(OBJECTS) -o $(EXECUTABLE)
+$(EXECUTABLE): $(OBJECTS)
+	$(CC) $(CCFLAGS) $(CCDEBUGFLAGS) $(LDFLAGS) $(OBJECTS) -o $(EXECUTABLE)
 	find . -regex ".*\.[cChH]\(pp\)?" -print | etags -
 optimize: $(OBJECTS)
-	$(CC) $(COPTIMIZEFLAGS) $(LDFLAGS) $(OBJECTS) -o $(EXECUTABLE)
-clean: 
+	$(CC) $(CCFLAGS) $(COPTIMIZEFLAGS) $(LDFLAGS) $(OBJECTS) -o $(EXECUTABLE)
+clean:
 	rm -f $(EXECUTABLE)
 	rm -f $(OBJECTS)
 	rm -f TAGS
