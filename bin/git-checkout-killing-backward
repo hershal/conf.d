@@ -1,0 +1,93 @@
+#!/usr/bin/env bash
+
+# Exit on error
+set -o errexit
+
+script=$(basename $0)
+
+currentBranch=$(git current-branch)
+desiredBranch=""
+pushRemote=origin
+push=0
+dry=0
+declare -a args
+
+function printHelp() {
+    echo "${script} -- check out a git branch deleting the branch you switched from"
+    echo
+    echo "Usage: ${script} [-d] [-p [remote]] branch"
+    echo
+    echo "-p, --push [remote]:"
+    echo "        Push the branch deletion to the remote. If 'remote' is unset, assume 'origin'."
+    echo "-d, --dry-run:"
+    echo "        Don't actually do anything, but print what would happen."
+    echo "-h, --help:"
+    echo "        Print this message and quit."
+}
+
+if [[ -z ${1} ]]; then
+    printHelp; exit 0;
+fi
+
+while [[ $# -gt 0 ]]; do
+    key="$1"
+
+    case ${key} in
+        -p|--push)
+            push=1;;
+            # At this point we don't know if the user specified the remote or
+            # not. Defer that processing to the base case.
+        -d|--dry-run)
+            dry=1;;
+        -h|--help)
+            printHelp
+            exit 0;;
+        *)
+            # TODO: Test this...
+            if [[ -z "${desiredBranch}" ]]; then
+                # If the branch is not set, then we can make some assumptions:
+                if [[ "${push}" == "1" ]] && (( $# > 1 )); then
+                    # If push is set, then the next arg could be the remote if
+                    # there is more than one remaining argument.
+                    pushRemote=${1}
+                else
+                    # One remaining arg: it's the desired branch
+                    desiredBranch=${1}
+                fi
+            else
+                # If the branch is set, then the remaining arg is the remote
+                pushRemote=${1}
+            fi;;
+    esac
+    shift
+done
+
+endString=""
+if [[ "${push}" == "1" ]]; then
+    endString=" and pushing the deletion to ${pushRemote}"
+fi
+echo "Switching to ${desiredBranch}, deleting ${currentBranch}${endString}."
+
+
+if [[ "${dry}" == "1" ]]; then
+    echo
+    echo "dry: ${dry}"
+    echo "current branch: ${currentBranch}"
+    echo "desired branch: ${desiredBranch}"
+    echo "push: ${push}"
+    echo "remote: ${pushRemote}"
+    echo
+    echo "Dry run specified. Exiting."
+    exit 0
+fi
+
+# git will fail if the desired branch doesn't exist
+git checkout ${desiredBranch}
+git branch -D ${currentBranch}
+
+
+if [[ "${push}" == "0" ]]; then
+    exit 0
+fi
+
+git push --delete ${pushRemote} ${currentBranch}
