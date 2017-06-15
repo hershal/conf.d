@@ -27,3 +27,5 @@ bindkey -M menuselect '^M' .accept-line
 
 export WORDCHARS=''
 export SHELL=`which zsh`
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
