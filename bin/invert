@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+invert () {
+    local disp=0
+    if [[ -n $1 ]]
+    then
+        disp=$1
+    fi
+    xcalib -invert -alter -s $disp > /dev/null
+}
+
+
+if [[ $# -eq 0 ]]; then
+    invert
+fi;
+
+
+while [[ $# -gt 0 ]]; do
+    key="$1"
+
+    case ${key} in
+        -i|--notify)
+            duration="0.2"
+            if [[ $# -gt 1 ]]; then
+                duration=${2}
+                shift
+            fi
+            invert && sleep ${duration} && invert
+            ;;
+        -h|--help|*)
+            echo "${script} -- invert the screen"
+            echo "Usage: ${script} [--invert|-i duration]"
+            echo
+            echo "With no arguments, the screen is immediately inverted."
+            echo "-i, --invert [duration]:"
+            echo "        Invert the screen and invert back, notifying the user that something occurred. This is useful to use at the end of scripts to tell the user that the script has completed. Duration is optional and is in the same format as GNU sleep."
+            echo "-h, --help:"
+            echo "        Print this message and quit."
+            exit 0
+            ;;
+    esac
+    shift
+done
