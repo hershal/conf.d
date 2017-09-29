@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-invert () {
+default_duration="0.2"
+
+invert_linux () {
     local disp=0
     if [[ -n $1 ]]
     then
@@ -9,18 +11,29 @@ invert () {
     xcalib -invert -alter -s $disp > /dev/null
 }
 
+invert_osx () {
+    osascript -e "tell application \"System Events\"" -e "key code 28 using {control down, option down, command down}" -e "end tell"
+}
+
+invert () {
+    case `uname -s` in
+        Darwin)
+            invert_osx 2> /dev/null ;;
+        *)
+            invert_linux ;;
+    esac
+}
 
 if [[ $# -eq 0 ]]; then
     invert
 fi;
-
 
 while [[ $# -gt 0 ]]; do
     key="$1"
 
     case ${key} in
         -i|--notify)
-            duration="0.2"
+            duration=${default_duration}
             if [[ $# -gt 1 ]]; then
                 duration=${2}
                 shift
@@ -28,12 +41,15 @@ while [[ $# -gt 0 ]]; do
             invert && sleep ${duration} && invert
             ;;
         -h|--help|*)
-            echo "${script} -- invert the screen"
+            echo "$(basename ${0}) -- invert the screen"
             echo "Usage: ${script} [--invert|-i duration]"
-            echo
+            echo ""
             echo "With no arguments, the screen is immediately inverted."
             echo "-i, --invert [duration]:"
-            echo "        Invert the screen and invert back, notifying the user that something occurred. This is useful to use at the end of scripts to tell the user that the script has completed. Duration is optional and is in the same format as GNU sleep."
+            echo "        Invert the screen and invert back, notifying the user that"
+            echo "        something occurred. This is useful to use at the end of scripts to"
+            echo "        tell the user that the script has completed. Duration is optional"
+            echo "        and is in the same format as GNU sleep. Default duration is ${default_duration}s."
             echo "-h, --help:"
             echo "        Print this message and quit."
             exit 0
