@@ -62,15 +62,4 @@ open () {
 }
 
 export PANEL_FIFO="/tmp/$(whoami)-panel-fifo"
-
-function invert() {
-    local disp=0
-
-    if [[ -n $1 ]]; then
-        disp=$1
-    fi
-
-    xcalib -invert -alter -s $disp > /dev/null
-}
-
 export NVM_DIR="/home/$(whoami)/.nvm"
