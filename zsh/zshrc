@@ -28,4 +28,8 @@ bindkey -M menuselect '^M' .accept-line
 export WORDCHARS=''
 export SHELL=`which zsh`
 
+# huge history
+HISTSIZE=10000000
+SAVEHIST=10000000
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
