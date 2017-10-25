@@ -204,9 +204,9 @@ if [[ -d ${HOME}/bashrc.d/ ]]; then
 fi
 
 nguard() {
-    while test $($@ > /dev/null 2>&1; echo $?) = 0; do sleep 1; done;
+    while test $(eval $@ > /dev/null 2>&1; echo $?) = 0; do sleep 1; done;
 }
 
 guard() {
-    while test $($@ > /dev/null 2>&1; echo $?) != 0; do sleep 1; done;
+    while test $(eval $@ > /dev/null 2>&1; echo $?) != 0; do sleep 1; done;
 }
