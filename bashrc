@@ -26,9 +26,6 @@ export TERM="xterm-256color"
 
 export email='hershal.bhave@gmail.com'
 
-# Append
-export PATH=${PATH}:~/conf.d/bin
-
 # Load OS-specific configs
 export configs=${HOME}/conf.d
 source ${configs}/bashrc.aliases
@@ -81,6 +78,10 @@ modpath-ng() {
     source ${outfile}
     rm -f ${outfile}
 }
+
+modpath -q ~/conf.d/bin
+modpath -q ~/.local/bin
+modpath -q ~/bin
 
 # map and rota taken from
 # http://onthebalcony.wordpress.com/2008/03/08/just-for-fun-map-as-higher-order-function-in-bash/
