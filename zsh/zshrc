@@ -33,3 +33,7 @@ HISTSIZE=10000000
 SAVEHIST=10000000
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if [[ -n $(hasbin thefuck) ]]; then
+    eval $(thefuck --alias)
+fi
