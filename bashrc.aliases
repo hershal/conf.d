@@ -16,10 +16,10 @@ alias cp="cp -r"
 alias m='make -j32'
 
 # emacs stuff
-export EDITOR="emacsclient -a \"\" "
-alias emc="$EDITOR  -nc  "
+export EDITOR="emacsclient"
+alias emc="$EDITOR -nc  "
 alias emn="$EDITOR -n "
-alias em="$EDITOR  -nw"
+alias em="$EDITOR -nw"
 alias emr="emacsclient -e \"(remember-other-frame)\""
 alias emk="emacsclient -e \"(kill-emacs)\""
 
