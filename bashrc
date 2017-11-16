@@ -53,7 +53,7 @@ ev() {
 }
 
 editor() {
-    emacsclient -a "" -c "$@"
+    emacsclient -c "$@"
 }
 
 update_links() {
