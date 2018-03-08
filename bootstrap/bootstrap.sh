@@ -1,4 +1,7 @@
-source ~/conf.d/bashrc
+source ~/conf.d/bootstrap/common/base.sh
+source ~/conf.d/bootstrap/common/emacs.sh
+source ~/conf.d/bootstrap/common/node.sh
+source ~/conf.d/bootstrap/common/ruby.sh
 
 case `uname -a` in
     *ARCH* )
