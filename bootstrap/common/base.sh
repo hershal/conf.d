@@ -6,6 +6,7 @@ update_links ~/conf.d/zsh/zshrc
 update_links ~/conf.d/zsh/zprezto
 update_links ~/conf.d/zsh/zpreztorc
 update_links ~/conf.d/ssh
+update_links ~/conf.d/imwheelrc
 
 cd ~/conf.d/
 git remote set-url origin ssh://git@github.com/hershal/conf.d
