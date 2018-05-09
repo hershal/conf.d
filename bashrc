@@ -17,8 +17,11 @@ if [[ -n ${BASH} ]]; then
     shopt -s histappend
     shopt -s cdspell
 
-    # This auto-expands any "!" with a space
-    bind Space:magic-space
+    # Only do this in interactive shells
+    if [ -z "$PS1" ]; then
+        # This auto-expands any "!" with a space
+        bind Space:magic-space
+    fi
 fi
 
 # xterm settings
