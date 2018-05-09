@@ -27,7 +27,7 @@ modpathargs="-o $tmpfile $modpathargs"
 
 # move to environment for bridge to csh
 # (modpath="$modpathargs"; export modpath; /bin/csh -f $EC_ENV_ROOT/bin/modpath)
-(modpath="$modpathargs"; export modpath; /bin/csh -f $configs/modpath)
+(modpath="$modpathargs"; export modpath; /bin/tcsh -f $configs/modpath)
 
 # if modpath was successful, use the file
 if [ $? = 0 -a ! -z $tmpfile ]; then
