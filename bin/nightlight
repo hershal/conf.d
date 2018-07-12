@@ -1,0 +1,80 @@
+#!/usr/bin/env bash
+
+night_mode=""
+
+night_linux () {
+    gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled $1
+}
+
+night_osx () {
+    echo "Nightlight isn't supported on OSX yet"
+    exit 1
+}
+
+night () {
+    case `uname -s` in
+        Darwin)
+            night_osx $1 2> /dev/null ;;
+        *)
+            night_linux $1 ;;
+    esac
+}
+
+read_night_mode_osx () {
+    echo "Nightlight isn't supported on OSX yet"
+    exit 1
+}
+
+read_night_mode_linux () {
+    echo $(gsettings get org.gnome.settings-daemon.plugins.color night-light-enabled)
+}
+
+read_night_mode () {
+    case `uname -s` in
+        Darwin)
+            echo $(read_night_mode_osx) ;;
+        *)
+            echo $(read_night_mode_linux) ;;
+    esac
+}
+
+flip_toggle () {
+    if [[ "$1" = "true" ]]; then
+        echo "false"
+    else
+        echo "true"
+    fi
+}
+
+while [[ $# -gt 0 ]]; do
+    key="$1"
+
+    case ${key} in
+        enable)
+            night_mode=true
+            ;;
+        disable)
+            night_mode=false
+            ;;
+        -h|--help)
+            echo "$(basename ${0}) -- enable or disable night mode"
+            echo "Usage: ${script} [enable|disable]"
+            echo ""
+            echo "With no arguments, the night mode is toggled."
+            echo "enable: "
+            echo "        Enable night mode."
+            echo "disable: "
+            echo "        Disable night mode."
+            echo "-h, --help:"
+            echo "        Print this message and quit."
+            exit 0
+            ;;
+    esac
+    shift
+done
+
+if [[ -z "${night_mode}" ]]; then
+    night_mode=$(flip_toggle $(read_night_mode))
+fi
+
+night ${night_mode}
