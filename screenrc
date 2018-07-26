@@ -10,7 +10,8 @@ startup_message off       # Do not display the copyright page.
 backtick 1 60 60 sh -c "acpi | awk '{ print \$4 * 1 \"%\"}'"
 backtick 2 60 60 sh -c "acpi | awk '{ print substr(\$5, 0, 5) }'"
 
-hardstatus alwayslastline '[%{= kw}%?%-Lw%?%{= kc}%n*%f %t%?%?%{= kw}%?%+Lw%?%?%= ] [%{= kc}%H%{= kw}] [%{c}%l %1` %2`%{w}]%{w} [%{c}%Y-%m-%d %C %A%{w}] '
+
+hardstatus alwayslastline '[%{= kw}%?%-Lw%?%{= kc}%n*%f %t%?%?%{= kw}%?%+Lw%?%?%= ] [%{= kc}%H%{= kw}] [%{c}%l %1` %2`%{w}]%{w} [%{c}%S %C %A%{w}] '
 # hardstatus alwayslastline  "%{.kW}%-w%{.rW}%f%n %t%{-}%+w %=%{..r}%{..c} [%H %l] %{..g} %m/%d %c %{..y} %1`"
 
 # 256 color xterm
