@@ -2,7 +2,7 @@
 
 default_duration="0.2"
 
-invert_linux () {
+invert_linux_xcalib () {
     local disp=0
     if [[ -n $1 ]]
     then
@@ -11,16 +11,42 @@ invert_linux () {
     xcalib -invert -alter -s $disp > /dev/null
 }
 
+invert_linux_gnome () {
+    set_invert_linux_gnome $(flip_toggle $(get_invert_linux_gnome))
+}
+
+get_invert_linux_gnome () {
+    echo $(gsettings get org.gnome.desktop.a11y.applications screen-magnifier-enabled)
+}
+
+set_invert_linux_gnome () {
+    gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled $1
+}
+
 invert_osx () {
     osascript -e "tell application \"System Events\"" -e "key code 28 using {control down, option down, command down}" -e "end tell"
 }
 
+flip_toggle () {
+    if [[ "$1" = "true" ]]; then
+        echo "false"
+    else
+        echo "true"
+    fi
+}
+
+
 invert () {
     case `uname -s` in
-        Darwin)
+        Darwin) # macOS
             invert_osx 2> /dev/null ;;
-        *)
-            invert_linux ;;
+        *) # default is Linux
+            if [[ "$DESKTOP_SESSION" = "gnome" ]]; then
+                invert_linux_gnome
+            else
+                invert_linux
+            fi
+            ;;
     esac
 }
 
