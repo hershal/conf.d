@@ -68,6 +68,13 @@ if [[ -f /usr/local/bin/gfind ]]; then
     alias find=gfind
 fi
 
+
+# If QT exists then add it to the path
+if [[ -d /usr/local/opt/qt/bin/ ]]; then
+    export PATH="/usr/local/opt/qt/bin:$PATH"
+fi
+
+
 # For some reason, osx's `ls` options are different than those in
 # linux. If gls exists, use that instead.
 alias ls='ls -G'
