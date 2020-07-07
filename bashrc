@@ -49,7 +49,6 @@ case `uname -a` in
     *Cygwin* )
         source ${configs}/bashrc.cygwin ;;
 esac
-[ -s "${NVM_DIR}/nvm.sh" ] && . "${NVM_DIR}/nvm.sh"
 
 ev() {
     evince $@ > /dev/null 2>&1 &
@@ -207,6 +206,16 @@ if [[ -d ${HOME}/bashrc.d/ ]]; then
     done
 fi
 
+# load nvm
+export NVM_DIR="$(readlink -e $HOME/.nvm)"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+# nvm completion
+[[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
 nguard() {
     while test $(eval $@ > /dev/null 2>&1; echo $?) = 0; do sleep 1; done;
 }
@@ -224,4 +233,5 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-modpath -q "$HOME/.rvm/bin"
+export PATH="$PATH:$HOME/.rvm/bin"
+alias bm="source bm"
