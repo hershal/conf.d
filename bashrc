@@ -82,7 +82,7 @@ modpath-ng() {
 }
 
 modpath -q ~/conf.d/bin
-modpath -q ~/.local/bin
+modpath -q ~/bashrc.d/bin
 modpath -q ~/bin
 
 # map and rota taken from
