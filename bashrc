@@ -225,3 +225,6 @@ export NVM_DIR="$HOME/.nvm"
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 modpath -q "$HOME/.rvm/bin"
+
+# Enable extensions in the 'pass' command
+PASSWORD_STORE_ENABLE_EXTENSIONS=true
