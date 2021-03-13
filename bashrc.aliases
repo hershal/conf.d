@@ -16,7 +16,6 @@ alias cp="cp -r"
 alias m='make -j32'
 
 # emacs stuff
-export EDITOR="emacsclient"
 alias emc="$EDITOR -nc  "
 alias emn="$EDITOR -n "
 alias em="$EDITOR -nw"

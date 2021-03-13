@@ -28,6 +28,7 @@ fi
 export TERM="xterm-256color"
 
 export email='hershal.bhave@gmail.com'
+export EDITOR='emacsclient -a "vi"'
 
 # Load OS-specific configs
 export configs=${HOME}/conf.d
@@ -53,10 +54,6 @@ esac
 
 ev() {
     evince $@ > /dev/null 2>&1 &
-}
-
-editor() {
-    emacsclient -c "$@"
 }
 
 update_links() {
