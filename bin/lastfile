@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+script=$(basename $0)
+num=1
+
+while [[ $# -gt 0 ]]; do
+    key="$1"
+
+    case ${key} in
+        -n|--num)
+            num=$2; shift;;
+        -h|--help)
+            echo "${script} -- show the last n created files in a directory"
+            echo "Usage: ${script} [-n|--num num] [dir...]"
+            echo
+            echo "-n, --num:"
+            echo "        Show the latest n files"
+            echo "-h, --help:"
+            echo "        Print this message and quit."
+            exit 0;;
+        *) dirs+=("$1");;
+    esac
+    shift
+done
+
+
+for dir in ${dirs}; do
+    find ${dir} -maxdepth 1 -exec ls -t1 {} + 2>/dev/null | head -n ${num}
+done
