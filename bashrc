@@ -207,9 +207,6 @@ fi
 export NVM_DIR="$(readlink -e $HOME/.nvm)"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
-# nvm completion
-[[ -r $NVM_DIR/bash_completion ]] && . $NVM_DIR/bash_completion
-
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
