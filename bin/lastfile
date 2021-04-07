@@ -25,5 +25,5 @@ done
 
 
 for dir in ${dirs}; do
-    find ${dir} -maxdepth 1 -exec ls -t1 {} + 2>/dev/null | head -n ${num}
+    find ${dir}/ -maxdepth 1 -exec ls -t1 {} + 2>/dev/null | head -n ${num}
 done
