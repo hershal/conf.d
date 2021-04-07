@@ -10,6 +10,7 @@ source ~/conf.d/bashrc
 zmodload zsh/complist
 setopt CLOBBER
 unsetopt share_history
+unsetopt auto_cd
 
 setopt rmstarsilent
 alias rsync='noglob rsync'
