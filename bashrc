@@ -28,6 +28,7 @@ fi
 export TERM="xterm-256color"
 
 export email='hershal.bhave@gmail.com'
+export EDITOR='emacsclient -a "vi"'
 
 # Load OS-specific configs
 export configs=${HOME}/conf.d
@@ -49,14 +50,9 @@ case `uname -a` in
     *Cygwin* )
         source ${configs}/bashrc.cygwin ;;
 esac
-[ -s "${NVM_DIR}/nvm.sh" ] && . "${NVM_DIR}/nvm.sh"
 
 ev() {
     evince $@ > /dev/null 2>&1 &
-}
-
-editor() {
-    emacsclient -c "$@"
 }
 
 update_links() {
@@ -83,7 +79,7 @@ modpath-ng() {
 }
 
 modpath -q ~/conf.d/bin
-modpath -q ~/.local/bin
+modpath -q ~/bashrc.d/bin
 modpath -q ~/bin
 
 # map and rota taken from
@@ -207,6 +203,14 @@ if [[ -d ${HOME}/bashrc.d/ ]]; then
     done
 fi
 
+# load nvm
+export NVM_DIR="$(readlink -e $HOME/.nvm)"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+modpath -q "$HOME/.rvm/bin"
+
+
 nguard() {
     while test $(eval $@ > /dev/null 2>&1; echo $?) = 0; do sleep 1; done;
 }
@@ -219,9 +223,8 @@ cl() {
     cd $@ && l
 }
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# Enable bm bookmark manager https://www.npmjs.com/package/bookmark
+alias bm="source bm"
 
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-modpath -q "$HOME/.rvm/bin"
+# Enable extensions in the 'pass' command
+PASSWORD_STORE_ENABLE_EXTENSIONS=true

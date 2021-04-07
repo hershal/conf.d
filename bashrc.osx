@@ -14,8 +14,6 @@ alias tagsgen='gfind . -regex ".*\.[cChH]\(pp\)?" -print | etags -'
 if [[ -d /Applications/MacPorts/Emacs.app/Contents/MacOS/bin/ ]]; then
     PATH=/Applications/MacPorts/Emacs.app/Contents/MacOS/bin/:$PATH
     export EDITOR='/Applications/MacPorts/Emacs.app/Contents/MacOS/bin/emacsclient -a "" '
-else
-    export EDITOR='emacsclient -a "" '
 fi
 
 # Enable bash-completion if we're actually using bash
