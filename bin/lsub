@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+
+script=$(basename $0)
+daemon=0
+quiet=0
+
+declare -a args
+
+while [[ $# -gt 0 ]]; do
+    key="$1"
+
+    case ${key} in
+        -d|--daemon)
+            daemon=1;;
+        -q|--quiet)
+            quiet=1;;
+        -h|--help)
+            echo "${script} -- run a job in a screen process"
+            echo "Usage: ${script} [-d|--daemon] [command...]"
+            echo
+            echo "-d, --daemon:"
+            echo "        Run the screen process like a daemon, i.e. fork the screen and return."
+            echo "-q, --quiet:"
+            echo "        Run the screen process quietly. Don't fork, don't return, stay quiet."
+            echo "        Useful when paired with shell job control."
+            echo "-h, --help:"
+            echo "        Print this message and quit."
+            exit 0;;
+        *) args+=("$1");;
+    esac
+    shift
+done
+
+screen_args=""
+if [[ ${daemon} -eq 1 ]]; then
+    screen_args="-d -m"
+elif [[ ${quiet} -eq 1 ]]; then
+    screen_args="-D -m"
+fi
+
+screen ${screen_args} ${args[@]}
