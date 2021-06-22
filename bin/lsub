@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-
-
 script=$(basename $0)
-daemon=0
-quiet=0
+
+# options: attach, fork, quiet
+mode="attach"
 
 declare -a args
 
@@ -12,14 +11,20 @@ while [[ $# -gt 0 ]]; do
 
     case ${key} in
         -d|--daemon)
-            daemon=1;;
+            mode="fork";;
         -q|--quiet)
-            quiet=1;;
+            mode="quiet";;
+        -a|--attach)
+            mode="attach";;
         -h|--help)
             echo "${script} -- run a job in a screen process"
-            echo "Usage: ${script} [-d|--daemon] [command...]"
+            echo "Usage: ${script} [-adfq] \"[command...]\""
             echo
-            echo "-d, --daemon:"
+            echo "Note: The quotes on the command are necessary for the command to execute properly."
+            echo
+            echo "-a, --attach:"
+            echo "        Run the screen process and attach to it immediately."
+            echo "-d, --daemon, -f, --fork:"
             echo "        Run the screen process like a daemon, i.e. fork the screen and return."
             echo "-q, --quiet:"
             echo "        Run the screen process quietly. Don't fork, don't return, stay quiet."
@@ -33,10 +38,12 @@ while [[ $# -gt 0 ]]; do
 done
 
 screen_args=""
-if [[ ${daemon} -eq 1 ]]; then
-    screen_args="-d -m"
-elif [[ ${quiet} -eq 1 ]]; then
-    screen_args="-D -m"
-fi
+case ${mode} in
+    attach) ;; # no more args necessary
+    fork) screen_args="-d -m";;
+    quiet) screen_args="-D -m";;
+    *) echo "couldn't parse arguments, exiting"; exit 1;;
+esac
 
-screen ${screen_args} ${args[@]}
+echo screen ${screen_args} bash -ci "${args[@]}"
+screen ${screen_args} bash -ci "${args[@]}"

@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+script=$(basename $0)
+
+screen -ls

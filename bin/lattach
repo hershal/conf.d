@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+script=$(basename $0)
+
+while [[ $# -gt 0 ]]; do
+    key="$1"
+
+    case ${key} in
+        -h|--help)
+            echo "${script} -- reattach to a running screen process"
+            echo "Usage: ${script}"
+            echo
+            echo "-h, --help:"
+            echo "        Print this message and quit."
+            exit 0;;
+        *) args+=("$1");;
+    esac
+    shift
+done
+
+
+screen -Uxx $@
