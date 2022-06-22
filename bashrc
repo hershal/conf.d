@@ -227,4 +227,4 @@ cl() {
 alias bm="source bm"
 
 # Enable extensions in the 'pass' command
-PASSWORD_STORE_ENABLE_EXTENSIONS=true
+export PASSWORD_STORE_ENABLE_EXTENSIONS=true
