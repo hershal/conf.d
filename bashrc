@@ -59,6 +59,7 @@ update_links() {
     prefixstr=.
 
     for config in $@; do
+        mv -f ${prefixstr}$(basename ${config}) ${prefixstr}$(basename ${config}).bak
         ln -s -F ${config} ${prefixstr}$(basename ${config})
     done;
 }
