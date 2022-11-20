@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+pwgen -C -N 3 | sed 's/ /-/g'

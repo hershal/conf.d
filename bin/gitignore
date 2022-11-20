@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# exit when any command fails
+set -e
+git_dir=$(git rev-parse --show-toplevel)
+
+echo $@ >> ${git_dir}/.gitignore
