@@ -44,7 +44,8 @@ while sleep 1; do
         echo $scriptname still running...
     fi
 
-    if [[ $exit_after -ge 0 ]] && [[ $counter > $exit_after ]]; then
+    echo "$counter $exit_after"
+    if [[ $exit_after -ge 0 ]] && [[ "$counter" -ge "$exit_after" ]]; then
         exit
     fi
 done
