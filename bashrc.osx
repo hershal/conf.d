@@ -1,5 +1,10 @@
 #;;; -*- mode: shell-script; -*-
 
+# For homebrew
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/sbin:$PATH"
+
 # added by travis gem
 [ -f /Users/hershal/.travis/travis.sh ] && source /Users/hershal/.travis/travis.sh
 
@@ -57,6 +62,9 @@ if [[ -f /usr/local/bin/gsed ]]; then
 fi
 
 # Use greadlink if possible
+if [[ -f /opt/homebrew/bin/greadlink ]]; then
+    alias readlink=greadlink
+fi
 if [[ -f /usr/local/bin/greadlink ]]; then
     alias readlink=greadlink
 fi
