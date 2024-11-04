@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+enroot_container_dir=""
+declare -a args
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -h|--help)
+            echo "$0 -- create a container filesytem from a docker image"
+            echo "Usage: $0 -p path [options] [--] IMAGE"
+            echo "  -p, --container-path"
+            echo "    The directory to import the image to."
+            echo "    The container will be named the last item in the path."
+            exit 0;;
+        -n|-p|--container-path)
+            enroot_container_dir="$2"; shift;;
+        *)
+            args+=("$1"); shift;;
+    esac
+    shift
+done
+
+if [ -z "$enroot_container_dir" ]; then
+    echo "no enroot dir given, exiting"
+    exit 1
+fi
+
+enroot_data_dir="$(readlink -em "$enroot_container_dir"/..)"
+enroot_container="$(basename "$enroot_container_dir")"
+
+
+function main {
+    echo "creating enroot container '${enroot_container}' in '$enroot_data_dir'..."
+    export ENROOT_DATA_PATH="$enroot_data_dir"
+    enroot create -n "${enroot_container}" "${args[@]}"
+    echo "creating enroot container '${enroot_container}' in '$enroot_data_dir'... done."
+}
+
+main
