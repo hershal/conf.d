@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+function main {
+    tmpdir="/tmp/firefox-tmp-$(slugify)"
+    mkdir ${tmpdir}
+    echo "running firefox (${tmpdir})..."
+    firefox --no-remote --profile ${tmpdir}
+    rm -rf ${tmpdir}
+    echo "running firefox (${tmpdir})... done."
+}
+
+main && exit 0
