@@ -71,12 +71,12 @@ modpath () {
 }
 
 # new generation of modpath
-modpath-ng() {
-    outfile=/tmp/modpath-ng.$$;
-    ${configs}/modpath-ng $@ -o ${outfile}
-    source ${outfile}
-    rm -f ${outfile}
-}
+#modpath-ng() {
+#    outfile=/tmp/modpath-ng.$$;
+#    ${configs}/modpath-ng $@ -o ${outfile}
+#    source ${outfile}
+#    rm -f ${outfile}
+#}
 
 modpath -q ~/conf.d/bin
 modpath -q ~/bashrc.d/bin
@@ -125,20 +125,20 @@ ff() { find . -type f -iname '*'$*'*' -ls ; }
 # *** End configs stolen from @ericcrosson:
 
 # Miscellaneous platform-sensitive configs
-if [[ -n ${BASH} ]]; then
-    unset -f which 2> /dev/null
-    if [[ -f ${_WHICH_BINARY} ]]; then
-        which () {
-            (alias; declare -f) | ${_WHICH_BINARY} \
-                                      --tty-only \
-                                      --read-alias \
-                                      --read-functions \
-                                      --show-tilde \
-                                      --show-dot $@
-        }
-        export -f which > /dev/null
-    fi
-fi
+# if [[ -n ${BASH} ]]; then
+#     unset -f which 2> /dev/null
+#     if [[ -f ${_WHICH_BINARY} ]]; then
+#         which () {
+#             (alias; declare -f) | ${_WHICH_BINARY} \
+#                                       --tty-only \
+#                                       --read-alias \
+#                                       --read-functions \
+#                                       --show-tilde \
+#                                       --show-dot $@
+#         }
+#         export -f which > /dev/null
+#     fi
+# fi
 
 # Taken from Petar Marinov
 # http://geocities.com/h2428/petar/bash_acd.htm
@@ -228,3 +228,4 @@ alias bm="source bm"
 
 # Enable extensions in the 'pass' command
 export PASSWORD_STORE_ENABLE_EXTENSIONS=true
+export SACCT_FORMAT="JobID,JobName%50,User,Partition,NodeList,Elapsed,State,ExitCode,CPUTime,MaxVMSize,MaxRSS,AllocTRES%32"
