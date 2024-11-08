@@ -4,6 +4,7 @@ enroot_container_dir=""
 declare -a pre_args
 declare -a post_args
 start_post_args=0
+forward_x_args=""
 
 while [ $# -gt 0 ]; do
     case "$1" in
@@ -16,6 +17,8 @@ while [ $# -gt 0 ]; do
         -c|--container-dir)
             enroot_container_dir="$2"
             shift;;
+        -x|--forward-x)
+            forward_x_args="--env DISPLAY --mount /tmp/.X11-unix:/tmp/.X11-unix";;
         --)
             start_post_args=1;;
         *)
@@ -40,7 +43,7 @@ enroot_container="$(basename "$enroot_container_dir")"
 function main {
     echo "entering enroot container '${enroot_container}' in '$enroot_data_dir'..."
     export ENROOT_DATA_PATH="$enroot_data_dir"
-    enroot start ${pre_args[@]} "$enroot_container" -- "${post_args[@]}"
+    enroot start ${forward_x_args} ${pre_args[@]} "$enroot_container" -- "${post_args[@]}"
     echo "entering enroot container '${enroot_container}' in '$enroot_data_dir'... done."
 }
 
