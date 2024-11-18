@@ -14,7 +14,7 @@ while [ $# -gt 0 ]; do
         -n|-p|--container-path)
             enroot_container_dir="$2"; shift;;
         *)
-            args+=("$1"); shift;;
+            args+=("$1");;
     esac
     shift
 done
@@ -31,7 +31,7 @@ enroot_container="$(basename "$enroot_container_dir")"
 function main {
     echo "removing enroot container '${enroot_container}' from '$enroot_data_dir'..."
     export ENROOT_DATA_PATH="$enroot_data_dir"
-    enroot remove "${enroot_container}" "${args[@]}"
+    enroot remove "${args[@]}" "${enroot_container}"
     echo "removing enroot container '${enroot_container}' from '$enroot_data_dir'... done."
 }
 
