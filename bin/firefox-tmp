@@ -1,12 +1,39 @@
 #!/usr/bin/env bash
 
+copy="0"
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -h|--help)
+            echo "$0 -- run firefox in a temporary profile"
+            echo "Usage: $0 [-c|--copy]"
+            echo "  -c, --copy"
+            echo "    Copy the user's default profile and run that"
+            exit 0;;
+        -c|--copy)
+            copy="1";;
+    esac
+    shift
+done
+
+
 function main {
     tmpdir="/tmp/firefox-tmp-$(slugify)"
-    mkdir ${tmpdir}
+
+    if [ "${copy}" = "1" ]; then
+        echo "copying default profile (${tmpdir})..."
+        cp -r ~/.mozilla/firefox/*.default ${tmpdir}
+        echo "copying default profile (${tmpdir})... done."
+    else
+        mkdir ${tmpdir}
+    fi
+
     echo "running firefox (${tmpdir})..."
-    firefox --no-remote --profile ${tmpdir}
-    rm -rf ${tmpdir}
+    firefox --no-remote --profile ${tmpdir} --new-instance 2>/dev/null
     echo "running firefox (${tmpdir})... done."
+    echo "cleaning up (${tmpdir})..."
+    rm -rf ${tmpdir}
+    echo "cleaning up (${tmpdir})... done."
 }
 
 main && exit 0
