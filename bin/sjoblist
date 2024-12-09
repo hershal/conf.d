@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+seperator=" "
+
+help() {
+    echo "$0 -- show all of user's slurm jobs IDs"
+    echo "Usage: $0 [-s separator] [-c]"
+    echo "  -c, --comma"
+    echo "    Comma-separate the list."
+    echo "  -n, --newline"
+    echo "    Newline-separate the list."
+    echo "  -s, --seperator"
+    echo "    Use the specified separator. Must only be one character."
+}
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        -h|--help)
+            help && exit 0;;
+        -c|--comma)
+            seperator=",";;
+        -n|--newline)
+            seperator="\n";;
+        -s|--seperator)
+            seperator="$2"
+            shift;;
+        *)
+            help && exit 0;;
+    esac
+    shift
+done
+
+main () {
+    squeue -O "jobid" | tail -n+2 | xargs | tr ' ' "${seperator}"
+}
+
+main && exit 0
