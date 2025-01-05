@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+script=$0
+sep="-"
+
+while [[ $# -gt 0 ]]; do
+    key="$1"
+
+    case ${key} in
+        -s|--separator)
+            sep=$2; shift;;
+        -h|--help)
+            echo "${script} -- echo a directory with an incremental name"
+            echo "Usage: ${script} [-s/--separator sep] dir"
+            echo
+            echo "-s, --separator sep:"
+            echo "        Set the separator 'sep' between the directory name and the increment."
+            echo "-h, --help:"
+            echo "        Print this message and quit."
+            exit 0;;
+        *)
+            dirname=$1;;
+    esac
+    shift
+done
+
+i=0
+while true; do
+    dir="${dirname}${sep}${i}"
+    if [ -d "${dir}" ]; then
+        ((i++))
+    else
+        echo "$dir"
+        exit 0
+    fi
+
+    if [ "$i" -gt "1000" ]; then
+        echo "ERROR: dir exceeded 1000, likely an infinite loop. Exiting"
+        exit 1
+    fi
+done

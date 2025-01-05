@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+declare -a jobids
+script="$(basename "$0")"
+nice=0
+norun=0
+
+while [[ $# -gt 0 ]]; do
+    key="$1"
+
+    case ${key} in
+        -n|--nice)
+            nice=$2; shift;;
+        --no-run)
+            norun=1;;
+        -h|--help)
+            echo "${script} -- adjust the nice value of multiple slurm jobs"
+            echo "Usage: ${script} -n|--nice <nice> jobids..."
+            echo
+            echo "-n, --nice:"
+            echo "        The nice value to adjust to."
+            echo "-h, --help:"
+            echo "        Print this message and quit."
+            exit 0;;
+        *) jobids+=($1);;
+    esac
+    shift
+done
+
+
+main() {
+    for job in ${jobids[@]}; do
+        if [ "$norun" = "0" ]; then
+            scontrol update jobid=$job nice=$nice
+        else
+            echo scontrol update jobid=$job nice=$nice
+        fi
+    done
+
+}
+
+
+main && exit 0

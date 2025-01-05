@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+script=$0
+short=0
+
+while [[ $# -gt 0 ]]; do
+    key="$1"
+
+    case ${key} in
+        -s|--short)
+            short=1;;
+        -h|--help)
+            echo "${script} -- Generate an RF8601-compatible date"
+            echo "Usage: ${script} [-s,--short]"
+            echo
+            echo "-s,--short"
+            echo "        Generate a short name with just the year, month, and day (no time)."
+            echo "-h, --help:"
+            echo "        Print this message and quit."
+            exit 0;;
+    esac
+    shift
+done
+
+if [ "$short" = "1" ]; then
+    date +"%Y-%m-%d"
+else
+    date +"%Y-%m-%d-%H%M%S"
+fi
