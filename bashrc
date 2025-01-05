@@ -228,5 +228,5 @@ alias bm="source bm"
 
 # Enable extensions in the 'pass' command
 export PASSWORD_STORE_ENABLE_EXTENSIONS=true
-export SACCT_FORMAT="JobID,JobName%20,Elapsed,State,ExitCode,CPUTime,AllocTRES%32"
-export SQUEUE_FORMAT2="jobid:8,name,statecompact:4,timeused:10,timelimit:10 ,reasonlist:20 ,nice:6 "
+export SACCT_FORMAT="JobID%-17,JobName%-49,State,Elapsed,ExitCode,AllocTRES%-32"
+export SQUEUE_FORMAT2="jobarrayid:18,name:50,statecompact:4,timeused:10 ,reasonlist:20 ,nice:6 ,priority:4"
