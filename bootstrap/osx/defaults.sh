@@ -125,3 +125,6 @@ sudo pmset -a destroyfvkeyonstandby 1
 
 echo "Allow Finder to quit"
 defaults write com.apple.finder QuitMenuItem -bool YES
+
+echo "Disable bouncing dock icons"
+defaults write com.apple.dock no-bouncing -bool TRUE
