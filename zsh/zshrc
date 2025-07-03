@@ -3,6 +3,14 @@
 # fix for tramp
 if [[ "$TERM" == "dumb" ]]; then source ~/conf.d/bashrc; return; fi
 
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+  autoload -Uz compinit
+  compinit
+fi
+
 source ~/conf.d/zsh/zprezto/init.zsh
 source ~/conf.d/zsh/zpreztorc
 source ~/conf.d/bashrc
