@@ -55,25 +55,10 @@ if [[ -f ${GWHICH_BINARY} ]]; then
     fi
 fi
 
-# For some reason, osx's `sed` seems to just plain suck. If gsed
-# exists, use that instead.
-if [[ -f /usr/local/bin/gsed ]]; then
-    alias sed='/usr/local/bin/gsed'
+# If we have homebrew coreutils, use that instead of the normal tools
+if [[ -d /opt/homebrew/opt/coreutils/libexec/gnubin ]]; then
+    PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 fi
-
-# Use greadlink if possible
-if [[ -f /opt/homebrew/bin/greadlink ]]; then
-    alias readlink=greadlink
-fi
-if [[ -f /usr/local/bin/greadlink ]]; then
-    alias readlink=greadlink
-fi
-
-# Use gfind if possible
-if [[ -f /usr/local/bin/gfind ]]; then
-    alias find=gfind
-fi
-
 
 # If QT exists then add it to the path
 if [[ -d /usr/local/opt/qt/bin/ ]]; then
