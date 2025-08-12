@@ -9,7 +9,6 @@ alias less="less -R -i"
 alias gv="grep -v"
 alias gr="grep -rniI"
 alias chmox="chmod +x"
-alias rfdate="date +\"%Y-%m-%d-%H%M%S\""
 alias psg="ps aux | grep "
 alias nocolor='sed -r "s:\x1b\[[0-9;]*[mk]::g"; return ${pipestatus[1]}'
 alias cp="cp -r"

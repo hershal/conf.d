@@ -212,11 +212,17 @@ modpath -q "$HOME/.rvm/bin"
 
 
 nguard() {
-    while test $(eval $@ > /dev/null 2>&1; echo $?) = 0; do sleep 1; done;
+    until eval $@; do
+        echo "guard: zero exit status, rerunning..."
+        sleep 1
+    done
 }
 
 guard() {
-    while test $(eval $@ > /dev/null 2>&1; echo $?) != 0; do sleep 1; done;
+    until eval $@; do
+        echo "guard: nonzero exit status, rerunning..."
+        sleep 1
+    done
 }
 
 cl() {
@@ -228,5 +234,11 @@ alias bm="source bm"
 
 # Enable extensions in the 'pass' command
 export PASSWORD_STORE_ENABLE_EXTENSIONS=true
+
+# SLURM setup
 export SACCT_FORMAT="JobID%-17,JobName%-49,State,Elapsed,ExitCode,AllocTRES%-32"
 export SQUEUE_FORMAT2="jobarrayid:18,name:50,statecompact:4,timeused:10 ,reasonlist:20 ,nice:6 ,priority:4"
+
+# Exit trap
+trap "echo bash exiting" EXIT
+
