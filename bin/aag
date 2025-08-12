@@ -1,0 +1,148 @@
+#!/bin/bash
+#
+# ag with logical AND of multiple searches
+#
+# Copyright (C) 2020 Maddison Hellstrom <https://github.com/b0o>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+set -euo pipefail
+
+function usage() {
+  mapfile -t usage << "EOF"
+aag: per-file logical AND of multiple ag searches
+
+Usage:
+  aag [path ..] ----] [opts] <pattern> --- [opts] <pattern> [--- [opts] <pattern> ..]
+
+  Paths can either be passed at the beginning of the command line followed by ----,
+  or they can be piped to stdin separated by newlines.
+
+Caveats and bugs:
+  - aag is a 'naive' interface to ag in that it doesn't attempt to parse or
+    understand any options passed to ag, and makes a few assumptions about your
+    usage.
+
+    Because of this, aag does not necessarily play niceley with all ag options.
+    Some may cause aag to break, while others may produce unexpected output.
+
+    For example, when using ag's -w option, the final output will highlight any
+    non-word matches of the pattern if they exist, although the list of matched
+    files will still be correct.
+
+    Generally, options that modify the way output is displayed will not work.
+
+    Options that are known to be unsupported:
+      -A, -B -c, --color*, -C, -D, --nofilename, -g, -l, -m, --numbers, -o, --pager,
+      --print-ling-lines, --passthrough, --stats*, --version, --vimgrep, -0
+
+  - If there are more than ARG_MAX (see sysconf(3)) candidate files for the first
+    search, aag will crash.  To work around this, try making your first search more
+    specific and/or limit the number/depth of paths searched.
+
+  - Output will not be displayed until the end of program execution.
+
+EOF
+  printf '%s\n' "${usage[@]}" >&2
+}
+
+declare -ga matches_old=()
+declare -ga matches=()
+declare -g compound_pattern=""
+
+function run_search() {
+  matches_old=("${matches[@]}")
+  matches=()
+
+  local -i needs_dashdash=1
+  local e
+  for e in "$@"; do
+    if [[ "$e" == "--" ]]; then
+      needs_dashdash=0
+      break
+    fi
+  done
+
+  local args=("$@")
+  if [[ $needs_dashdash -eq 1 ]]; then
+    args=("${args[@]:0:$((${#args[@]} - 1))}" -- "${args[-1]}")
+  fi
+
+  [[ -z "$compound_pattern" ]] || compound_pattern+="|"
+  compound_pattern+="(${args[-1]})"
+
+  local res
+  res="$(ag "${args[@]}" "${matches_old[@]}")" || {
+    echo "no matches" >&2
+    return 1
+  }
+  mapfile -t matches <<< "$res"
+}
+
+function main() {
+  [[ $# -ge 0 ]] || {
+    usage
+    exit 1
+  }
+  [[ ! $1 =~ ^(-h|--help)$ ]] || {
+    usage
+    exit 0
+  }
+
+  local -a maybe_paths=()
+  local -a search=()
+  local -i sep_found=0
+
+  if [[ -p /dev/stdin ]]; then
+    mapfile -t matches
+  else
+    local -i i=1
+    for e in "$@"; do
+      [[ "$e" != "----" ]] || {
+        matches=("${maybe_paths[@]}")
+        shift $i
+        break
+      }
+      [[ "$e" != "---" ]] || break
+      maybe_paths+=("$e")
+      i=$((i + 1))
+    done
+  fi
+
+  for e in "$@"; do
+    [[ "$e" != "---" ]] || {
+      sep_found=1
+      run_search --nocolor --files-with-matches "${search[@]}"
+      search=()
+      continue
+    }
+    search+=("$e")
+  done
+
+  if [[ $sep_found -eq 0 ]]; then
+    echo "error: unnecessary use of aag with a single search query" >&2
+    return 1
+  fi
+
+  if [[ ${#search[@]} -eq 0 ]]; then
+    echo "error: unnecessary extra --- not preceding a search query" >&2
+    return 1
+  fi
+
+  run_search --nocolor --files-with-matches  "${search[@]}"
+  run_search --color --heading "$compound_pattern"
+  printf '%s\n' "${matches[@]}"
+}
+
+main "$@"
