@@ -1,11 +1,45 @@
 #!/bin/bash
+# Wrapper around sbatch that prints ONLY the numeric job id on a successful
+# submission (consumed by start-llamacpp-servers.* and similar tooling).
+#
+# This script is itself named `sbatch` and lives in a bin/ dir that sits on
+# PATH ahead of /usr/bin, so it MUST call the real sbatch by an ABSOLUTE path.
+# Calling a bare `sbatch` here re-invokes this wrapper -> infinite recursion /
+# fork bomb. The recursion guard below is a hard backstop against that ever
+# happening again, regardless of PATH ordering.
 
-sbr="$(sbatch "$@")"
-
-if [[ "$sbr" =~ Submitted\ batch\ job\ ([0-9]+) ]]; then
-    echo "${BASH_REMATCH[1]}"
-    exit 0
-else
-    echo "sbatch failed"
+if [ -n "${_SBATCH_WRAPPER_ACTIVE:-}" ]; then
+    echo "sbatch wrapper: recursion detected (PATH misconfig?), refusing to re-enter" >&2
     exit 1
 fi
+export _SBATCH_WRAPPER_ACTIVE=1
+
+# Locate the real sbatch binary (anything but this wrapper).
+self="$(readlink -f "$0" 2>/dev/null || echo "$0")"
+real_sbatch=""
+for cand in /usr/bin/sbatch /bin/sbatch /opt/slurm/bin/sbatch /usr/local/bin/sbatch; do
+    cand_real="$(readlink -f "$cand" 2>/dev/null || echo "$cand")"
+    if [ -x "$cand" ] && [ "$cand_real" != "$self" ]; then
+        real_sbatch="$cand"
+        break
+    fi
+done
+if [ -z "$real_sbatch" ]; then
+    echo "sbatch wrapper: could not find the real sbatch binary" >&2
+    exit 127
+fi
+
+out="$("$real_sbatch" "$@")"
+rc=$?
+
+if [[ "$out" =~ Submitted\ batch\ job\ ([0-9]+) ]]; then
+    # Successful submission: emit just the job id.
+    echo "${BASH_REMATCH[1]}"
+    exit 0
+fi
+
+# Not a submission success (errors, --help, --version, --parsable, dry runs, ...):
+# pass the real sbatch's stdout and exit status through unchanged instead of
+# masking them. Errors that sbatch wrote to stderr are already visible.
+[ -n "$out" ] && printf '%s\n' "$out"
+exit "$rc"
