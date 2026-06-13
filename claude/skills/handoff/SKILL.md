@@ -76,10 +76,11 @@ re-litigate, prior decisions that are load-bearing.>
 
 ## After writing the file
 
-1. **Add a row to `docs/handoffs/README.md`** in the index table (timestamp, file link, one-line topic). Newest at the bottom. Create the README with a table header if it doesn't exist.
-2. **Update the project's "latest handoff" pointer** if the repo has one (e.g. a `docs/repo_map.md`, top-level README, or CLAUDE.md line that tracks the current handoff) — point it at the new file as "Latest".
-3. **Reference the prior handoff inline** if it's still load-bearing (so the next agent reads it for context). Use a relative path like `[prior-handoff.md](prior-handoff.md)`.
-4. **Commit** the new handoff + index updates as one commit (only if the repo is a git repo and the user expects commits). Message like: `Handoff: <description>`.
+1. **Add a row to `docs/handoffs/README.md`** in the index table (timestamp, file link, one-line topic, **Status**). New handoffs start at `open`. Newest at the bottom. Create the README with the header — including a Status column — if it doesn't exist.
+2. **Supersede the prior handoff** if this one carries its unfinished work forward: set that row's Status to `superseded` in the index, and prepend a one-line banner to the top of its file: `> **Status: superseded** by [<new-file>](<new-file>.md) — YYYY-MM-DD`. The lexically-latest `open` handoff is always the live baton. (If the prior work was actually *finished* rather than passed on, the closeout skill marks it `done` instead — see Status lifecycle.)
+3. **Update the project's "latest handoff" pointer** if the repo has one (e.g. a `docs/repo_map.md`, top-level README, or CLAUDE.md line that tracks the current handoff) — point it at the new file as "Latest".
+4. **Reference the prior handoff inline** if it's still load-bearing (so the next agent reads it for context). Use a relative path like `[prior-handoff.md](prior-handoff.md)`.
+5. **Commit** the new handoff + index updates as one commit (only if the repo is a git repo and the user expects commits). Message like: `Handoff: <description>`.
 
 ## What to avoid
 
@@ -88,6 +89,18 @@ re-litigate, prior decisions that are load-bearing.>
 - Don't write a handoff for trivial work. Use this for substantial transitions (stage completed, design approved, fanout done, etc.).
 - Don't pick a description that describes the past tense ("stage3-completed"). Describe what the receiver is picking up ("stage4-cot-generation").
 
+## Status lifecycle
+
+A handoff is a baton, so it has a lifecycle — tracked in the index table's **Status** column, which is both the source of truth and the dashboard a new session scans first to find the live baton:
+
+- **`open`** — written, awaiting pickup; the lexically-latest `open` handoff is the current one.
+- **`done`** — its work was completed. Set by the **closeout skill** when the session that finished the work wraps up.
+- **`superseded`** — replaced by a newer handoff before its work was done (the baton was passed onward, not dropped). Set by this skill when you write the successor (step 2 above).
+
+There is deliberately **no `in-progress` state.** A session has no reliable moment to flip `open → in-progress` when it picks the baton up — it just reads the latest handoff and starts — so that marker would silently rot. Instead, transitions happen only at moments a skill reliably acts: writing a successor (here), and closeout (which checks whether the session came from a handoff and marks the source `done` or `superseded`). **A status nobody updates is worse than none — only set status where a skill drives it.**
+
+When you close or supersede a handoff, also prepend the one-line banner to its file so someone who opens it directly isn't misled by stale content. It's a terminal stamp, written once, so it can't drift.
+
 ## Prior handoffs index
 
-See `docs/handoffs/README.md` for the full table of past handoffs. **The lexically latest file is the current handoff.** When you write a new one, you supersede it.
+See `docs/handoffs/README.md` for the full table of past handoffs. **The lexically-latest `open` file is the current handoff.**

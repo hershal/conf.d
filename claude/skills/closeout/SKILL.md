@@ -96,10 +96,17 @@ A passing "I prefer X", or a lesson *you* learned once this session, does **not*
 
 > **3 vs 4, quickly:** "We cache the lookup because the ORM re-queries 3× otherwise" → project memory (vector 3). "Hershal wants every change committed separately" → auto-memory (vector 4) — but only once it's an explicit instruction or a repeated, called-out pattern, not a one-off remark.
 
-### 5. Handoff — *will work continue, and would a cold reader need orientation?* (capstone, only if step 2 said "continuing")
+### 5. Handoff — *will work continue, and would a cold reader need orientation?* (capstone if continuing; **also fires to close a source handoff** if this session came from one)
 
-**Signal:** the user is continuing later (especially if out of context) and there's enough live state that a fresh agent shouldn't have to reconstruct it. Skip for a finished or trivial slice.
-**Action:** invoke the **`handoff`** skill → `docs/handoffs/YYYY-MM-DD-HHMM-<slug>.md`, indexed and pointed-to per that skill. Write it **last** so it can reference the docs, plan-status, and memories you just produced — it's the map to the whole paper trail.
+**First, did this session come from a handoff?** Check whether you started from or worked against an existing `docs/handoffs/*.md` (it was the live `open` baton). If so, its status must be updated now — this is the transition the whole handoff lifecycle depends on, and the one moment an agent reliably acts on it:
+
+- **Work finished (step 2 = done)** → mark that source handoff `done`: flip its row in `docs/handoffs/README.md` and prepend a `> **Status: done** — YYYY-MM-DD` banner to its top.
+- **Continuing (step 2 = continuing)** → the successor you write below supersedes it; the `handoff` skill flips the source to `superseded` as part of writing the new one.
+
+Do this **automatically and report it in the recap** — don't ask first. Leaving a finished session's source handoff sitting at `open` is the exact stale-baton problem the status field exists to prevent.
+
+**Signal (write a new one):** the user is continuing later (especially if out of context) and there's enough live state that a fresh agent shouldn't have to reconstruct it. Skip for a finished or trivial slice.
+**Action (if continuing):** invoke the **`handoff`** skill → `docs/handoffs/YYYY-MM-DD-HHMM-<slug>.md`, indexed and pointed-to per that skill. The new handoff starts at `open`. Write it **last** so it can reference the docs, plan-status, and memories you just produced — it's the map to the whole paper trail.
 
 ## What to avoid
 
