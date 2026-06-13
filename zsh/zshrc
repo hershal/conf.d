@@ -46,3 +46,8 @@ SAVEHIST=10000000
 if [[ -n $(hasbin thefuck) ]]; then
     eval $(thefuck --alias)
 fi
+export PATH="$HOME/.local/bin:$PATH"
+# alias bm="source bm"  # disabled by bookmark-cli-ng
+
+# bookmark-cli-ng
+[ -f "$HOME/.local/share/bookmark-cli-ng/bm.bash" ] && source "$HOME/.local/share/bookmark-cli-ng/bm.bash"
