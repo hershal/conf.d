@@ -2,7 +2,6 @@
 
 # For homebrew
 export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/opt/homebrew/sbin:$PATH"
 
 # added by travis gem
@@ -21,11 +20,16 @@ if [[ -d /Applications/MacPorts/Emacs.app/Contents/MacOS/bin/ ]]; then
     export EDITOR='/Applications/MacPorts/Emacs.app/Contents/MacOS/bin/emacsclient -a "" '
 fi
 
-# Enable bash-completion if we're actually using bash
+# Enable bash-completion if we're actually using bash. macOS's /etc/bashrc
+# doesn't load it (unlike Linux), so source brew's: bash-completion@2 installs
+# etc/profile.d/bash_completion.sh, the old v1 formula installs
+# etc/bash_completion.
 if [[ -n ${BASH} ]]; then
-    if [ -f $(brew --prefix)/etc/bash_completion ]; then
-        . $(brew --prefix)/etc/bash_completion
-    fi
+    for _bc in "$(brew --prefix)/etc/profile.d/bash_completion.sh" \
+               "$(brew --prefix)/etc/bash_completion"; do
+        if [ -f "${_bc}" ]; then . "${_bc}"; break; fi
+    done
+    unset _bc
 fi
 
 function flash () {
