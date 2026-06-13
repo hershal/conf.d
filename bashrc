@@ -3,6 +3,9 @@
 # bash-specific configuration
 if [[ -n ${BASH} ]]; then
 
+    # Source global definitions (bash-completion et al. for non-login shells)
+    [ -f /etc/bashrc ] && . /etc/bashrc
+
     # General Shell Settings
     export PS1="[\u@\h \W]\$ "
     export PS2=">"
@@ -39,15 +42,10 @@ hasbin() {
 }
 
 case `uname -a` in
-    *ARCH* )
-        source ${configs}/bashrc.linux
-        source ${configs}/bashrc.arch ;;
     *Linux* )
         source ${configs}/bashrc.linux ;;
     *Darwin* )
-        source ${configs}/bashrc.osx ;;
-    *Cygwin* )
-        source ${configs}/bashrc.cygwin ;;
+        source ${configs}/bashrc.macos ;;
 esac
 
 ev() {
@@ -78,9 +76,7 @@ modpath () {
 #    rm -f ${outfile}
 #}
 
-modpath -q ~/conf.d/bin
-modpath -q ~/bashrc.d/bin
-modpath -q ~/bin
+# (personal bin dirs are prepended to PATH at the very end of this file)
 
 # map and rota taken from
 # http://onthebalcony.wordpress.com/2008/03/08/just-for-fun-map-as-higher-order-function-in-bash/
@@ -207,6 +203,12 @@ fi
 export NVM_DIR="$(readlink -e $HOME/.nvm)"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
+# load pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
+
+# load rvm
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 modpath -q "$HOME/.rvm/bin"
 
@@ -230,15 +232,30 @@ cl() {
 }
 
 # Enable bm bookmark manager https://www.npmjs.com/package/bookmark
-alias bm="source bm"
+# alias bm="source bm"  # disabled by bookmark-cli-ng
 
 # Enable extensions in the 'pass' command
 export PASSWORD_STORE_ENABLE_EXTENSIONS=true
 
 # SLURM setup
-export SACCT_FORMAT="JobID%-17,JobName%-49,State,Elapsed,ExitCode,AllocTRES%-32"
-export SQUEUE_FORMAT2="jobarrayid:18,name:50,statecompact:4,timeused:10 ,reasonlist:20 ,nice:6 ,priority:4"
+export SACCT_FORMAT="JobID%-20,JobName%-49,State,Elapsed,ExitCode,AllocTRES%-32"
+export SQUEUE_FORMAT2="jobarrayid:20,name:50,statecompact:4,timeused:10 ,reasonlist:20 ,nice:6 ,priority:4"
 
 # Exit trap
 trap "echo bash exiting" EXIT
 
+# Prepend personal bin dirs to the front of PATH (after pyenv/nvm/rvm have
+# prepended theirs) so wrapper scripts there win over the real binaries (e.g.
+# the claude --remote wrapper beats ~/.local/bin/claude). modpath -n 1 inserts
+# at position 1, but it's idempotent (won't MOVE an entry already in PATH) and
+# bashrc is sourced more than once, so delete any existing entry first, then
+# re-add at the front. Listed in reverse so the resulting front order is
+# conf.d/bin : bashrc.d/bin : bin (each -n 1 pushes the previous one back).
+for _d in ~/bin ~/bashrc.d/bin ~/conf.d/bin; do
+    modpath -q -d "$_d" > /dev/null 2> /dev/null
+    modpath -q -n 1 "$_d"
+done
+unset _d
+
+# bookmark-cli-ng
+[ -f "$HOME/.local/share/bookmark-cli-ng/bm.bash" ] && source "$HOME/.local/share/bookmark-cli-ng/bm.bash"
