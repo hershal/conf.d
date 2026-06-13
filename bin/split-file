@@ -1,0 +1,143 @@
+#!/usr/bin/env bash
+
+script="$(basename "$0")"
+split_count=0
+split_lines=0
+output_prefix=""
+show_help=0
+norun=0
+
+while [[ $# -gt 0 ]]; do
+    key="$1"
+
+    case ${key} in
+        -n|--number)
+            split_count=$2
+            shift;;
+        -l|--lines)
+            split_lines=$2
+            shift;;
+        -o|--output-prefix)
+            output_prefix=$2
+            shift;;
+        -nr|--no-run)
+            norun=1;;
+        -h|--help)
+            show_help=1;;
+        *)
+            input_file=$1;;
+    esac
+    shift
+done
+
+usage() {
+    echo "${script} -- split a file into multiple files"
+    echo "Usage: ${script} [options] input_file"
+    echo
+    echo "Options:"
+    echo "-n, --number <count>:"
+    echo "        Split the file into <count> files of roughly equal size."
+    echo "-l, --lines <lines>:"
+    echo "        Split the file into multiple files, each with <lines> lines."
+    echo "-o, --output-prefix <prefix>:"
+    echo "        Use <prefix> for output filenames. Default: '<input_file>-split'"
+    echo "-nr, --no-run:"
+    echo "        Show the commands that would be executed without running them."
+    echo "-h, --help:"
+    echo "        Print this message and quit."
+}
+
+main() {
+    if [[ $show_help -eq 1 ]]; then
+        usage
+        exit 0
+    fi
+
+    if [[ -z "$input_file" ]]; then
+        echo "Error: No input file specified."
+        usage
+        exit 1
+    fi
+
+    if [[ ! -f "$input_file" ]]; then
+        echo "Error: Input file '$input_file' does not exist."
+        exit 1
+    fi
+
+    if [[ $split_count -eq 0 && $split_lines -eq 0 ]]; then
+        echo "Error: Either -n or -l must be specified."
+        usage
+        exit 1
+    fi
+
+    if [[ $split_count -gt 0 && $split_lines -gt 0 ]]; then
+        echo "Error: Cannot use both -n and -l options together."
+        usage
+        exit 1
+    fi
+
+    # Set default output prefix based on input filename if not specified
+    if [[ -z "$output_prefix" ]]; then
+        # Extract the filename without extension
+        filename=$(basename -- "$input_file")
+        extension="${filename##*.}"
+        basename="${filename%.*}"
+        if [[ "$filename" == "$extension" ]]; then
+            # No extension
+            output_prefix="${filename}-split"
+        else
+            output_prefix="${basename}-split"
+        fi
+    fi
+
+    # Calculate total lines in the file
+    total_lines=$(wc -l < "$input_file")
+
+    if [[ $split_count -gt 0 ]]; then
+        # Calculate lines per file when splitting into n files
+        lines_per_file=$(( (total_lines + split_count - 1) / split_count ))
+        split_cmd="split -l $lines_per_file \"$input_file\" \"${output_prefix}\" --numeric-suffixes=0 --suffix-length=1"
+    else
+        # Split by number of lines
+        split_cmd="split -l $split_lines \"$input_file\" \"${output_prefix}\" --numeric-suffixes=0 --suffix-length=1"
+    fi
+
+    # Add extension to output files if input file has an extension
+    if [[ "$filename" != "$extension" ]]; then
+        split_cmd="$split_cmd --additional-suffix=.${extension}"
+    fi
+
+    if [[ $norun -eq 1 ]]; then
+        echo "Would execute:"
+        echo "$split_cmd"
+        echo
+        echo "Would create files:"
+        # Calculate number of output files
+        if [[ $split_count -gt 0 ]]; then
+            num_files=$split_count
+        else
+            num_files=$(( (total_lines + lines_per_file - 1) / lines_per_file ))
+        fi
+        
+        # Generate the expected file names
+        for ((i=0; i<num_files; i++)); do
+            if [[ "$filename" != "$extension" ]]; then
+                echo "${output_prefix}${i}.${extension}"
+            else
+                echo "${output_prefix}${i}"
+            fi
+        done
+    else
+        eval "$split_cmd"
+        echo "Split $input_file into multiple files with prefix '$output_prefix'"
+        echo "Created files:"
+        if [[ "$filename" != "$extension" ]]; then
+            ls -1 "${output_prefix}"*".${extension}"
+        else
+            ls -1 "${output_prefix}"*
+        fi
+    fi
+}
+
+main
+
