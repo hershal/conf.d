@@ -83,12 +83,18 @@ Close with a short, **plain-language** recap (a few lines, no jargon, no checkli
 **Signal:** a hard bug whose root cause was counterintuitive, a design decision with a non-obvious why, a gotcha that cost real time. Apply the test: *would someone competent, reading the code and git log, still have to re-derive this?*
 **Action:** invoke the **`dump-memory`** skill → `memory/YYYY-MM-DD-<slug>.md`. This is durable *project* knowledge.
 
-### 4. User & process memory — *did the user reveal a durable preference, give feedback on how I should work, or set a constraint not derivable from code?*
+### 4. User & process memory — *did the user explicitly ask to remember something, or has a called-out issue recurred?*
 
-**Signal:** "I prefer…", a correction you shouldn't repeat next time, a standing decision, a workflow they want followed, a fact about who they are or what the project is for. Also "long-term curated thoughts" worth carrying across sessions.
-**Action:** write to the **auto-memory store** (the `memory/` + `MEMORY.md` system described in your system prompt — one fact per file with frontmatter, plus a one-line `MEMORY.md` pointer; check for an existing file to update before creating a duplicate). This is distinct from vector 3: vector 3 is *project knowledge*; this is *about the user and how to work*, and persists across all sessions on this project.
+**Be conservative — the default is NOT to save.** A memory store earns its value by staying small; most things that surface in a session do not belong in it. Save a memory **only** when one of these clears the bar:
 
-> **3 vs 4, quickly:** "We cache the lookup because the ORM re-queries 3× otherwise" → project memory (vector 3). "Hershal wants every change committed separately" → auto-memory (vector 4).
+- **The user explicitly says to remember it** — "remember this", "save that", "from now on…", or an emphatic standing instruction ("NEVER do X"). Their words are the trigger, not your judgment that a fact seems useful.
+- **A recurring, called-out issue** — the same mistake or friction has come up **more than twice**, *especially* one the **user has explicitly called out**. Wait for the pattern; a single correction is not enough.
+
+A passing "I prefer X", or a lesson *you* learned once this session, does **not** clear the bar — leave it. When in doubt, don't save: an over-eager store is noise that buries the few facts that matter, and the user has flagged exactly this over-eagerness.
+
+**Action (only if the bar is cleared):** write to the **auto-memory store** (the `memory/` + `MEMORY.md` system described in your system prompt — one fact per file with frontmatter, plus a one-line `MEMORY.md` pointer; check for an existing file to update before creating a duplicate). This is distinct from vector 3: vector 3 is *project knowledge*; this is *about the user and how to work*, and persists across all sessions on this project.
+
+> **3 vs 4, quickly:** "We cache the lookup because the ORM re-queries 3× otherwise" → project memory (vector 3). "Hershal wants every change committed separately" → auto-memory (vector 4) — but only once it's an explicit instruction or a repeated, called-out pattern, not a one-off remark.
 
 ### 5. Handoff — *will work continue, and would a cold reader need orientation?* (capstone, only if step 2 said "continuing")
 
@@ -99,6 +105,7 @@ Close with a short, **plain-language** recap (a few lines, no jargon, no checkli
 
 - **Asking blind.** Don't open with "any open items?" — reconstruct them from the session and present a list to react to. You have the context; use it.
 - **Manufacturing artifacts.** A quiet session may need nothing. Saying "nothing to close out, the tree is clean and the work is done" *is* a valid closeout.
+- **Over-saving memories.** Saving a memory is the rare exception, not a closeout checklist item. Don't persist every preference or lesson — save only on an explicit "remember this" or a pattern that's recurred 2+ times (see vector 4). Most closeouts save zero memories.
 - **Duplicating the sub-skills.** Don't hand-write a handoff or memory file — invoke the skill so format and indexing stay consistent.
 - **Skipping the git check.** Uncommitted changes are the most common silently-dropped open thread. Always run `git status`.
 - **Burying the next step.** The final recap exists so the next session starts in one read. Lead with what to do first.
