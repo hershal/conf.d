@@ -9,9 +9,16 @@ while [[ $# -gt 0 ]]; do
     key="$1"
 
     case ${key} in
-        -n|--nice)
-            nice=$2; shift;;
-        --no-run)
+        -n*|--nice)
+            if [[ ${key} == -n* && ${key} != "-n" ]]; then
+                # Handle -n50 format
+                nice=${key#-n}
+            else
+                # Handle -n 50 or --nice 50 format
+                nice=$2
+                shift
+            fi;;
+        -nr|--no-run)
             norun=1;;
         -h|--help)
             echo "${script} -- adjust the nice value of multiple slurm jobs"
@@ -19,6 +26,8 @@ while [[ $# -gt 0 ]]; do
             echo
             echo "-n, --nice:"
             echo "        The nice value to adjust to."
+            echo "-nr, --no-run:"
+            echo "        Write the scontrol cmdline to stdout and exit."
             echo "-h, --help:"
             echo "        Print this message and quit."
             exit 0;;
