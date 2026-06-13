@@ -114,25 +114,25 @@ fmt_reset() {
 # (Tweak the escapes here — e.g. $'\033[38;5;208m' for orange — if your theme
 #  renders yellow poorly.)
 c_reset=$'\033[0m'; c_warn=$'\033[33m'; c_hot=$'\033[31m'
-window_tok() { # $1=label  $2=pct(float)  $3=reset-string
-  local label="$1" int reset="$3" col=""
-  int=$(printf '%.0f' "$2")
+window_tok() { # $1=pct(float)  $2=reset-string
+  local int reset="$2" col=""
+  int=$(printf '%.0f' "$1")
   if [ "$int" -ge 90 ]; then col="$c_hot"
   elif [ "$int" -ge 80 ]; then col="$c_warn"; fi
-  printf '%s%s:%d%%%s%s' "$col" "$label" "$int" "${reset:+/$reset}" "${col:+$c_reset}"
+  printf '%s%d%%%s%s' "$col" "$int" "${reset:+/$reset}" "${col:+$c_reset}"
 }
 
 # Show a placeholder until rate_limits populates (cold launch, before the first
 # API response) so the segment never silently disappears.
 if [ -n "$five_h" ]; then
-  five_seg=$(window_tok "5h" "$five_h" "$(fmt_reset "$five_reset")")
+  five_seg=$(window_tok "$five_h" "$(fmt_reset "$five_reset")")
 else
-  five_seg="5h:—"
+  five_seg="—"
 fi
 if [ -n "$week" ]; then
-  week_seg=$(window_tok "7d" "$week" "$(fmt_reset "$week_reset")")
+  week_seg=$(window_tok "$week" "$(fmt_reset "$week_reset")")
 else
-  week_seg="7d:—"
+  week_seg="—"
 fi
 sub_part="$five_seg $week_seg"
 
