@@ -1,0 +1,51 @@
+#!/usr/bin/env bash
+# Wrapper: journalctl --user with a couple of shortcuts.
+#
+# Shortcuts (must be the first arg):
+#   jctl err [N]   show last N (default 100) error-priority entries across all user units
+#   jctl --help    show this help
+#
+# Anything else is passed through to `journalctl --user` unchanged. Examples:
+#   jctl -u my-service -f
+#   jctl -u 'app-*' -f
+#   jctl -u my-service -p err -n 100
+#   jctl --since "1 hour ago"
+
+show_help() {
+    cat <<'EOF'
+jctl - wrapper around `journalctl --user`
+
+Usage:
+    jctl [shortcut | journalctl args...]
+
+Shortcuts (must be first arg):
+    err [N]        last N error-priority entries (default N=100)
+    --help, -h     show this message
+
+Anything else is forwarded to `journalctl --user` unchanged.
+
+Common patterns:
+    jctl -u my-service -f              # tail one unit
+    jctl -u 'app-*' -f                 # tail multiple units (glob)
+    jctl -u my-service -n 100          # last 100 lines
+    jctl -u my-service -p err          # only errors for one unit
+    jctl --since "1 hour ago"          # time-filtered
+    jctl err 50                        # last 50 errors across all units
+
+For the full list of journalctl flags:
+    journalctl --help
+EOF
+}
+
+case "${1:-}" in
+    err)
+        shift
+        exec journalctl --user -p err -n "${1:-100}" --no-pager
+        ;;
+    --help|-h)
+        show_help
+        ;;
+    *)
+        exec journalctl --user "$@"
+        ;;
+esac

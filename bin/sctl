@@ -1,0 +1,54 @@
+#!/usr/bin/env bash
+# Wrapper: systemctl --user with a couple of shortcuts.
+#
+# Shortcuts (must be the first arg):
+#   sctl failed    list any failed user units (shorthand for: list-units --state=failed)
+#   sctl --help    show this help
+#
+# Anything else is passed through to `systemctl --user` unchanged. Examples:
+#   sctl status my-service
+#   sctl restart my-service
+#   sctl start svc-a svc-b
+#   sctl list-units 'app-*'
+#   sctl daemon-reload
+
+show_help() {
+    cat <<'EOF'
+sctl - wrapper around `systemctl --user`
+
+Usage:
+    sctl [shortcut | systemctl args...]
+
+Shortcuts (must be first arg):
+    failed         list any failed user units
+    --help, -h     show this message
+
+Anything else is forwarded to `systemctl --user` unchanged.
+
+Common patterns:
+    sctl status my-service             # status of one unit
+    sctl start my-service              # start
+    sctl restart my-service            # restart
+    sctl stop my-service               # stop
+    sctl enable my-service             # enable on boot
+    sctl list-units                    # list running user units
+    sctl list-unit-files               # list installed user unit files
+    sctl daemon-reload                 # reload after editing units
+
+For the full list of systemctl subcommands and flags:
+    systemctl --help
+EOF
+}
+
+case "${1:-}" in
+    failed)
+        shift
+        exec systemctl --user list-units --state=failed --no-pager "$@"
+        ;;
+    --help|-h)
+        show_help
+        ;;
+    *)
+        exec systemctl --user "$@"
+        ;;
+esac
