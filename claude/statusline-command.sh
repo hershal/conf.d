@@ -119,21 +119,22 @@ window_tok() { # $1=label  $2=pct(float)  $3=reset-string
   int=$(printf '%.0f' "$2")
   if [ "$int" -ge 90 ]; then col="$c_hot"
   elif [ "$int" -ge 80 ]; then col="$c_warn"; fi
-  printf '%s%s:%d%%%s%s' "$col" "$label" "$int" "${reset:+ ($reset)}" "${col:+$c_reset}"
+  printf '%s%s:%d%%%s%s' "$col" "$label" "$int" "${reset:+/$reset}" "${col:+$c_reset}"
 }
 
-sub_part=""
+# Show a placeholder until rate_limits populates (cold launch, before the first
+# API response) so the segment never silently disappears.
 if [ -n "$five_h" ]; then
-  sub_part=$(window_tok "5h" "$five_h" "$(fmt_reset "$five_reset")")
+  five_seg=$(window_tok "5h" "$five_h" "$(fmt_reset "$five_reset")")
+else
+  five_seg="5h:—"
 fi
 if [ -n "$week" ]; then
-  wk_part=$(window_tok "7d" "$week" "$(fmt_reset "$week_reset")")
-  if [ -n "$sub_part" ]; then
-    sub_part="$sub_part $wk_part"
-  else
-    sub_part="$wk_part"
-  fi
+  week_seg=$(window_tok "7d" "$week" "$(fmt_reset "$week_reset")")
+else
+  week_seg="7d:—"
 fi
+sub_part="$five_seg $week_seg"
 
 # 4. Directory basename
 if [ -n "$cwd" ]; then
