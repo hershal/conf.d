@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# Wrapper around the real `claude` binary that defaults to --remote-control,
+# but only for plain interactive launches. Invokes the real binary by
+# absolute path to avoid recursing into this wrapper.
+
+REAL_CLAUDE="/home/hbhave/.local/bin/claude"
+
+if [[ ! -x "$REAL_CLAUDE" ]]; then
+  echo "claude wrapper: real binary not found at $REAL_CLAUDE" >&2
+  exit 127
+fi
+
+# Add --remote-control only when this is a plain interactive launch:
+#  - stdin and stdout are TTYs (Remote Control needs an interactive terminal)
+#  - no print mode, and --remote-control not already given
+#  - every argument is dash-prefixed; --remote-control [name] swallows the
+#    next bare word, so a subcommand (doctor, update, mcp, ...) or a prompt
+#    argument must pass through untouched. This is deliberately conservative:
+#    a bare flag *value* (e.g. `--model opus`) also disables the default.
+add_flag=1
+
+[[ -t 0 && -t 1 ]] || add_flag=0
+
+for arg in "$@"; do
+  case "$arg" in
+    --remote-control|--remote-control=*) add_flag=0; break ;;
+    -p|--print) add_flag=0; break ;;
+    -*) ;;
+    *) add_flag=0; break ;;
+  esac
+done
+
+if (( add_flag )); then
+  exec "$REAL_CLAUDE" --remote-control "$@"
+fi
+exec "$REAL_CLAUDE" "$@"
