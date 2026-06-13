@@ -44,9 +44,11 @@ Whether work continues in a new session gates the handoff (vector 5). **Infer th
 
 Don't make the user state what you can already read off the session. The same discipline as "don't ask blind" in step 1 applies here: read the evidence first, ask only for what you truly can't infer.
 
-### 3. Triage the five vectors
+### 3. Check the five vectors — this is *your* checklist, not a report
 
-Walk each vector below. For each, ask yourself its question against the actual session. Most sessions trigger one or two, not all five. Decide which apply and what each one's action is.
+Walk each vector below and ask yourself its question against the actual session. Most sessions trigger one or two, not all five. Decide which apply and what each one's action is.
+
+This framework is internal scaffolding for *your* reasoning. **Do not narrate it to the user** — never show them the word "triage", a "vector N" list, an "N/A" table, or the checklist verbatim. When you report (step 6), translate the outcome into plain sentences: what genuinely needs writing down, and what you did about it.
 
 ### 4. Confirm the close-out plan
 
@@ -62,7 +64,7 @@ Invoke each sub-skill via the Skill tool (`handoff`, `plan`, `dump-memory`) rath
 
 ### 6. Final summary
 
-Close with a 3–6 line recap: what you wrote and where (with paths), and the **one** thing the next session should do first. That recap is the last thing the user sees before the session dies — make it the pointer they'd want.
+Close with a short, **plain-language** recap (a few lines, no jargon, no checklist): what you wrote and where (with paths), and the **one** thing the next session should do first. That recap is the last thing the user sees before the session dies — make it the pointer they'd want.
 
 ## The five vectors
 
@@ -100,3 +102,4 @@ Close with a 3–6 line recap: what you wrote and where (with paths), and the **
 - **Duplicating the sub-skills.** Don't hand-write a handoff or memory file — invoke the skill so format and indexing stay consistent.
 - **Skipping the git check.** Uncommitted changes are the most common silently-dropped open thread. Always run `git status`.
 - **Burying the next step.** The final recap exists so the next session starts in one read. Lead with what to do first.
+- **Narrating the scaffolding.** The five-vector checklist is how you *think*, not how you *report*. Dumping "triage / vector 1: N/A / vector 2: …" on the user reads as ceremony and buries the point. Say it plainly: "Everything's committed; I saved the one preference worth keeping; no handoff needed." If nothing fired, one sentence is the whole report.
