@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en" class="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{PAGE_TITLE}} — {{REPORT_TITLE}}</title>
+  <link rel="stylesheet" href="./assets/tailwind.css" />
+  <link rel="stylesheet" href="./assets/report.css" />
+  <script defer src="./assets/report.js"></script>
+</head>
+<body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased">
+
+<div class="mx-auto max-w-[1500px] lg:grid lg:grid-cols-[270px_minmax(0,1fr)]">
+
+  <!-- ===================== SIDEBAR (shared across pages) ===================== -->
+  <aside class="hidden lg:flex flex-col gap-6 sticky top-0 h-screen border-r border-slate-200 dark:border-slate-800 px-6 py-7 overflow-y-auto">
+    <div>
+      <div class="flex items-center gap-2">
+        <span class="grid place-items-center w-8 h-8 rounded-lg bg-violet-600 text-white text-sm font-bold">{{LOGO}}</span>
+        <span class="text-sm font-semibold tracking-tight">{{REPORT_TITLE}}</span>
+      </div>
+      <p class="mt-1 text-xs text-slate-500">{{PAGE_KICKER}}</p>
+    </div>
+
+    <nav class="flex flex-col gap-1 text-sm">
+      <p class="mb-1 text-[10px] font-semibold uppercase tracking-wider text-slate-400">This page</p>
+      <!-- One per section id on THIS page. nav-link + nav-dot drive the scroll-spy. -->
+      <a href="#sectionA" class="nav-link flex items-center gap-2 py-1.5 text-slate-600 dark:text-slate-300" data-active="true"><span class="nav-dot w-1.5 h-1.5 rounded-full bg-violet-600 opacity-0 scale-0 transition"></span> Section A</a>
+      <a href="#sectionB" class="nav-link flex items-center gap-2 py-1.5 text-slate-600 dark:text-slate-300"><span class="nav-dot w-1.5 h-1.5 rounded-full bg-violet-600 opacity-0 scale-0 transition"></span> Section B</a>
+
+      <p class="mt-4 mb-1 text-[10px] font-semibold uppercase tracking-wider text-slate-400">All pages</p>
+      <!-- Identical block on every page; mark the current page font-semibold + violet. -->
+      <a href="./index.html" class="flex items-center gap-2 py-1.5 font-semibold text-violet-600 dark:text-violet-400">1 · Overview</a>
+      <a href="./page-two.html" class="flex items-center gap-2 py-1.5 text-slate-600 dark:text-slate-300 hover:text-violet-600">2 · Second page</a>
+    </nav>
+
+    <div class="mt-auto flex flex-col gap-3">
+      <button data-theme-toggle class="inline-flex items-center justify-between gap-2 rounded-lg border border-slate-200 dark:border-slate-700 px-3 py-2 text-xs font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition">
+        <span>Theme</span><span class="text-slate-500" data-theme-label>Light</span>
+      </button>
+      <p class="text-[11px] leading-relaxed text-slate-400">{{SIDEBAR_FOOTNOTE}}</p>
+    </div>
+  </aside>
+
+  <main class="min-w-0">
+
+    <!-- Mobile top bar: hamburger reveals the same <aside> as a drawer (report.js). -->
+    <div class="lg:hidden sticky top-0 z-40 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90 backdrop-blur px-4 py-3">
+      <div class="flex items-center gap-2.5">
+        <button data-nav-toggle aria-label="Open menu" class="grid place-items-center w-8 h-8 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 4h12M2 8h12M2 12h12"/></svg></button>
+        <span class="text-sm font-semibold">{{REPORT_TITLE}}</span>
+      </div>
+      <button data-theme-toggle class="rounded-lg border border-slate-200 dark:border-slate-700 px-2.5 py-1 text-xs"><span data-theme-label>Light</span></button>
+    </div>
+
+    <!-- ===================== PAGE HEADER ===================== -->
+    <header id="sectionA" class="px-6 sm:px-10 lg:px-14 pt-12 pb-10 border-b border-slate-200 dark:border-slate-800">
+      <p class="text-xs font-semibold uppercase tracking-[0.18em] text-violet-600 dark:text-violet-400">{{PAGE_KICKER}}</p>
+      <h1 class="mt-3 text-3xl font-bold tracking-tight">{{HEADLINE}}<span class="text-slate-400 dark:text-slate-500"> — {{SUBHEAD}}</span></h1>
+      <p class="mt-4 prose-measure text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">
+        {{LEDE}}
+      </p>
+    </header>
+
+    <!-- ===================== A SECTION ===================== -->
+    <section id="sectionB" class="px-6 sm:px-10 lg:px-14 py-12 border-b border-slate-200 dark:border-slate-800 reveal">
+      <h2 class="text-2xl font-bold tracking-tight">{{SECTION_TITLE}}</h2>
+      <p class="mt-3 prose-measure text-[14px] leading-relaxed text-slate-600 dark:text-slate-300">{{SECTION_BODY}}</p>
+      <!-- Build cards/tables/diagrams here with Tailwind utilities + the report.css
+           component classes (.mbar/.delta/.sev/.statnum/.axis/.evi/.verified). -->
+    </section>
+
+  </main>
+</div>
+</body>
+</html>

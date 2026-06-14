@@ -1,0 +1,139 @@
+/* Report chrome — small niceties on top of the vendored Tailwind build.
+   The before/after demo components use real app Tailwind classes; this file
+   only styles the documentation shell so the two never collide. */
+
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+
+/* Editorial reading measure for prose blocks */
+.prose-measure { max-width: 68ch; }
+
+/* Evidence chip: monospace file:line citation */
+.evi {
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  font-size: 11px;
+  letter-spacing: -0.01em;
+}
+
+/* Before / After corner tags */
+.ba-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* The "app surface" inside a demo frame mimics the real app background so the
+   real components sit on the same canvas they ship on. */
+.app-surface { background:
+  radial-gradient(circle at 1px 1px, rgba(15,23,42,0.04) 1px, transparent 0) 0 0 / 22px 22px; }
+.dark .app-surface { background:
+  radial-gradient(circle at 1px 1px, rgba(255,255,255,0.04) 1px, transparent 0) 0 0 / 22px 22px; }
+
+/* Active section link in the sticky nav */
+.nav-link[data-active="true"] {
+  color: rgb(124 58 237);
+  font-weight: 600;
+}
+.dark .nav-link[data-active="true"] { color: rgb(167 139 250); }
+.nav-link[data-active="true"] .nav-dot { opacity: 1; transform: scale(1); }
+
+/* Before/after image overlay slider */
+.slider-wrap { position: relative; overflow: hidden; user-select: none; }
+.slider-after { position: absolute; inset: 0; overflow: hidden; will-change: width; }
+.slider-after img, .slider-base img { display: block; width: 100%; height: auto; }
+.slider-handle {
+  position: absolute; top: 0; bottom: 0; width: 2px; background: rgb(37 99 235);
+  cursor: ew-resize; transform: translateX(-1px);
+}
+.slider-handle::after {
+  content: "⇄"; position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%); width: 32px; height: 32px; border-radius: 9999px;
+  background: rgb(37 99 235); color: white; display: grid; place-items: center;
+  font-size: 14px; box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+/* ---- Code blocks (modularization before/after) ---- */
+.code {
+  font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  font-size: 11.5px;
+  line-height: 1.6;
+  white-space: pre;
+  overflow-x: auto;
+  tab-size: 2;
+}
+.code .cmt { color: rgb(148 163 184); font-style: italic; }      /* slate-400 */
+.code .kw  { color: rgb(124 58 237); }                            /* violet-600 — component / keyword */
+.dark .code .kw { color: rgb(167 139 250); }
+.code .str { color: rgb(13 148 136); }                            /* teal-600 — string */
+.dark .code .str { color: rgb(45 212 191); }
+.code .muted { color: rgb(100 116 139); }                         /* slate-500 */
+/* the duplicated class soup — highlighted so the eye catches the repetition */
+.code .dup {
+  background: rgba(251, 191, 36, 0.22);                           /* amber-400 @ ~22% */
+  border-bottom: 1.5px dashed rgba(217, 119, 6, 0.7);            /* amber-600 */
+  border-radius: 2px;
+  padding: 0 1px;
+}
+.code .new { background: rgba(16, 185, 129, 0.16); border-radius: 2px; padding: 0 1px; } /* emerald tint for the primitive */
+
+/* Reveal-on-scroll */
+.reveal { opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease; }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+
+/* ============ Performance-audit additions ============ */
+
+/* Before/after metric bar: a track with a fill sized to the AFTER fraction. */
+.mbar { position: relative; height: 30px; border-radius: 6px; overflow: hidden;
+  background: rgba(148,163,184,0.18); }
+.mbar > .fill { position: absolute; inset: 0 auto 0 0; border-radius: 6px; }
+.mbar > .lab { position: absolute; inset: 0; display: flex; align-items: center;
+  padding: 0 10px; font-size: 11.5px; font-weight: 600; letter-spacing: -0.01em; }
+.fill-before { background: linear-gradient(90deg, rgba(244,63,94,0.85), rgba(244,63,94,0.6)); }
+.fill-after  { background: linear-gradient(90deg, rgba(16,185,129,0.9), rgba(16,185,129,0.62)); }
+.fill-neutral { background: linear-gradient(90deg, rgba(59,130,246,0.85), rgba(59,130,246,0.6)); }
+
+/* Big delta pill (e.g. "−48%", "74×") */
+.delta { font-variant-numeric: tabular-nums; font-weight: 700; }
+
+/* Stat card grid number */
+.statnum { font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+
+/* Priority axis chips */
+.axis { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em;
+  padding: 2px 7px; border-radius: 9999px; }
+.axis-startup { background: rgba(168,85,247,0.16); color: rgb(126 34 206); }
+.dark .axis-startup { color: rgb(216 180 254); }
+.axis-load { background: rgba(59,130,246,0.16); color: rgb(29 78 216); }
+.dark .axis-load { color: rgb(147 197 253); }
+.axis-resp { background: rgba(16,185,129,0.16); color: rgb(4 120 87); }
+.dark .axis-resp { color: rgb(110 231 183); }
+.axis-cmplx { background: rgba(148,163,184,0.2); color: rgb(71 85 105); }
+.dark .axis-cmplx { color: rgb(203 213 225); }
+
+/* Effort/severity dots */
+.sev { width: 8px; height: 8px; border-radius: 9999px; display: inline-block; }
+.sev-high { background: rgb(244 63 94); }
+.sev-med { background: rgb(245 158 11); }
+.sev-low { background: rgb(148 163 184); }
+
+/* Verified check */
+.verified { color: rgb(5 150 105); font-weight: 600; }
+.dark .verified { color: rgb(52 211 153); }
+
+
+/* ---- Mobile nav drawer (hamburger table of contents) ---- */
+.nav-backdrop { position: fixed; inset: 0; z-index: 55; background: rgba(15,23,42,0.45); }
+@media (min-width: 1024px) { .nav-backdrop { display: none !important; } }
+@media (max-width: 1023.98px) {
+  aside.nav-mobile-open {
+    display: flex !important;
+    position: fixed; top: 0; bottom: 0; left: 0; right: auto;
+    width: 280px; max-width: 86vw; height: 100dvh;
+    z-index: 60; overflow-y: auto;
+    background: #ffffff; box-shadow: 0 10px 40px rgba(0,0,0,0.28);
+    animation: navSlideIn 0.18s ease-out;
+  }
+  .dark aside.nav-mobile-open { background: rgb(2 6 23); }
+}
+@keyframes navSlideIn { from { transform: translateX(-100%); } to { transform: translateX(0); } }
