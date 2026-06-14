@@ -6,55 +6,49 @@
   <title>{{PAGE_TITLE}} — {{REPORT_TITLE}}</title>
   <link rel="stylesheet" href="./assets/tailwind.css" />
   <link rel="stylesheet" href="./assets/report.css" />
+  <script defer src="./site-nav.js"></script>
   <script defer src="./assets/report.js"></script>
 </head>
 <body class="bg-white text-slate-900 dark:bg-slate-950 dark:text-slate-100 antialiased">
 
-<div class="mx-auto max-w-[1500px] lg:grid lg:grid-cols-[270px_minmax(0,1fr)]">
+<!-- The chrome is rendered by report.js from site-nav.js + this page's
+     sections. You only write: site-nav.js (once), the <title> above, and the
+     <main> content below — each <header>/<section> with an id + data-toc. -->
+<div class="ps-shell">
 
-  <!-- ===================== SIDEBAR (shared across pages) ===================== -->
-  <aside class="hidden lg:flex flex-col gap-6 sticky top-0 h-screen border-r border-slate-200 dark:border-slate-800 px-6 py-7 overflow-y-auto">
-    <div>
-      <div class="flex items-center gap-2">
-        <span class="grid place-items-center w-8 h-8 rounded-lg bg-violet-600 text-white text-sm font-bold">{{LOGO}}</span>
-        <span class="text-sm font-semibold tracking-tight">{{REPORT_TITLE}}</span>
-      </div>
-      <p class="mt-1 text-xs text-slate-500">{{PAGE_KICKER}}</p>
-    </div>
-
-    <nav class="flex flex-col gap-1 text-sm">
-      <p class="mb-1 text-[10px] font-semibold uppercase tracking-wider text-slate-400">This page</p>
-      <!-- One per section id on THIS page. nav-link + nav-dot drive the scroll-spy. -->
-      <a href="#sectionA" class="nav-link flex items-center gap-2 py-1.5 text-slate-600 dark:text-slate-300" data-active="true"><span class="nav-dot w-1.5 h-1.5 rounded-full bg-violet-600 opacity-0 scale-0 transition"></span> Section A</a>
-      <a href="#sectionB" class="nav-link flex items-center gap-2 py-1.5 text-slate-600 dark:text-slate-300"><span class="nav-dot w-1.5 h-1.5 rounded-full bg-violet-600 opacity-0 scale-0 transition"></span> Section B</a>
-
-      <p class="mt-4 mb-1 text-[10px] font-semibold uppercase tracking-wider text-slate-400">All pages</p>
-      <!-- Identical block on every page; mark the current page font-semibold + violet. -->
-      <a href="./index.html" class="flex items-center gap-2 py-1.5 font-semibold text-violet-600 dark:text-violet-400">1 · Overview</a>
-      <a href="./page-two.html" class="flex items-center gap-2 py-1.5 text-slate-600 dark:text-slate-300 hover:text-violet-600">2 · Second page</a>
-    </nav>
-
-    <div class="mt-auto flex flex-col gap-3">
-      <button data-theme-toggle class="inline-flex items-center justify-between gap-2 rounded-lg border border-slate-200 dark:border-slate-700 px-3 py-2 text-xs font-medium hover:bg-slate-50 dark:hover:bg-slate-800 transition">
-        <span>Theme</span><span class="text-slate-500" data-theme-label>Light</span>
+  <!-- ===================== SIDEBAR (the "Spine") ===================== -->
+  <aside class="ps-sidebar" data-sidebar>
+    <a class="ps-brand" href="./index.html" data-brand></a>     <!-- filled from site-nav.js -->
+    <nav class="ps-nav" data-nav aria-label="Contents"></nav>   <!-- the page tree, derived -->
+    <div class="ps-foot">
+      <button class="ps-jump" data-jump aria-keyshortcuts="/">
+        <svg class="ps-icon-sm" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="7" cy="7" r="4.5"/><path d="M13 13l-3-3"/></svg>
+        <span>Jump to…</span><kbd>/</kbd>
       </button>
-      <p class="text-[11px] leading-relaxed text-slate-400">{{SIDEBAR_FOOTNOTE}}</p>
+      <button data-theme-toggle class="ps-themebtn"><span>Theme</span><span class="ps-themeval" data-theme-label>Light</span></button>
+      <div class="ps-meter" data-meter></div>
+      <p class="ps-note">{{SIDEBAR_FOOTNOTE}}</p>
     </div>
   </aside>
 
-  <main class="min-w-0">
+  <main class="ps-main" data-main>
 
-    <!-- Mobile top bar: hamburger reveals the same <aside> as a drawer (report.js). -->
-    <div class="lg:hidden sticky top-0 z-40 flex items-center justify-between border-b border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90 backdrop-blur px-4 py-3">
-      <div class="flex items-center gap-2.5">
-        <button data-nav-toggle aria-label="Open menu" class="grid place-items-center w-8 h-8 rounded-lg border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-800"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 4h12M2 8h12M2 12h12"/></svg></button>
-        <span class="text-sm font-semibold">{{REPORT_TITLE}}</span>
-      </div>
-      <button data-theme-toggle class="rounded-lg border border-slate-200 dark:border-slate-700 px-2.5 py-1 text-xs"><span data-theme-label>Light</span></button>
+    <!-- Mobile bar (only < 768px). "On this page" opens a sheet; ☰ the drawer. -->
+    <div class="ps-topbar">
+      <button class="ps-icon" data-nav-toggle aria-label="All pages" aria-expanded="false">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 4h12M2 8h12M2 12h12"/></svg>
+      </button>
+      <button class="ps-here" data-sheet-toggle aria-expanded="false">
+        <small>On this page</small><b data-here></b>
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 6l4 4 4-4"/></svg>
+      </button>
+      <button class="ps-icon" data-theme-toggle aria-label="Toggle theme"><span data-theme-label>Light</span></button>
+      <div class="ps-hair" data-progress></div>
     </div>
 
     <!-- ===================== PAGE HEADER ===================== -->
-    <header id="sectionA" class="px-6 sm:px-10 lg:px-14 pt-12 pb-10 border-b border-slate-200 dark:border-slate-800">
+    <!-- The header IS the first section: give it an id + data-toc. -->
+    <header id="overview" data-toc="{{NAV_LABEL}}" class="px-6 sm:px-10 lg:px-14 pt-12 pb-10 border-b border-slate-200 dark:border-slate-800">
       <p class="text-xs font-semibold uppercase tracking-[0.18em] text-violet-600 dark:text-violet-400">{{PAGE_KICKER}}</p>
       <h1 class="mt-3 text-3xl font-bold tracking-tight">{{HEADLINE}}<span class="text-slate-400 dark:text-slate-500"> — {{SUBHEAD}}</span></h1>
       <p class="mt-4 prose-measure text-[15px] leading-relaxed text-slate-600 dark:text-slate-300">
@@ -63,7 +57,8 @@
     </header>
 
     <!-- ===================== A SECTION ===================== -->
-    <section id="sectionB" class="px-6 sm:px-10 lg:px-14 py-12 border-b border-slate-200 dark:border-slate-800 reveal">
+    <!-- Every <section id data-toc="…"> becomes a sub-entry in the sidebar. -->
+    <section id="sectionB" data-toc="{{NAV_LABEL}}" class="px-6 sm:px-10 lg:px-14 py-12 border-b border-slate-200 dark:border-slate-800 reveal">
       <h2 class="text-2xl font-bold tracking-tight">{{SECTION_TITLE}}</h2>
       <p class="mt-3 prose-measure text-[14px] leading-relaxed text-slate-600 dark:text-slate-300">{{SECTION_BODY}}</p>
       <!-- Build cards/tables/diagrams here with Tailwind utilities + the report.css
