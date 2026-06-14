@@ -292,9 +292,15 @@ def find_mocks_dir(project_root):
 
 def mock_states(mocks_dir, mock_files):
     """Best-effort lifecycle badge per mock, scraped from the mocks index.html
-    (the ui-mockups dashboard). The badge may sit before or after the mock's
-    link, so pick the state word NEAREST the filename (within a card's span).
-    Missing/unparseable → no badge."""
+    (the ui-mockups dashboard).
+
+    Cards are packed tightly and lay out differently per project (the badge sits
+    before the link in some indexes, after it in others), so a plain nearest-word
+    scan grabs the neighbouring card's badge. Instead we match BADGE SPANS — a
+    <span> whose text is exactly a lifecycle word — and bind each mock to the
+    badge span nearest its link. This ignores 'Implemented:'/'Chosen:' prose in
+    descriptions and the header legend. Falls back to nearest bare word for
+    indexes that don't use span badges. Missing/unparseable → no badge."""
     states = {}
     try:
         with open(os.path.join(mocks_dir, "index.html"),
@@ -302,15 +308,35 @@ def mock_states(mocks_dir, mock_files):
             low = f.read().lower()
     except OSError:
         return states
+
+    badges = [(m.start(), m.group(1)) for m in re.finditer(
+        r"<span\b[^>]*>\s*(open|chosen|implemented|cancelled)\s*</span>", low)]
+
+    # Drop a header legend (badge spans sitting before any mock card). Allow a
+    # small margin so a layout that puts the badge just before the link is kept.
+    if badges:
+        hrefs = [h for h in (low.find(fn.lower()) for fn in mock_files) if h >= 0]
+        if hrefs:
+            badges = [b for b in badges if b[0] >= min(hrefs) - 150]
+
     for fn in mock_files:
         i = low.find(fn.lower())
         if i < 0:
             continue
-        lo, hi, best, best_d = max(0, i - 400), i + 400, "", 401
+        if badges:
+            best, best_d = "", 700
+            for pos, word in badges:
+                if abs(pos - i) < best_d:
+                    best_d, best = abs(pos - i), word
+            if best:
+                states[fn] = best
+            continue
+        # fallback: nearest bare state word within a card's span
+        best, best_d = "", 401
         for w in STATE_WORDS:
-            start = lo
+            start = max(0, i - 400)
             while True:
-                j = low.find(w, start, hi)
+                j = low.find(w, start, i + 400)
                 if j < 0:
                     break
                 if abs(j - i) < best_d:
