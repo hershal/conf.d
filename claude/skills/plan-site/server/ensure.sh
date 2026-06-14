@@ -9,6 +9,10 @@
 #   ./ensure.sh --restart  # restart it (after editing the server)
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"           # plans/_server
+
+# This dir is committed with the project; keep runtime artifacts out of git.
+[ -f .gitignore ] || printf '%s\n' '.port' '__pycache__/' '*.pyc' > .gitignore
+
 PLANS_DIR="$(cd .. && pwd)"
 PROJECT_DIR="$(cd ../.. && pwd)"
 NAME="$(basename "$PROJECT_DIR")-plans"

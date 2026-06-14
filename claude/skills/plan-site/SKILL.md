@@ -23,6 +23,7 @@ plans/
   _server/              # ONE dashboard server for the WHOLE project (shared; see below)
     plans_server.py     #   dynamic index + markdown renderer (stdlib only)
     ensure.sh           #   start-or-reuse the project server under pm2
+    .gitignore          #   auto-created by ensure.sh — keeps .port/__pycache__ out of git
   YYYY-MM-DD-<slug>/     # this report site
     index.html          # page 1 — the overview / thesis
     <page-2>.html       # subsequent pages, one concern each
