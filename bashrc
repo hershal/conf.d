@@ -143,15 +143,26 @@ if [[ -n ${BASH} ]]; then
         local x2 the_new_dir adir index
         local -i cnt
 
-        if [[ $1 ==  "--" ]]; then
+        # `cd -` lists the numbered directory stack (use `cd -1`, `cd -2`, …
+        # to jump to an entry). This listing used to live on `cd --`.
+        if [[ $1 == "-" ]]; then
             dirs -v
             return 0
+        fi
+
+        # `cd --` is the standard end-of-options marker: everything after it
+        # is a path, even if it starts with '-'. `cd --` on its own goes to
+        # $HOME. (Tools like `bm` rely on this `cd -- <path>` form.)
+        local -i end_opts=0
+        if [[ $1 == "--" ]]; then
+            end_opts=1
+            shift
         fi
 
         the_new_dir=$1
         [[ -z $1 ]] && the_new_dir=$HOME
 
-        if [[ ${the_new_dir:0:1} == '-' ]]; then
+        if [[ $end_opts -eq 0 && ${the_new_dir:0:1} == '-' ]]; then
             #
             # Extract dir N from dirs
             index=${the_new_dir:1}
@@ -163,6 +174,10 @@ if [[ -n ${BASH} ]]; then
 
         # '~' has to be substituted by ${HOME}
         [[ ${the_new_dir:0:1} == '~' ]] && the_new_dir="${HOME}${the_new_dir:1}"
+
+        # A path that still begins with '-' can only have arrived via
+        # `cd -- <path>`; anchor it with './' so pushd reads it as a directory.
+        [[ ${the_new_dir:0:1} == '-' ]] && the_new_dir="./${the_new_dir}"
 
         # Now change to the new dir and add to the top of the stack
         pushd "${the_new_dir}" > /dev/null
