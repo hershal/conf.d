@@ -101,6 +101,34 @@ Every mock page is one self-contained file. Replace the theme block with the **p
 </html>
 ```
 
+## Table of contents — required
+
+Every mock has multiple stacked sections (baseline, variants, galleries, critique), so **give each page a table of contents** near the top: a compact row of anchor links to each section. Add an `id` to every section heading and link to it. It makes a long decision page navigable and lets the user (and you) jump straight to "the rating gallery" or "the interactive row".
+
+```html
+<nav class="toc" aria-label="Contents">
+  <span class="toc-h">On this page</span>
+  <a href="#baseline">Baseline</a><a href="#opt-1b">1B · …</a><a href="#critique">Critique</a>
+</nav>
+<style>
+.toc{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;margin-top:16px;padding:10px 14px;border:1px solid var(--border);border-radius:10px;background:var(--card);font-size:12.5px;}
+.toc-h{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:700;}
+.toc a{color:var(--accent);}
+</style>
+```
+
+## Make it interactive — live playgrounds (the user loves these)
+
+**Strong, repeatedly-confirmed user preference: mocks should be *interactable*, not just static galleries.** Whenever the thing being designed has *behavior* — anything that animates, appears/disappears, changes state on input, or is felt as much as seen — build a **live playground** into the mock: real controls (buttons, toggles, segmented switches, sliders) that fire the actual component so the user can *play with it*, not just look at a frozen picture. A toast that slides in, a gesture with tunable resistance, a button that morphs on click, a filter that re-sorts a list — a static screenshot undersells all of them; let the user trigger the real motion. This is dependency-free vanilla JS in a page-scoped `<script>` (the "static and dependency-free" principle means *no build step / no framework*, **not** "no JavaScript").
+
+Patterns that have landed well:
+- **A control panel that drives the real component.** Pick a variant + state from segmented switches, toggle options (has-action? long-text?), then a **Fire / Run / Play** button mounts the live component with its true enter/exit animation. Add a "fire 3" / "stack" button when concurrent behavior matters.
+- **Tunable knobs** for anything with feel (gesture resistance, timing, thresholds): live sliders + presets + a copyable resulting config, so the user dials in the values you'll then bake into code.
+- **Still keep the static galleries too.** They're what a screenshot captures and what the decision rests on; the playground is the *added* dimension. Galleries for at-a-glance comparison, playground for the live feel.
+- Gate motion-heavy demos behind `prefers-reduced-motion` where it matters, and make controls keyboard-reachable.
+
+If a design has no dynamic behavior at all (a pure layout/spacing/color choice), a playground adds nothing — don't force one. But the moment there's motion or state, reach for it by default.
+
 ## Responsive mocks: render at true device widths
 
 If a component re-lays-out across breakpoints, **do not** show it in a single narrow column — that clips wider layouts to the mock's own width and hides exactly what you're trying to judge. Instead:
@@ -108,6 +136,57 @@ If a component re-lays-out across breakpoints, **do not** show it in a single na
 - Render each breakpoint in its **own fixed-width frame** at the **true device width** (e.g. ~390px mobile, ~834px tablet, ~1280px desktop), each in its own horizontally-scrollable box.
 - Prefer **one container-query template per variant** that re-flows by its container's width, then drop that single template into each device frame — so the mock proves the *same* markup adapts, rather than hand-faking three layouts.
 - Label each frame with its width.
+
+## Debug overlay — name every part (so iteration is precise)
+
+Iterating on a mock over chat is far faster when **every part has a name** both sides can point at — "make the *depth-score* bigger", "move *rating* next to *flag*", "drop the *rail*". Build this into every non-trivial mock: a toggle that overlays each region with its name. It turns vague back-and-forth ("the thing under the title") into precise edits.
+
+**Convention.** Tag content-bearing parts with `data-dbg="<name>"` (leaf — e.g. `title`, `summary`, `rating`, `flag`) and structural groups with `data-dbgc="<name>"` (container — e.g. `row`, `action-bar`, `tags`). Name parts the way the **user would say them**, not the CSS class. Don't label pure wrappers that have no meaning of their own — a bare `body`/`meta` wrapper shown in the overlay just reads as a confusing **empty box**; label the meaningful thing inside it instead (e.g. the byline), or leave it unlabelled.
+
+**Render labels in a JS top layer — NOT as CSS `::after` pseudo-elements.** This is the one real gotcha, and it fails silently: the parts you most want to name — clamped titles/summaries (`overflow:hidden` + `-webkit-line-clamp`) and rounded thumbnails (`overflow:hidden`) — will **clip a pseudo-element label to nothing**, so exactly those labels vanish with no error. A separate absolutely-positioned layer can't be clipped by the element's own overflow. Keep the dashed `outline` in CSS (an `outline` is drawn outside the box and is *not* clipped by the element's overflow); put only the text label in the JS layer, positioned from each element's `getBoundingClientRect()`.
+
+**Make the toggle a fixed, always-reachable control** — `position:fixed` (a floating pill or FAB in a corner) so it stays clickable no matter how far the page is scrolled. A toggle that scrolls off the top is useless on a long mock. Placement is a project taste call (top-right pill, bottom-right FAB, bottom-center bar…); **top-right pill is the default**.
+
+Drop-in (fixed toggle + outline CSS + label layer):
+
+```html
+<div class="dbgbar"><label><input type="checkbox" id="dbgtoggle"> 🔍 Show part names</label></div>
+<style>
+.dbgbar { position:fixed; right:16px; top:16px; z-index:9998; }                          /* always reachable (top-right) */
+.dbgbar label { display:inline-flex; align-items:center; gap:7px; cursor:pointer; user-select:none;
+  padding:8px 12px; border:1px solid #262626; border-radius:999px; background:#111;
+  color:#a3a3a3; font:600 12px/1 ui-sans-serif,system-ui; box-shadow:0 8px 24px rgba(0,0,0,.55); }
+body.dbg .dbgbar label { border-color:#38bdf8; color:#38bdf8; }                           /* lit when on */
+body.dbg [data-dbg]  { outline:1px dashed rgba(56,189,248,.55); outline-offset:-1px; }  /* leaf */
+body.dbg [data-dbgc] { outline:1px dashed rgba(168,85,247,.6);  outline-offset:-1px; }  /* container */
+.dbg-label { position:absolute; z-index:9999; font-size:8px; font-weight:700; line-height:1.4;
+  padding:0 3px; background:#38bdf8; color:#06121a; border-radius:0 0 3px 0; white-space:nowrap; pointer-events:none; }
+.dbg-label.c { background:#a855f7; color:#fff; transform:translateX(-100%); border-radius:0 0 0 3px; }  /* container → top-right */
+</style>
+<script>
+(function(){
+  const cb = document.getElementById('dbgtoggle');
+  function render(){
+    document.querySelectorAll('.dbg-label').forEach(e => e.remove());
+    if(!document.body.classList.contains('dbg')) return;
+    const sx = scrollX, sy = scrollY;
+    document.querySelectorAll('[data-dbg],[data-dbgc]').forEach(el => {
+      const c = el.hasAttribute('data-dbgc'), name = c ? el.dataset.dbgc : el.dataset.dbg;
+      const r = el.getBoundingClientRect(); if(!r.width || !r.height) return;
+      const l = document.createElement('div'); l.className = 'dbg-label' + (c ? ' c' : ''); l.textContent = name;
+      l.style.top = (sy + r.top) + 'px'; l.style.left = (sx + (c ? r.right : r.left)) + 'px';
+      document.body.appendChild(l);
+    });
+  }
+  function set(on){ document.body.classList.toggle('dbg', on); cb.checked = on; render(); }
+  cb.addEventListener('change', e => set(e.target.checked));
+  if(/[?&]dbg\b/.test(location.search)) set(true);            // ?dbg also enables it (handy for screenshots)
+  addEventListener('scroll', render, true); addEventListener('resize', render);
+})();
+</script>
+```
+
+Screenshot the overlay-**on** version alongside the normal one and hand the user both — the labelled shot becomes the shared map for every later "change X" request.
 
 ## Ranked critique
 
