@@ -41,12 +41,13 @@ else
 fi
 
 # 3. Context usage progress bar
+BAR_WIDTH=6   # cells; the numeric % and (used/total) tokens carry the real detail
 used=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
 if [ -n "$used" ]; then
-  filled=$(printf '%.0f' "$(echo "$used * 10 / 100" | bc -l 2>/dev/null || echo 0)")
-  [ "$filled" -gt 10 ] 2>/dev/null && filled=10
+  filled=$(printf '%.0f' "$(echo "$used * $BAR_WIDTH / 100" | bc -l 2>/dev/null || echo 0)")
+  [ "$filled" -gt "$BAR_WIDTH" ] 2>/dev/null && filled=$BAR_WIDTH
   [ "$filled" -lt 0 ] 2>/dev/null && filled=0
-  empty=$((10 - filled))
+  empty=$((BAR_WIDTH - filled))
   bar=""
   i=0
   while [ "$i" -lt "$filled" ]; do
@@ -82,7 +83,7 @@ if [ -n "$used" ]; then
     ctx_part=$(printf '%s %.0f%%' "$bar" "$used")
   fi
 else
-  ctx_part="░░░░░░░░░░ -"
+  ctx_part="$(printf '░%.0s' $(seq 1 "$BAR_WIDTH")) -"
 fi
 
 # 3b. Subscription (plan) utilization — 5h session window + 7d weekly window.
@@ -134,7 +135,14 @@ if [ -n "$week" ]; then
 else
   week_seg="—"
 fi
-sub_part="$five_seg $week_seg"
+# Prefix the windows with the clux account when launched via clux (it exports
+# CLUX_ACCOUNT), since the 5h/7d usage above is that subscription's. A bare
+# `claude` session leaves CLUX_ACCOUNT unset and the segment unlabeled.
+if [ -n "$CLUX_ACCOUNT" ]; then
+  sub_part="@$CLUX_ACCOUNT $five_seg $week_seg"
+else
+  sub_part="$five_seg $week_seg"
+fi
 
 # 4. Directory basename
 if [ -n "$cwd" ]; then
