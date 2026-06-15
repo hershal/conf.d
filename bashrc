@@ -20,6 +20,9 @@ if [[ -n ${BASH} ]]; then
     shopt -s histappend
     shopt -s cdspell
 
+    # Free C-q / C-s (XON/XOFF flow control) so they're usable as keys (tmux 2nd prefix)
+    [[ $- == *i* ]] && stty -ixon 2>/dev/null
+
     # Only do this in interactive shells
     if [ -z "$PS1" ]; then
         # This auto-expands any "!" with a space
@@ -53,12 +56,20 @@ ev() {
 }
 
 update_links() {
-    prefixstr=.
-
-    for config in $@; do
-        mv -f ${prefixstr}$(basename ${config}) ${prefixstr}$(basename ${config}).bak
-        ln -s -F ${config} ${prefixstr}$(basename ${config})
-    done;
+    # Symlink ~/.<name> -> <conf.d path>, replacing any existing symlink.
+    # No .bak (the old version backed up the *symlink* and churned junk). A real,
+    # non-symlink file in the way is left alone with a warning — pass -f to force
+    # over it anyway.   Usage: update_links [-f] <path> [<path> ...]
+    local force=
+    [[ $1 == -f ]] && { force=1; shift; }
+    for config in "$@"; do
+        local link=".$(basename "$config")"
+        if [[ -z $force && -e $link && ! -L $link ]]; then
+            echo "update_links: ~/$link exists and is not a symlink — skipping (use -f to force)" >&2
+            continue
+        fi
+        ln -sfn "$config" "$link"
+    done
 }
 
 # don't ask
